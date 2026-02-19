@@ -66,6 +66,13 @@
 
     /* ── Empty / loading states ── */
     .feed-state { font-size: 0.9rem; color: var(--muted); font-style: italic; padding: 1rem 0; }
+
+    /* ── Page transition curtain ── */
+    .curtain { position: fixed; inset: 0; background: var(--red); z-index: 9999; transform: translateY(-100%); pointer-events: none; }
+    .curtain.enter { animation: curtainEnter 0.45s cubic-bezier(0.77,0,0.18,1) forwards; }
+    .curtain.exit  { animation: curtainExit  0.35s cubic-bezier(0.77,0,0.18,1) forwards; pointer-events: all; }
+    @keyframes curtainEnter { from { transform: translateY(0); } to { transform: translateY(-100%); } }
+    @keyframes curtainExit  { from { transform: translateY(-100%); } to { transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -346,6 +353,24 @@
 
     loadStrava();
     loadLetterboxd();
+  </script>
+
+  <div class="curtain" id="curtain"></div>
+  <script>
+    const curtain = document.getElementById('curtain');
+    if (curtain) {
+      curtain.classList.add('enter');
+      document.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) return;
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          curtain.classList.remove('enter');
+          curtain.classList.add('exit');
+          setTimeout(() => { window.location.href = href; }, 350);
+        });
+      });
+    }
   </script>
 </body>
 </html>
