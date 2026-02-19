@@ -148,6 +148,13 @@
       display: block;
       border: 1px solid var(--border);
     }
+    .card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
     .card-body {
       padding: 1rem 0 0;
     }
@@ -242,6 +249,17 @@
       gap: 1rem;
       list-style: none;
     }
+
+    /* ── Scroll animations ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -264,14 +282,14 @@
       </div>
     </section>
 
-    <section class="about-section" id="about">
+    <section class="about-section fade-in" id="about">
       <div class="container">
         <h2 class="section-label">About</h2>
         <p>I'm a Senior Finance Analyst at Amazon Advertising in New York, where I lead valuation and deal structuring for Fortune 100 global advertising partnerships ranging up to $385MM annually. Before Amazon, I spent four years at Capital One across deal finance, partnership valuations, and capital markets. My long-term goal is a front-office finance role in professional sports. Outside of work I'm training for the Tokyo Marathon and building things on the side.</p>
       </div>
     </section>
 
-    <section class="skills-strip" aria-label="Skills">
+    <section class="skills-strip fade-in" aria-label="Skills">
       <div class="container">
         <ul class="skills-list">
           <li>Python</li>
@@ -284,7 +302,7 @@
       </div>
     </section>
 
-    <section class="cards-section" id="projects">
+    <section class="cards-section fade-in" id="projects">
       <div class="container">
         <h2 class="section-label">Projects</h2>
         <div class="cards-grid">
@@ -325,7 +343,7 @@
       </div>
     </section>
 
-    <section class="quotes-section">
+    <section class="quotes-section fade-in">
       <div class="container">
         <h2 class="section-label">Quotes</h2>
         <blockquote class="quote-featured">
@@ -353,5 +371,18 @@
     </div>
   </footer>
 
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
