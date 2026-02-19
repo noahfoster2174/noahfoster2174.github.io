@@ -163,26 +163,42 @@
       const container = document.getElementById('letterboxd-feed');
       try {
         const rssUrl = 'https://letterboxd.com/noahfoster/rss/';
-        const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl) + '&count=8';
-        const res = await fetch(apiUrl);
+        const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl);
+        const res = await fetch(proxyUrl);
         const data = await res.json();
-        if (!data.items || !data.items.length) {
+        const xml = new DOMParser().parseFromString(data.contents, 'text/xml');
+        const items = Array.from(xml.querySelectorAll('item')).slice(0, 8);
+
+        if (!items.length) {
           setEmpty('letterboxd-feed', 'No films logged yet.');
           return;
         }
         container.replaceChildren();
-        data.items.slice(0, 8).forEach(item => {
-          const rawTitle = item.title || '';
-          const title = rawTitle.replace(/^.+,\s*/, '');
-          const ratingMatch = (item.description || '').match(/[\u2605\u2606\u00bd]+/);
-          const rating = ratingMatch ? ratingMatch[0] : '';
-          const date = item.pubDate ? new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+        items.forEach(item => {
+          // Title format: "Film Name, Year - ★★★★½" — strip year and rating suffix
+          const rawTitle = item.querySelector('title')?.textContent || '';
+          const title = rawTitle.replace(/,\s*\d{4}.*$/, '').replace(/\s*-\s*[\u2605\u2606\u00bd]+.*$/, '').trim();
+
+          // Rating from letterboxd:memberRating namespace element
+          const memberRating = item.getElementsByTagNameNS('https://letterboxd.com', 'memberRating')[0]?.textContent;
+          let rating = '';
+          if (memberRating) {
+            const val = parseFloat(memberRating);
+            rating = '\u2605'.repeat(Math.floor(val)) + (val % 1 >= 0.5 ? '\u00bd' : '');
+          }
+
+          const pubDate = item.querySelector('pubDate')?.textContent || '';
+          const date = pubDate ? new Date(pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+
+          // Poster from first <img> in description CDATA
+          const desc = item.querySelector('description')?.textContent || '';
+          const imgMatch = desc.match(/src="(https:\/\/[^"]+)"/);
 
           const filmItem = makeEl('div', 'film-item');
 
-          if (item.thumbnail) {
+          if (imgMatch) {
             const img = makeEl('img', 'film-poster');
-            img.src = item.thumbnail;
+            img.src = imgMatch[1];
             img.alt = '';
             img.loading = 'lazy';
             filmItem.appendChild(img);
