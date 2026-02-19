@@ -192,7 +192,7 @@
           const name = makeEl('div', 'run-name');
           setText(name, a.name || 'Run');
           const stats = makeEl('div', 'run-stats');
-          setText(stats, `${miles} mi \u00b7 ${mins}:${secs} \u00b7 ${paceMins}:${paceSecs}/mi`);
+          setText(stats, `${miles} mi \u00b7 ${mins}m ${secs}s \u00b7 ${paceMins}:${paceSecs}/mi`);
           const dateEl = makeEl('div', 'run-date');
           setText(dateEl, date);
           content.appendChild(name);
