@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -44,7 +46,7 @@
     .run-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.25rem; }
     .run-stats { font-size: 0.85rem; color: var(--muted); }
     .run-date { font-size: 0.8rem; color: var(--border); margin-top: 0.2rem; }
-    .run-map { width: 90px; height: 64px; flex-shrink: 0; display: block; }
+    .run-map { width: 150px; height: 110px; flex-shrink: 0; border: 1px solid var(--border); }
 
     /* ── Letterboxd ── */
     .film-item { display: flex; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
@@ -138,33 +140,6 @@
       return points;
     }
 
-    function drawRoute(canvas, polyline) {
-      if (!polyline) return;
-      const points = decodePolyline(polyline);
-      if (points.length < 2) return;
-      const ctx = canvas.getContext('2d');
-      const W = canvas.width, H = canvas.height;
-      let minLat = Infinity, maxLat = -Infinity, minLng = Infinity, maxLng = -Infinity;
-      points.forEach(([lat, lng]) => {
-        if (lat < minLat) minLat = lat; if (lat > maxLat) maxLat = lat;
-        if (lng < minLng) minLng = lng; if (lng > maxLng) maxLng = lng;
-      });
-      const pad = 6;
-      const scale = Math.min((W - pad * 2) / (maxLng - minLng || 1), (H - pad * 2) / (maxLat - minLat || 1));
-      const offX = (W - (maxLng - minLng) * scale) / 2;
-      const offY = (H - (maxLat - minLat) * scale) / 2;
-      ctx.strokeStyle = '#E22D32';
-      ctx.lineWidth = 1.5;
-      ctx.lineJoin = 'round';
-      ctx.lineCap = 'round';
-      ctx.beginPath();
-      points.forEach(([lat, lng], i) => {
-        const x = (lng - minLng) * scale + offX;
-        const y = H - ((lat - minLat) * scale + offY);
-        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-      });
-      ctx.stroke();
-    }
 
     // ── Strava ──
     async function loadStrava() {
@@ -200,15 +175,27 @@
           content.appendChild(dateEl);
           item.appendChild(content);
 
+          let mapDiv = null;
           if (a.polyline) {
-            const canvas = makeEl('canvas', 'run-map');
-            canvas.width = 90;
-            canvas.height = 64;
-            item.appendChild(canvas);
-            drawRoute(canvas, a.polyline);
+            mapDiv = makeEl('div', 'run-map');
+            item.appendChild(mapDiv);
           }
 
+          // Append to DOM before Leaflet init so element has a measured size
           container.appendChild(item);
+
+          if (mapDiv && a.polyline) {
+            const points = decodePolyline(a.polyline);
+            const lmap = L.map(mapDiv, {
+              zoomControl: false, attributionControl: false,
+              dragging: false, touchZoom: false,
+              scrollWheelZoom: false, doubleClickZoom: false,
+              boxZoom: false, keyboard: false,
+            });
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(lmap);
+            const poly = L.polyline(points, { color: '#E22D32', weight: 2.5 }).addTo(lmap);
+            lmap.fitBounds(poly.getBounds(), { padding: [10, 10] });
+          }
         });
       } catch {
         setEmpty('strava-feed', 'No runs logged yet.');
