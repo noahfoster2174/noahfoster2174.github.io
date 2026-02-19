@@ -31,6 +31,21 @@
     nav a:hover, nav a[aria-current] { color: var(--red); }
     nav a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 2px; }
 
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--red);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 0 0 4px 4px;
+      z-index: 100;
+    }
+    .skip-link:focus { top: 0; }
+
     .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--red); margin-bottom: 1.5rem; }
 
     /* ── Bio ── */
@@ -87,6 +102,7 @@
   <noscript><style>.fade-in { opacity: 1; transform: none; }</style></noscript>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to content</a>
 
   <header>
     <div class="container">
@@ -100,7 +116,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <section class="bio-section fade-in">
       <div class="container">
         <div class="bio-grid">
@@ -146,7 +162,7 @@
         <div class="cards-grid">
 
           <div class="card">
-            <img src="https://picsum.photos/seed/noahsite/600/400" alt="noahfoster.com" loading="lazy" />
+            <img src="https://picsum.photos/seed/noahsite/600/400" alt="noahfoster.com" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
             <div class="card-body">
               <h3 class="card-title">noahfoster.com</h3>
               <p class="card-desc">This site — designed and built with Claude from scratch. My first project as I learn to code.</p>
@@ -154,7 +170,7 @@
           </div>
 
           <div class="card">
-            <img src="https://picsum.photos/seed/nycmovie/600/400" alt="NYC Movie App" loading="lazy" />
+            <img src="https://picsum.photos/seed/nycmovie/600/400" alt="NYC Movie App" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
             <div class="card-body">
               <h3 class="card-title">NYC Movie App</h3>
               <p class="card-desc">A personal tool that aggregates AMC, Alamo Drafthouse, and advance screening listings in one place — with support for film festivals and special events.</p>
@@ -162,7 +178,7 @@
           </div>
 
           <div class="card">
-            <img src="https://picsum.photos/seed/nycmetro/600/400" alt="NYC Metro App" loading="lazy" />
+            <img src="https://picsum.photos/seed/nycmetro/600/400" alt="NYC Metro App" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
             <div class="card-body">
               <h3 class="card-title">NYC Metro App</h3>
               <p class="card-desc">A real-time subway companion app for New York City, inspired by the transit tools I actually want to use. Built to practice API integration and mobile-first design.</p>
@@ -170,7 +186,7 @@
           </div>
 
           <div class="card">
-            <img src="https://picsum.photos/seed/hedgefund/600/400" alt="AI Hedge Fund" loading="lazy" />
+            <img src="https://picsum.photos/seed/hedgefund/600/400" alt="AI Hedge Fund" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
             <div class="card-body">
               <h3 class="card-title">AI Hedge Fund</h3>
               <p class="card-desc">Three competing strategies — Long/Short AI, Active Management AI, and myself as CIO — paper trading for six months before deploying real capital.</p>
@@ -178,7 +194,7 @@
           </div>
 
           <div class="card">
-            <img src="https://picsum.photos/seed/sportsbetting/600/400" alt="Sports Betting Models" loading="lazy" />
+            <img src="https://picsum.photos/seed/sportsbetting/600/400" alt="Sports Betting Models" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
             <div class="card-body">
               <h3 class="card-title">Sports Betting Models</h3>
               <p class="card-desc">A suite of data-driven models for NFL and NBA prop betting, with team-specific analysis for the Patriots, Celtics, and Red Sox.</p>
