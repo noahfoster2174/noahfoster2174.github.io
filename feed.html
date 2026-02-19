@@ -94,6 +94,7 @@
           </div>
           <div class="feed-col">
             <h3 class="feed-col-title"><span>Watching</span></h3>
+            <div id="week-films-summary"></div>
             <div id="letterboxd-feed"><p class="feed-state">Loading films...</p></div>
           </div>
         </div>
@@ -252,6 +253,39 @@
           setEmpty('letterboxd-feed', 'No films logged yet.');
           return;
         }
+        // ── Weekly film summary ──
+        const now = new Date();
+        const daysFromMon = now.getDay() === 0 ? 6 : now.getDay() - 1;
+        const weekStart = new Date(now);
+        weekStart.setDate(now.getDate() - daysFromMon);
+        weekStart.setHours(0, 0, 0, 0);
+
+        const weekItems = items.filter(item => {
+          const d = item.querySelector('pubDate')?.textContent;
+          return d && new Date(d) >= weekStart;
+        });
+
+        const filmSummaryEl = document.getElementById('week-films-summary');
+        filmSummaryEl.className = 'week-summary';
+        filmSummaryEl.replaceChildren();
+        const filmTotal = makeEl('div', 'week-total');
+        filmTotal.appendChild(document.createTextNode(weekItems.length));
+        const filmUnit = makeEl('span');
+        setText(filmUnit, `film${weekItems.length !== 1 ? 's' : ''} this week`);
+        filmTotal.appendChild(filmUnit);
+        filmSummaryEl.appendChild(filmTotal);
+
+        if (weekItems.length) {
+          const filmMeta = makeEl('div', 'week-meta');
+          const abbrevTitles = weekItems.map(item => {
+            const raw = item.querySelector('title')?.textContent || '';
+            const title = raw.replace(/,\s*\d{4}.*$/, '').replace(/\s*-\s*[\u2605\u2606\u00bd]+.*$/, '').trim();
+            return title.length > 14 ? title.slice(0, 13) + '\u2026' : title;
+          }).join(' \u00b7 ');
+          setText(filmMeta, abbrevTitles);
+          filmSummaryEl.appendChild(filmMeta);
+        }
+
         container.replaceChildren();
         items.forEach(item => {
           // Title format: "Film Name, Year - ★★★★½" — strip year and rating suffix
