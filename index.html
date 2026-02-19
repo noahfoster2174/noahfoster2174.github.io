@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Noah Foster — finance, strategy, and sports." />
   <title>Noah Foster</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -140,6 +143,13 @@
       font-family: 'Spectral', serif;
       opacity: 0.15;
     }
+    .quote-featured cite {
+      display: block;
+      font-size: 0.9rem;
+      font-style: normal;
+      color: var(--muted);
+      margin-top: 0.75rem;
+    }
     .quotes-list {
       list-style: none;
       display: flex;
@@ -175,13 +185,6 @@
       gap: 1rem;
       list-style: none;
     }
-    .social-icons img {
-      width: 20px;
-      height: 20px;
-      opacity: 0.4;
-      transition: opacity 0.2s;
-    }
-    .social-icons img:hover { opacity: 1; }
   </style>
 </head>
 <body>
@@ -192,7 +195,7 @@
       <nav>
         <a href="#">About</a>
         <a href="#">Projects</a>
-        <a href="http://www.linkedin.com/in/noahbfoster/" target="_blank">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank">LinkedIn</a>
       </nav>
     </div>
   </header>
@@ -206,11 +209,11 @@
 
     <section class="cards-section">
       <div class="container">
-        <p class="section-label">Interests</p>
+        <h2 class="section-label">Interests</h2>
         <div class="cards-grid">
 
           <div class="card">
-            <img src="http://www.trbimg.com/img-58c5c983/turbine/bal-maryland-basketball-a-surprising-no-6-seed-in-ncaa-tournament-20170312" alt="Maryland Basketball" />
+            <img src="https://picsum.photos/seed/maryland/600/400" alt="Maryland Basketball" loading="lazy" />
             <div class="card-body">
               <h3 class="card-title">Maryland Basketball</h3>
               <p class="card-desc">Terps fan since day one.</p>
@@ -218,7 +221,7 @@
           </div>
 
           <div class="card">
-            <img src="http://www.rjbentleys.net/images/d0ca3c5c5a7c987d57550716300fa4eb.jpg" alt="RJ Bentley's" />
+            <img src="https://picsum.photos/seed/bentleys/600/400" alt="RJ Bentley's" loading="lazy" />
             <div class="card-body">
               <h3 class="card-title">RJ Bentley's</h3>
               <p class="card-desc">College Park institution.</p>
@@ -226,7 +229,7 @@
           </div>
 
           <div class="card">
-            <img src="https://cdn.images.express.co.uk/img/dynamic/143/590x/Gold-PS4-814437.jpg" alt="PlayStation" />
+            <img src="https://picsum.photos/seed/playstation/600/400" alt="PlayStation" loading="lazy" />
             <div class="card-body">
               <h3 class="card-title">PlayStation</h3>
               <p class="card-desc">Now on PS Vita apparently.</p>
@@ -234,7 +237,7 @@
           </div>
 
           <div class="card">
-            <img src="https://www.rhsmith.umd.edu/files/VMH.jpg" alt="Van Munching Hall" />
+            <img src="https://picsum.photos/seed/vmh/600/400" alt="Van Munching Hall" loading="lazy" />
             <div class="card-body">
               <h3 class="card-title">Van Munching Hall</h3>
               <p class="card-desc">Smith School of Business, UMD.</p>
@@ -247,9 +250,10 @@
 
     <section class="quotes-section">
       <div class="container">
-        <p class="section-label">Quotes</p>
+        <h2 class="section-label">Quotes</h2>
         <blockquote class="quote-featured">
           The greatest glory in living lies not in never falling, but in rising every time we fall.
+          <cite>— Nelson Mandela</cite>
         </blockquote>
         <ul class="quotes-list">
           <li>"The way to get started is to quit talking and begin doing."</li>
@@ -264,9 +268,9 @@
       <div class="footer-inner">
         <span class="footer-copy">© 2026 Noah Foster</span>
         <ul class="social-icons">
-          <li><a href="#"><img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/twitter.svg" alt="Twitter" /></a></li>
-          <li><a href="#"><img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/instagram.svg" alt="Instagram" /></a></li>
-          <li><a href="#"><img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/medium.svg" alt="Medium" /></a></li>
+          <li><a href="#" style="font-size:0.85rem;color:var(--muted);text-decoration:none;">Twitter</a></li>
+          <li><a href="#" style="font-size:0.85rem;color:var(--muted);text-decoration:none;">Instagram</a></li>
+          <li><a href="#" style="font-size:0.85rem;color:var(--muted);text-decoration:none;">Medium</a></li>
         </ul>
       </div>
     </div>
