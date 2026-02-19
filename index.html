@@ -1,95 +1,276 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
- <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-138252423-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-138252423-1');
-</script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Noah Foster</title>
-  <meta charset="utf-8"/>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #E22D32;
+      --text: #1a1a1a;
+      --muted: #555;
+      --border: #e5e5e5;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fff;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 0 1.5rem;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .site-title {
+      font-family: 'Spectral', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .site-title span {
+      display: inline-block;
+      border-bottom: 3px solid var(--red);
+      padding-bottom: 2px;
+    }
+    nav {
+      margin-top: 0.75rem;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav a {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover { color: var(--red); }
+
+    .hero {
+      padding: 3.5rem 0 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero p {
+      font-family: 'Spectral', serif;
+      font-size: 1.5rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.5;
+    }
+    .hero p em {
+      color: var(--red);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--red);
+      margin-bottom: 1.5rem;
+    }
+
+    .cards-section {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    @media (max-width: 600px) {
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      border: 1px solid var(--border);
+    }
+    .card-body {
+      padding: 1rem 0 0;
+    }
+    .card-title {
+      font-family: 'Spectral', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .quotes-section {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .quote-featured {
+      font-family: 'Spectral', serif;
+      font-size: 1.6rem;
+      line-height: 1.45;
+      max-width: 680px;
+      margin: 0 auto 2rem;
+      text-align: center;
+      position: relative;
+    }
+    .quote-featured::before {
+      content: '"';
+      font-size: 5rem;
+      color: var(--red);
+      line-height: 0;
+      position: absolute;
+      top: 1.5rem;
+      left: -1rem;
+      font-family: 'Spectral', serif;
+      opacity: 0.15;
+    }
+    .quotes-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .quotes-list li {
+      font-size: 0.95rem;
+      color: var(--muted);
+      padding-left: 1rem;
+      border-left: 2px solid var(--border);
+    }
+
+    footer {
+      border-top: 3px solid var(--red);
+      padding: 2rem 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      list-style: none;
+    }
+    .social-icons img {
+      width: 20px;
+      height: 20px;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .social-icons img:hover { opacity: 1; }
+  </style>
 </head>
-<script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
- <body>
-  <header class="container">
-    <div class="row">
-      <h1 class="col-sm-4" id="myName">Noah Foster</h1>
-      <nav class="col-sm-8 text-right">
-        <p class="topthreeparagraphs">BMGT495</p>
-        <p class="topthreeparagraphs">BMGT340</p>
-        <p class="topthreeparagraphs">BMGT364</p>
+<body>
+
+  <header>
+    <div class="container">
+      <h1 class="site-title"><span>Noah Foster</span></h1>
+      <nav>
+        <a href="#">About</a>
+        <a href="#">Projects</a>
+        <a href="http://www.linkedin.com/in/noahbfoster/" target="_blank">LinkedIn</a>
       </nav>
     </div>
   </header>
-  <section class="jumbotron">
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p>Finance, strategy, and <em>sports</em>. Building things on the side.</p>
+      </div>
+    </section>
+
+    <section class="cards-section">
+      <div class="container">
+        <p class="section-label">Interests</p>
+        <div class="cards-grid">
+
+          <div class="card">
+            <img src="http://www.trbimg.com/img-58c5c983/turbine/bal-maryland-basketball-a-surprising-no-6-seed-in-ncaa-tournament-20170312" alt="Maryland Basketball" />
+            <div class="card-body">
+              <h3 class="card-title">Maryland Basketball</h3>
+              <p class="card-desc">Terps fan since day one.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="http://www.rjbentleys.net/images/d0ca3c5c5a7c987d57550716300fa4eb.jpg" alt="RJ Bentley's" />
+            <div class="card-body">
+              <h3 class="card-title">RJ Bentley's</h3>
+              <p class="card-desc">College Park institution.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="https://cdn.images.express.co.uk/img/dynamic/143/590x/Gold-PS4-814437.jpg" alt="PlayStation" />
+            <div class="card-body">
+              <h3 class="card-title">PlayStation</h3>
+              <p class="card-desc">Now on PS Vita apparently.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="https://www.rhsmith.umd.edu/files/VMH.jpg" alt="Van Munching Hall" />
+            <div class="card-body">
+              <h3 class="card-title">Van Munching Hall</h3>
+              <p class="card-desc">Smith School of Business, UMD.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="quotes-section">
+      <div class="container">
+        <p class="section-label">Quotes</p>
+        <blockquote class="quote-featured">
+          The greatest glory in living lies not in never falling, but in rising every time we fall.
+        </blockquote>
+        <ul class="quotes-list">
+          <li>"The way to get started is to quit talking and begin doing."</li>
+          <li>"Your time is limited, so don't waste it living someone else's life."</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
     <div class="container">
-      <div class="row text-center">
-        <h2>BMGT 301</h2>
-        <h3>Web Development</h3>
-        <a class="btn btn-primary" href="http://www.linkedin.com/in/noahbfoster/" role="button">Visit this cool website</a>
+      <div class="footer-inner">
+        <span class="footer-copy">© 2026 Noah Foster</span>
+        <ul class="social-icons">
+          <li><a href="#"><img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/twitter.svg" alt="Twitter" /></a></li>
+          <li><a href="#"><img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/instagram.svg" alt="Instagram" /></a></li>
+          <li><a href="#"><img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/medium.svg" alt="Medium" /></a></li>
+        </ul>
       </div>
     </div>
-  </section>
-  <section class="container">
-    <div class="row">
-      <figure class="col-sm-6">
-        <p id="firstFav">Maryland Basketball</p>
-        <img src="http://www.trbimg.com/img-58c5c983/turbine/bal-maryland-basketball-a-surprising-no-6-seed-in-ncaa-tournament-20170312"/>
-    	</figure>
-    	<figure class="col-sm-6">
-        <p id="secondFav">RJ Bentley's</p>
-        <img src="http://www.rjbentleys.net/images/d0ca3c5c5a7c987d57550716300fa4eb.jpg"/>
-      </figure>
-    </div>
-    <div class="row">
-      <figure class="col-sm-6">
-        <p id="thirdFav">Playstation 4</p>
-        <img src="https://cdn.images.express.co.uk/img/dynamic/143/590x/Gold-PS4-814437.jpg"/>
-      </figure>
-      <figure class="col-sm-6">
-        <p id="fourthFav">Van Munching Hall</p>
-        <img src="https://www.rhsmith.umd.edu/files/VMH.jpg"/>
-      </figure>
-    </div>
-  </section>
-  
-  <section class="container">
-    <h3 id="quotes">Favorite Quotes</h3>
-    
-    <ol>
-      <li id="firstQuote">"The greatest glory in living lies not in never falling, but in rising every time we fall."</li>
-      <li id="secondQuote">"The way to get started is to quit talking and begin doing."</li>
-      <li id="thirdQuote">"Your time is limited, so don't waste it living someone else's life."</li>
-    </ol>
-    
-  </section>
-  
-  <footer class="container">
-    <div class="row">
-      <p class="col-sm-4">&copy; 2019 BMGT301</p>
-      <ul class="col-sm-8">
-        <li class="col-sm-1">
-            <img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/twitter.svg">
-        </li>
-        <li class="col-sm-1">
-           <img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/facebook.svg">
-        </li>
-        <li class="col-sm-1">
-           <img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/instagram.svg">
-        </li>
-        <li class="col-sm-1">
-  <img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/medium.svg">
-        </li>
-      </ul>
-    </div>
   </footer>
- </body>
+
+</body>
 </html>
