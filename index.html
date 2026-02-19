@@ -244,10 +244,19 @@
       font-size: 0.85rem;
       color: var(--muted);
     }
-    .social-icons {
+    .footer-contact {
       display: flex;
-      gap: 1rem;
-      list-style: none;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .footer-contact a {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .footer-contact a:hover {
+      color: var(--red);
     }
 
     /* ── Scroll animations ── */
@@ -366,11 +375,10 @@
     <div class="container">
       <div class="footer-inner">
         <span class="footer-copy">© 2026 Noah Foster</span>
-        <ul class="social-icons">
-          <li><a href="#" style="font-size:0.85rem;color:var(--muted);text-decoration:none;">Twitter</a></li>
-          <li><a href="#" style="font-size:0.85rem;color:var(--muted);text-decoration:none;">Instagram</a></li>
-          <li><a href="#" style="font-size:0.85rem;color:var(--muted);text-decoration:none;">Medium</a></li>
-        </ul>
+        <div class="footer-contact">
+          <a href="mailto:noahfoster6@gmail.com">noahfoster6@gmail.com</a>
+          <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
       </div>
     </div>
   </footer>
