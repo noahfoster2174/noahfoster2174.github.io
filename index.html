@@ -98,6 +98,28 @@
       line-height: 1.75;
     }
 
+    /* ── Skills Strip ── */
+    .skills-strip {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      list-style: none;
+    }
+    .skills-list li {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      background: #f5f5f5;
+      padding: 0.4rem 0.85rem;
+      border-radius: 2px;
+    }
+
     .section-label {
       font-size: 0.75rem;
       font-weight: 700;
@@ -232,6 +254,19 @@
       <div class="container">
         <h2 class="section-label">About</h2>
         <p>I'm a Senior Finance Analyst at Amazon Advertising in New York, where I lead valuation and deal structuring for Fortune 100 global advertising partnerships ranging up to $385MM annually. Before Amazon, I spent four years at Capital One across deal finance, partnership valuations, and capital markets. My long-term goal is a front-office finance role in professional sports. Outside of work I'm training for the Tokyo Marathon and building things on the side.</p>
+      </div>
+    </section>
+
+    <section class="skills-strip">
+      <div class="container">
+        <ul class="skills-list">
+          <li>Python</li>
+          <li>SQL</li>
+          <li>Snowflake</li>
+          <li>Tableau</li>
+          <li>AWS</li>
+          <li>Bloomberg</li>
+        </ul>
       </div>
     </section>
 
