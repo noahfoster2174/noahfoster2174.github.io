@@ -31,19 +31,7 @@
     nav a:hover, nav a[aria-current] { color: var(--red); }
     nav a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 2px; }
 
-    .skip-link {
-      position: absolute;
-      top: -100%;
-      left: 1rem;
-      background: var(--red);
-      color: #fff;
-      padding: 0.5rem 1rem;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-decoration: none;
-      border-radius: 0 0 4px 4px;
-      z-index: 100;
-    }
+    .skip-link { position: absolute; top: -100%; left: 1rem; background: var(--red); color: #fff; padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 700; text-decoration: none; border-radius: 0 0 4px 4px; z-index: 100; }
     .skip-link:focus { top: 0; }
 
     .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--red); margin-bottom: 1.5rem; }
@@ -53,30 +41,34 @@
     .bio-grid { display: grid; grid-template-columns: 200px 1fr; gap: 3rem; align-items: start; }
     @media (max-width: 640px) { .bio-grid { grid-template-columns: 1fr; } }
     .bio-photo { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--border); }
-    .bio-text p { font-size: 1rem; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
-    .bio-text p:last-child { margin-bottom: 0; }
+    .bio-text p { font-size: 1rem; color: var(--muted); line-height: 1.75; }
 
-    /* ── Building ── */
-    .building-section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
-    .building-text { font-family: 'Spectral', serif; font-size: 1.15rem; color: var(--muted); max-width: 680px; line-height: 1.7; }
+    /* ── Experience ── */
+    .experience-section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
+    .exp-list { display: flex; flex-direction: column; gap: 2.5rem; }
+    .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 3rem; align-items: start; }
+    @media (max-width: 640px) { .exp-item { grid-template-columns: 1fr; gap: 0.5rem; } }
+    .exp-meta { display: flex; flex-direction: column; gap: 0.2rem; }
+    .exp-company { font-weight: 700; font-size: 0.95rem; }
+    .exp-period { font-size: 0.8rem; color: var(--muted); }
+    .exp-role { font-size: 0.9rem; font-weight: 600; color: var(--red); margin-bottom: 0.6rem; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+    .exp-bullets li { font-size: 0.9rem; color: var(--muted); padding-left: 1.1rem; position: relative; line-height: 1.5; }
+    .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--border); }
 
     /* ── Skills ── */
-    .skills-strip { padding: 2rem 0; border-bottom: 1px solid var(--border); }
-    .skills-list { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; }
-    .skills-list li { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text); background: #f5f5f5; padding: 0.4rem 0.85rem; border-radius: 2px; }
+    .skills-section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    @media (max-width: 600px) { .skills-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+    .skills-cat-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text); margin-bottom: 0.75rem; }
+    .skills-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .skills-list li { font-size: 0.9rem; color: var(--muted); }
 
-    /* ── Cards ── */
-    .cards-section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
-    .cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-    @media (max-width: 600px) { .cards-grid { grid-template-columns: 1fr; } }
-    .card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-    .card img { width: 100%; height: 200px; object-fit: cover; display: block; border: 1px solid var(--border); }
-    .card-body { padding: 1rem 0 0; }
-    .card-title { font-family: 'Spectral', serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 0.25rem; }
-    .card-desc { font-size: 0.9rem; color: var(--muted); }
-    .card-placeholder-img { width: 100%; height: 200px; background: #f5f5f5; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
-    .card-placeholder-img::after { content: '\2014'; font-size: 1.5rem; color: var(--border); }
+    /* ── CTA ── */
+    .about-cta-section { padding: 3rem 0; }
+    .cta-link { font-family: 'Spectral', serif; font-size: 1.2rem; color: var(--text); text-decoration: none; border-bottom: 2px solid var(--red); padding-bottom: 2px; }
+    .cta-link:hover { color: var(--red); }
+    .cta-link:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 2px; }
 
     /* ── Footer ── */
     footer { border-top: 3px solid var(--red); padding: 2rem 0; }
@@ -108,7 +100,7 @@
       <h1 class="site-title"><a href="index.html"><span>Noah Foster</span></a></h1>
       <nav aria-label="Main">
         <a href="about.html" aria-current="page">About</a>
-        <a href="about.html#projects">Projects</a>
+        <a href="projects.html">Projects</a>
         <a href="feed.html">Feed</a>
         <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </nav>
@@ -116,99 +108,99 @@
   </header>
 
   <main id="main-content">
+
     <section class="bio-section fade-in">
       <div class="container">
         <div class="bio-grid">
-          <div>
-            <img src="photo.jpg" alt="Noah Foster" class="bio-photo" onerror="this.src='https://placehold.co/300x300/f5f5f5/555?text=NF'" />
-          </div>
+          <img src="photo.jpg" alt="Noah Foster" class="bio-photo" onerror="this.src='https://placehold.co/300x300/f5f5f5/555?text=NF'" />
           <div class="bio-text">
             <h2 class="section-label">About</h2>
-            <p>I'm a Senior Finance Analyst at Amazon Advertising in New York, where I lead valuation and deal structuring for Fortune 100 global advertising partnerships ranging up to $385MM annually. Before Amazon, I spent four years at Capital One across deal finance, partnership valuations, and capital markets.</p>
-            <p>My long-term goal is a front-office finance role in professional sports — where analytical rigor meets the industry I care most about. To get there, I'm building the skills that matter: I'm currently learning Claude Code and self-teaching software development, working through a personal project roadmap that spans web apps, automation tools, and financial modeling systems.</p>
-            <p>Outside of work I'm training for the 2026 Tokyo Marathon and building things on the side.</p>
+            <p>Senior Finance Analyst at Amazon Advertising in New York, where I lead valuation and deal structuring for Fortune 100 global advertising partnerships. My long-term goal is a front-office finance role in professional sports — and I'm building toward it by learning to code, training for the 2026 Tokyo Marathon, and working through a personal project roadmap.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="building-section fade-in">
+    <section class="experience-section fade-in">
       <div class="container">
-        <h2 class="section-label">Building</h2>
-        <p class="building-text">Learning Claude Code and working through a personal project roadmap. Each project is a step toward the front-office sports finance role I'm building toward — and proof that the analytical skills I use at Amazon translate beyond the spreadsheet.</p>
-      </div>
-    </section>
+        <h2 class="section-label">Experience</h2>
+        <div class="exp-list">
 
-    <section class="skills-strip fade-in" aria-label="Skills">
-      <div class="container">
-        <ul class="skills-list">
-          <li>Python</li>
-          <li>SQL</li>
-          <li>Snowflake</li>
-          <li>Tableau</li>
-          <li>AWS</li>
-          <li>Bloomberg</li>
-          <li>Claude Code</li>
-          <li>React</li>
-          <li>Git / GitHub</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="cards-section fade-in" id="projects">
-      <div class="container">
-        <h2 class="section-label">Projects</h2>
-        <div class="cards-grid">
-
-          <div class="card">
-            <img src="https://picsum.photos/seed/noahsite/600/400" alt="noahfoster.com" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
-            <div class="card-body">
-              <h3 class="card-title">noahfoster.com</h3>
-              <p class="card-desc">This site — designed and built with Claude from scratch. My first project as I learn to code.</p>
+          <div class="exp-item">
+            <div class="exp-meta">
+              <span class="exp-company">Amazon Advertising</span>
+              <span class="exp-period">2023 – Present · New York</span>
+            </div>
+            <div>
+              <div class="exp-role">Senior Finance Analyst</div>
+              <ul class="exp-bullets">
+                <li>Lead valuation and deal structuring for Fortune 100 global advertising partnerships</li>
+                <li>Manage partnerships ranging up to $385MM annually</li>
+              </ul>
             </div>
           </div>
 
-          <div class="card">
-            <img src="https://picsum.photos/seed/nycmovie/600/400" alt="NYC Movie App" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
-            <div class="card-body">
-              <h3 class="card-title">NYC Movie App</h3>
-              <p class="card-desc">A personal tool that aggregates AMC, Alamo Drafthouse, and advance screening listings in one place — with support for film festivals and special events.</p>
+          <div class="exp-item">
+            <div class="exp-meta">
+              <span class="exp-company">Capital One</span>
+              <span class="exp-period">2019 – 2023</span>
             </div>
-          </div>
-
-          <div class="card">
-            <img src="https://picsum.photos/seed/nycmetro/600/400" alt="NYC Metro App" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
-            <div class="card-body">
-              <h3 class="card-title">NYC Metro App</h3>
-              <p class="card-desc">A real-time subway companion app for New York City, inspired by the transit tools I actually want to use. Built to practice API integration and mobile-first design.</p>
-            </div>
-          </div>
-
-          <div class="card">
-            <img src="https://picsum.photos/seed/hedgefund/600/400" alt="AI Hedge Fund" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
-            <div class="card-body">
-              <h3 class="card-title">AI Hedge Fund</h3>
-              <p class="card-desc">Three competing strategies — Long/Short AI, Active Management AI, and myself as CIO — paper trading for six months before deploying real capital.</p>
-            </div>
-          </div>
-
-          <div class="card">
-            <img src="https://picsum.photos/seed/sportsbetting/600/400" alt="Sports Betting Models" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
-            <div class="card-body">
-              <h3 class="card-title">Sports Betting Models</h3>
-              <p class="card-desc">A suite of data-driven models for NFL and NBA prop betting, with team-specific analysis for the Patriots, Celtics, and Red Sox.</p>
-            </div>
-          </div>
-
-          <div class="card card--placeholder">
-            <div class="card-placeholder-img"></div>
-            <div class="card-body">
-              <h3 class="card-title">Coming Soon</h3>
-              <p class="card-desc">Next project in progress.</p>
+            <div>
+              <div class="exp-role">Finance Analyst</div>
+              <ul class="exp-bullets">
+                <li>Deal finance, partnership valuations, and capital markets</li>
+                <li>Four years across multiple finance functions</li>
+              </ul>
             </div>
           </div>
 
         </div>
+      </div>
+    </section>
+
+    <section class="skills-section fade-in">
+      <div class="container">
+        <h2 class="section-label">Skills</h2>
+        <div class="skills-grid">
+
+          <div class="skills-cat">
+            <h3 class="skills-cat-label">Finance</h3>
+            <ul class="skills-list">
+              <li>Financial Modeling</li>
+              <li>Deal Structuring</li>
+              <li>Partnership Valuations</li>
+              <li>Capital Markets</li>
+            </ul>
+          </div>
+
+          <div class="skills-cat">
+            <h3 class="skills-cat-label">Data &amp; Analytics</h3>
+            <ul class="skills-list">
+              <li>Python</li>
+              <li>SQL</li>
+              <li>Snowflake</li>
+              <li>Tableau</li>
+              <li>Bloomberg</li>
+            </ul>
+          </div>
+
+          <div class="skills-cat">
+            <h3 class="skills-cat-label">Technology</h3>
+            <ul class="skills-list">
+              <li>AWS</li>
+              <li>Claude Code</li>
+              <li>React</li>
+              <li>Git / GitHub</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="about-cta-section fade-in">
+      <div class="container">
+        <a href="projects.html" class="cta-link">See my projects →</a>
       </div>
     </section>
 
@@ -226,19 +218,15 @@
     </div>
   </footer>
 
+  <div class="curtain" id="curtain"></div>
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-  </script>
-  <div class="curtain" id="curtain"></div>
-  <script>
+
     const curtain = document.getElementById('curtain');
     if (curtain) {
       curtain.classList.add('enter');
