@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "name": "rolling 800s",
+    "distance": 9888.3,
+    "moving_time": 3082,
+    "start_date_local": "2026-02-18T08:55:34Z",
+    "type": "Run"
+  },
+  {
+    "name": "morning run",
+    "distance": 11306.7,
+    "moving_time": 4042,
+    "start_date_local": "2026-02-17T09:15:49Z",
+    "type": "Run"
+  },
+  {
+    "name": "last one!",
+    "distance": 23225.8,
+    "moving_time": 7643,
+    "start_date_local": "2026-02-15T11:24:00Z",
+    "type": "Run"
+  },
+  {
+    "name": "morning run",
+    "distance": 7095.4,
+    "moving_time": 2278,
+    "start_date_local": "2026-02-13T09:30:17Z",
+    "type": "Run"
+  },
+  {
+    "name": "tempo thursday",
+    "distance": 12615.0,
+    "moving_time": 3982,
+    "start_date_local": "2026-02-12T08:55:36Z",
+    "type": "Run"
+  }
+]
