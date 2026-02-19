@@ -36,6 +36,13 @@
     nav { margin-top: 0.75rem; display: flex; gap: 1.5rem; }
     nav a { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); text-decoration: none; font-weight: 600; }
     nav a:hover { color: var(--red); }
+    nav a:focus-visible,
+    .cta-link:focus-visible,
+    .footer-contact a:focus-visible {
+      outline: 2px solid var(--red);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
 
     .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--red); margin-bottom: 1.5rem; }
 
@@ -101,7 +108,7 @@
       <div class="container">
         <h2 class="section-label">Featured Project</h2>
         <div class="featured-card">
-          <img src="https://picsum.photos/seed/nycmovie/1000/400" alt="NYC Movie App" loading="lazy" />
+          <img src="https://picsum.photos/seed/nycmovie/1000/400" alt="NYC Movie App" loading="eager" />
           <div class="featured-body">
             <h3 class="featured-title">NYC Movie App</h3>
             <p class="featured-desc">A personal tool that aggregates AMC, Alamo Drafthouse, and advance screening listings in one place — with support for film festivals and special events. Built for my NYC moviegoing habit.</p>
