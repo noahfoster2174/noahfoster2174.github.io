@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feed — Noah Foster</title>
+  <meta name="description" content="What Noah Foster is running and watching." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%23E22D32'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='white'>NF</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root { --red: #E22D32; --text: #1a1a1a; --muted: #555; --border: #e5e5e5; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: var(--text); line-height: 1.6; }
+    header { border-bottom: 1px solid var(--border); padding: 2rem 0 1.5rem; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+    .site-title { font-family: 'Spectral', serif; font-size: 2.4rem; font-weight: 700; letter-spacing: -0.5px; }
+    .site-title a { text-decoration: none; color: inherit; }
+    .site-title span { display: inline-block; border-bottom: 3px solid var(--red); padding-bottom: 2px; }
+    nav { margin-top: 0.75rem; display: flex; gap: 1.5rem; }
+    nav a { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); text-decoration: none; font-weight: 600; }
+    nav a:hover, nav a[aria-current] { color: var(--red); }
+    .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--red); margin-bottom: 1.5rem; }
+    footer { border-top: 3px solid var(--red); padding: 2rem 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-size: 0.85rem; color: var(--muted); }
+    .footer-contact { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+    .footer-contact a { font-size: 0.85rem; color: var(--muted); text-decoration: none; }
+    .footer-contact a:hover { color: var(--red); }
+
+    /* ── Feed ── */
+    .feed-section { padding: 3rem 0; }
+    .feed-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    @media (max-width: 700px) { .feed-grid { grid-template-columns: 1fr; gap: 3rem; } }
+    .feed-col-title { font-family: 'Spectral', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--border); }
+    .feed-col-title span { border-bottom: 2px solid var(--red); padding-bottom: 2px; }
+
+    /* ── Strava ── */
+    .run-item { padding: 1rem 0; border-bottom: 1px solid var(--border); }
+    .run-item:last-child { border-bottom: none; }
+    .run-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .run-stats { font-size: 0.85rem; color: var(--muted); }
+    .run-date { font-size: 0.8rem; color: var(--border); margin-top: 0.2rem; }
+
+    /* ── Letterboxd ── */
+    .film-item { display: flex; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+    .film-item:last-child { border-bottom: none; }
+    .film-poster { width: 40px; height: 60px; object-fit: cover; border: 1px solid var(--border); flex-shrink: 0; background: #f5f5f5; }
+    .film-poster-placeholder { width: 40px; height: 60px; background: #f5f5f5; border: 1px solid var(--border); flex-shrink: 0; }
+    .film-info { flex: 1; min-width: 0; }
+    .film-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; }
+    .film-rating { font-size: 0.85rem; color: var(--red); }
+    .film-date { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── Empty / loading states ── */
+    .feed-state { font-size: 0.9rem; color: var(--muted); font-style: italic; padding: 1rem 0; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1 class="site-title"><a href="index.html"><span>Noah Foster</span></a></h1>
+      <nav aria-label="Main">
+        <a href="about.html">About</a>
+        <a href="about.html#projects">Projects</a>
+        <a href="feed.html" aria-current="page">Feed</a>
+        <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="feed-section">
+      <div class="container">
+        <h2 class="section-label" style="margin-bottom:2rem;">Feed</h2>
+        <div class="feed-grid">
+          <div class="feed-col">
+            <h3 class="feed-col-title"><span>Running</span></h3>
+            <div id="strava-feed"><p class="feed-state">Loading runs...</p></div>
+          </div>
+          <div class="feed-col">
+            <h3 class="feed-col-title"><span>Watching</span></h3>
+            <div id="letterboxd-feed"><p class="feed-state">Loading films...</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">© 2026 Noah Foster</span>
+        <div class="footer-contact">
+          <a href="mailto:noahfoster6@gmail.com">noahfoster6@gmail.com</a>
+          <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Safe text helper — never use innerHTML with untrusted data
+    function setText(el, text) { el.textContent = text; }
+
+    function makeEl(tag, cls) {
+      const el = document.createElement(tag);
+      if (cls) el.className = cls;
+      return el;
+    }
+
+    function setEmpty(id, msg) {
+      const el = document.getElementById(id);
+      el.replaceChildren();
+      const p = makeEl('p', 'feed-state');
+      setText(p, msg);
+      el.appendChild(p);
+    }
+
+    // ── Strava ──
+    async function loadStrava() {
+      const container = document.getElementById('strava-feed');
+      try {
+        const res = await fetch('strava.json');
+        if (!res.ok) throw new Error();
+        const activities = await res.json();
+        if (!Array.isArray(activities) || !activities.length) {
+          setEmpty('strava-feed', 'No runs logged yet.');
+          return;
+        }
+        container.replaceChildren();
+        activities.slice(0, 5).forEach(a => {
+          const km = (a.distance / 1000).toFixed(2);
+          const mins = Math.floor(a.moving_time / 60);
+          const secs = String(a.moving_time % 60).padStart(2, '0');
+          const paceRaw = a.distance > 0 ? a.moving_time / (a.distance / 1000) : 0;
+          const paceMins = Math.floor(paceRaw / 60);
+          const paceSecs = String(Math.round(paceRaw % 60)).padStart(2, '0');
+          const date = new Date(a.start_date_local).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+          const item = makeEl('div', 'run-item');
+          const name = makeEl('div', 'run-name');
+          setText(name, a.name || 'Run');
+          const stats = makeEl('div', 'run-stats');
+          setText(stats, `${km} km \u00b7 ${mins}:${secs} \u00b7 ${paceMins}:${paceSecs}/km`);
+          const dateEl = makeEl('div', 'run-date');
+          setText(dateEl, date);
+          item.appendChild(name);
+          item.appendChild(stats);
+          item.appendChild(dateEl);
+          container.appendChild(item);
+        });
+      } catch {
+        setEmpty('strava-feed', 'No runs logged yet.');
+      }
+    }
+
+    // ── Letterboxd ──
+    async function loadLetterboxd() {
+      const container = document.getElementById('letterboxd-feed');
+      try {
+        const rssUrl = 'https://letterboxd.com/noahfoster/rss/';
+        const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl) + '&count=8';
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+        if (!data.items || !data.items.length) {
+          setEmpty('letterboxd-feed', 'No films logged yet.');
+          return;
+        }
+        container.replaceChildren();
+        data.items.slice(0, 8).forEach(item => {
+          const rawTitle = item.title || '';
+          const title = rawTitle.replace(/^.+,\s*/, '');
+          const ratingMatch = (item.description || '').match(/[\u2605\u2606\u00bd]+/);
+          const rating = ratingMatch ? ratingMatch[0] : '';
+          const date = item.pubDate ? new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+
+          const filmItem = makeEl('div', 'film-item');
+
+          if (item.thumbnail) {
+            const img = makeEl('img', 'film-poster');
+            img.src = item.thumbnail;
+            img.alt = '';
+            img.loading = 'lazy';
+            filmItem.appendChild(img);
+          } else {
+            filmItem.appendChild(makeEl('div', 'film-poster-placeholder'));
+          }
+
+          const info = makeEl('div', 'film-info');
+          const titleEl = makeEl('div', 'film-title');
+          setText(titleEl, title);
+          info.appendChild(titleEl);
+
+          if (rating) {
+            const ratingEl = makeEl('div', 'film-rating');
+            setText(ratingEl, rating);
+            info.appendChild(ratingEl);
+          }
+
+          if (date) {
+            const dateEl = makeEl('div', 'film-date');
+            setText(dateEl, date);
+            info.appendChild(dateEl);
+          }
+
+          filmItem.appendChild(info);
+          container.appendChild(filmItem);
+        });
+      } catch {
+        setEmpty('letterboxd-feed', 'No films logged yet.');
+      }
+    }
+
+    loadStrava();
+    loadLetterboxd();
+  </script>
+</body>
+</html>
