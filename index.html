@@ -268,18 +268,19 @@
 
     // ── Page transition curtain ──
     const curtain = document.getElementById('curtain');
-    curtain.classList.add('enter');
-
-    document.querySelectorAll('a[href]').forEach(link => {
-      const href = link.getAttribute('href');
-      if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) return;
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        curtain.classList.remove('enter');
-        curtain.classList.add('exit');
-        setTimeout(() => { window.location.href = href; }, 350);
+    if (curtain) {
+      curtain.classList.add('enter');
+      document.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) return;
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          curtain.classList.remove('enter');
+          curtain.classList.add('exit');
+          setTimeout(() => { window.location.href = href; }, 350);
+        });
       });
-    });
+    }
   </script>
 </body>
 </html>
