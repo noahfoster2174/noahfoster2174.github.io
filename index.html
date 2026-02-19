@@ -161,6 +161,20 @@
       font-size: 0.9rem;
       color: var(--muted);
     }
+    .card-placeholder-img {
+      width: 100%;
+      height: 200px;
+      background: #f5f5f5;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-placeholder-img::after {
+      content: '—';
+      font-size: 1.5rem;
+      color: var(--border);
+    }
 
     .quotes-section {
       padding: 3rem 0;
@@ -272,38 +286,38 @@
 
     <section class="cards-section" id="projects">
       <div class="container">
-        <h2 class="section-label">Interests</h2>
+        <h2 class="section-label">Projects</h2>
         <div class="cards-grid">
 
           <div class="card">
-            <img src="https://picsum.photos/seed/maryland/600/400" alt="Maryland Basketball" loading="lazy" />
+            <img src="https://picsum.photos/seed/noahsite/600/400" alt="noahfoster.com" loading="lazy" />
             <div class="card-body">
-              <h3 class="card-title">Maryland Basketball</h3>
-              <p class="card-desc">Terps fan since day one.</p>
+              <h3 class="card-title">noahfoster.com</h3>
+              <p class="card-desc">This site — designed and built with Claude from scratch.</p>
             </div>
           </div>
 
-          <div class="card">
-            <img src="https://picsum.photos/seed/bentleys/600/400" alt="RJ Bentley's" loading="lazy" />
+          <div class="card card--placeholder">
+            <div class="card-placeholder-img"></div>
             <div class="card-body">
-              <h3 class="card-title">RJ Bentley's</h3>
-              <p class="card-desc">College Park institution.</p>
+              <h3 class="card-title">Coming Soon</h3>
+              <p class="card-desc">Next project in progress.</p>
             </div>
           </div>
 
-          <div class="card">
-            <img src="https://picsum.photos/seed/playstation/600/400" alt="PlayStation" loading="lazy" />
+          <div class="card card--placeholder">
+            <div class="card-placeholder-img"></div>
             <div class="card-body">
-              <h3 class="card-title">PlayStation</h3>
-              <p class="card-desc">Now on PS Vita apparently.</p>
+              <h3 class="card-title">Coming Soon</h3>
+              <p class="card-desc">Next project in progress.</p>
             </div>
           </div>
 
-          <div class="card">
-            <img src="https://picsum.photos/seed/vmh/600/400" alt="Van Munching Hall" loading="lazy" />
+          <div class="card card--placeholder">
+            <div class="card-placeholder-img"></div>
             <div class="card-body">
-              <h3 class="card-title">Van Munching Hall</h3>
-              <p class="card-desc">Smith School of Business, UMD.</p>
+              <h3 class="card-title">Coming Soon</h3>
+              <p class="card-desc">Next project in progress.</p>
             </div>
           </div>
 
