@@ -26,9 +26,9 @@
       --border: #e5e5e5;
     }
 
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: var(--text); line-height: 1.6; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: var(--text); line-height: 1.6; overflow-x: hidden; }
 
-    header { border-bottom: 1px solid var(--border); padding: 2rem 0 1.5rem; }
+    header { border-bottom: 1px solid var(--border); padding: 2rem 0 1.5rem; position: relative; z-index: 1; }
     .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
     .site-title { font-family: 'Spectral', serif; font-size: 2.4rem; font-weight: 700; letter-spacing: -0.5px; }
     .site-title a { text-decoration: none; color: inherit; }
@@ -47,9 +47,56 @@
     .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--red); margin-bottom: 1.5rem; }
 
     /* ── Hero ── */
-    .hero { padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--border); }
-    .hero p { font-family: 'Spectral', serif; font-size: 1.5rem; color: var(--muted); max-width: 560px; line-height: 1.5; }
-    .hero p em { color: var(--red); font-style: normal; font-weight: 600; }
+    .hero {
+      min-height: calc(100vh - 97px);
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+      padding: 4rem 0;
+    }
+    @media (max-width: 700px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 0; }
+    }
+
+    .hero-tagline {
+      font-family: 'Spectral', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      color: var(--muted);
+      line-height: 1.4;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: heroReveal 0.7s ease 0.1s forwards;
+    }
+    .hero-tagline em { color: var(--red); font-style: normal; font-weight: 600; }
+
+    @keyframes heroReveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-stats {
+      border-left: 2px solid var(--red);
+      padding-left: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      opacity: 0;
+      animation: heroReveal 0.7s ease 0.35s forwards;
+    }
+    @media (max-width: 700px) {
+      .hero-stats { border-left: none; border-top: 2px solid var(--red); padding-left: 0; padding-top: 1.5rem; flex-direction: row; flex-wrap: wrap; gap: 1.25rem 2rem; }
+    }
+    .stat-block { display: flex; flex-direction: column; gap: 0.1rem; }
+    .stat-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--border); }
+    .stat-value { font-size: 0.95rem; color: var(--text); font-weight: 500; }
+    .stat-live .stat-label { color: var(--red); }
+    .stat-live .stat-value { font-family: 'Spectral', serif; font-size: 1.3rem; font-weight: 700; }
 
     /* ── Intro ── */
     .intro-section { padding: 2rem 0; border-bottom: 1px solid var(--border); }
@@ -57,9 +104,19 @@
 
     /* ── Featured Project ── */
     .featured-section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
-    .featured-card img { width: 100%; height: 280px; object-fit: cover; display: block; border: 1px solid var(--border); margin-bottom: 1.5rem; }
-    .featured-title { font-family: 'Spectral', serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .featured-desc { font-size: 0.95rem; color: var(--muted); max-width: 640px; line-height: 1.7; margin-bottom: 1rem; }
+    .featured-card {
+      background: #1a1a1a;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      padding: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 640px) {
+      .featured-card { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem; }
+    }
+    .featured-title { font-family: 'Spectral', serif; font-size: 2rem; font-weight: 700; color: #fff; line-height: 1.2; }
+    .featured-desc { font-size: 0.95rem; color: #999; line-height: 1.7; margin-bottom: 1.25rem; }
     .featured-cta { font-size: 0.85rem; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.08em; }
 
     /* ── CTAs ── */
@@ -75,6 +132,23 @@
     .footer-contact { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
     .footer-contact a { font-size: 0.85rem; color: var(--muted); text-decoration: none; }
     .footer-contact a:hover { color: var(--red); }
+
+    /* ── Scroll animations ── */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Page transition curtain ── */
+    .curtain {
+      position: fixed; inset: 0;
+      background: var(--red);
+      z-index: 9999;
+      transform: translateY(-100%);
+      pointer-events: none;
+    }
+    .curtain.enter { animation: curtainEnter 0.45s cubic-bezier(0.77,0,0.18,1) forwards; }
+    .curtain.exit  { animation: curtainExit  0.35s cubic-bezier(0.77,0,0.18,1) forwards; pointer-events: all; }
+    @keyframes curtainEnter { from { transform: translateY(0); } to { transform: translateY(-100%); } }
+    @keyframes curtainExit  { from { transform: translateY(-100%); } to { transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -94,23 +168,43 @@
   <main>
     <section class="hero">
       <div class="container">
-        <p>Senior Finance Analyst at <em>Amazon Advertising</em>. Building toward sports. Running toward Tokyo.</p>
+        <div class="hero-inner">
+          <p class="hero-tagline">Senior Finance Analyst at <em>Amazon Advertising</em>. Building toward sports. Running toward Tokyo.</p>
+          <div class="hero-stats">
+            <div class="stat-block">
+              <span class="stat-label">Role</span>
+              <span class="stat-value">Senior Finance Analyst</span>
+              <span class="stat-value">Amazon Advertising</span>
+            </div>
+            <div class="stat-block">
+              <span class="stat-label">Based</span>
+              <span class="stat-value">New York City</span>
+            </div>
+            <div class="stat-block">
+              <span class="stat-label">Goal</span>
+              <span class="stat-value">Tokyo Marathon 2026</span>
+            </div>
+            <div class="stat-block stat-live" id="hero-miles" style="display:none">
+              <span class="stat-label">This week</span>
+              <span class="stat-value" id="hero-miles-value">—</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="intro-section">
+    <section class="intro-section fade-in">
       <div class="container">
         <p class="intro-line">I build at the intersection of finance, sports, and technology.</p>
       </div>
     </section>
 
-    <section class="featured-section">
+    <section class="featured-section fade-in">
       <div class="container">
         <h2 class="section-label">Featured Project</h2>
         <div class="featured-card">
-          <img src="https://picsum.photos/seed/nycmovie/1000/400" alt="NYC Movie App" loading="eager" />
+          <h3 class="featured-title">NYC Movie App</h3>
           <div class="featured-body">
-            <h3 class="featured-title">NYC Movie App</h3>
             <p class="featured-desc">A personal tool that aggregates AMC, Alamo Drafthouse, and advance screening listings in one place — with support for film festivals and special events. Built for my NYC moviegoing habit.</p>
             <span class="featured-cta">In development →</span>
           </div>
@@ -118,7 +212,7 @@
       </div>
     </section>
 
-    <section class="cta-section">
+    <section class="cta-section fade-in">
       <div class="container">
         <div class="cta-group">
           <a href="about.html#projects" class="cta-link">See all projects →</a>
@@ -140,5 +234,52 @@
     </div>
   </footer>
 
+  <div class="curtain" id="curtain"></div>
+
+  <noscript><style>.fade-in { opacity: 1; transform: none; } .hero-tagline, .hero-stats { opacity: 1; transform: none; }</style></noscript>
+  <script>
+    // ── Scroll animations ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── Live miles from Strava ──
+    (async () => {
+      try {
+        const res = await fetch('strava.json');
+        if (!res.ok) return;
+        const activities = await res.json();
+        if (!Array.isArray(activities)) return;
+        const now = new Date();
+        const daysFromMon = now.getDay() === 0 ? 6 : now.getDay() - 1;
+        const weekStart = new Date(now);
+        weekStart.setDate(now.getDate() - daysFromMon);
+        weekStart.setHours(0, 0, 0, 0);
+        const miles = activities
+          .filter(a => new Date(a.start_date_local) >= weekStart)
+          .reduce((sum, a) => sum + a.distance, 0) / 1609.34;
+        if (miles > 0) {
+          document.getElementById('hero-miles-value').textContent = miles.toFixed(1) + ' mi';
+          document.getElementById('hero-miles').style.display = '';
+        }
+      } catch {}
+    })();
+
+    // ── Page transition curtain ──
+    const curtain = document.getElementById('curtain');
+    curtain.classList.add('enter');
+
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) return;
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        curtain.classList.remove('enter');
+        curtain.classList.add('exit');
+        setTimeout(() => { window.location.href = href; }, 350);
+      });
+    });
+  </script>
 </body>
 </html>
