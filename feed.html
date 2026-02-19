@@ -39,6 +39,12 @@
     .feed-col-title { font-family: 'Spectral', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--border); }
     .feed-col-title span { border-bottom: 2px solid var(--red); padding-bottom: 2px; }
 
+    /* ── Weekly summary ── */
+    .week-summary { padding: 1rem 0 1.25rem; border-bottom: 1px solid var(--border); margin-bottom: 0.25rem; }
+    .week-total { font-family: 'Spectral', serif; font-size: 2rem; font-weight: 700; line-height: 1; }
+    .week-total span { font-size: 1rem; font-weight: 400; color: var(--muted); margin-left: 0.3rem; }
+    .week-meta { font-size: 0.8rem; color: var(--muted); margin-top: 0.35rem; }
+
     /* ── Strava ── */
     .run-item { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
     .run-item:last-child { border-bottom: none; }
@@ -83,6 +89,7 @@
         <div class="feed-grid">
           <div class="feed-col">
             <h3 class="feed-col-title"><span>Running</span></h3>
+            <div id="week-summary"></div>
             <div id="strava-feed"><p class="feed-state">Loading runs...</p></div>
           </div>
           <div class="feed-col">
@@ -152,6 +159,29 @@
           setEmpty('strava-feed', 'No runs logged yet.');
           return;
         }
+        // ── Weekly summary ──
+        const now = new Date();
+        const dayOfWeek = now.getDay(); // 0=Sun
+        const daysFromMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+        const weekStart = new Date(now);
+        weekStart.setDate(now.getDate() - daysFromMonday);
+        weekStart.setHours(0, 0, 0, 0);
+
+        const weekRuns = activities.filter(a => new Date(a.start_date_local) >= weekStart);
+        const weekMiles = (weekRuns.reduce((sum, a) => sum + a.distance, 0) / 1609.34).toFixed(1);
+        const summaryEl = document.getElementById('week-summary');
+        summaryEl.className = 'week-summary';
+        summaryEl.replaceChildren();
+        const total = makeEl('div', 'week-total');
+        total.appendChild(document.createTextNode(weekMiles));
+        const unit = makeEl('span');
+        setText(unit, 'mi this week');
+        total.appendChild(unit);
+        const meta = makeEl('div', 'week-meta');
+        setText(meta, `${weekRuns.length} run${weekRuns.length !== 1 ? 's' : ''} · Mon–today`);
+        summaryEl.appendChild(total);
+        summaryEl.appendChild(meta);
+
         container.replaceChildren();
         activities.slice(0, 5).forEach(a => {
           const miles = (a.distance / 1609.34).toFixed(2);
