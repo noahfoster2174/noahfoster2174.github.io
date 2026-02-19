@@ -86,6 +86,18 @@
       font-weight: 600;
     }
 
+    /* ── About ── */
+    .about-section {
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .about-section p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 680px;
+      line-height: 1.75;
+    }
+
     .section-label {
       font-size: 0.75rem;
       font-weight: 700;
@@ -202,8 +214,8 @@
     <div class="container">
       <h1 class="site-title"><span>Noah Foster</span></h1>
       <nav>
-        <a href="#">About</a>
-        <a href="#">Projects</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
         <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </nav>
     </div>
@@ -212,11 +224,18 @@
   <main>
     <section class="hero">
       <div class="container">
-        <p>Finance, strategy, and <em>sports</em>. Building things on the side.</p>
+        <p>Senior Finance Analyst at <em>Amazon Advertising</em>. Building toward sports. Running toward Tokyo.</p>
       </div>
     </section>
 
-    <section class="cards-section">
+    <section class="about-section" id="about">
+      <div class="container">
+        <h2 class="section-label">About</h2>
+        <p>I'm a Senior Finance Analyst at Amazon Advertising in New York, where I lead valuation and deal structuring for Fortune 100 global advertising partnerships ranging up to $385MM annually. Before Amazon, I spent four years at Capital One across deal finance, partnership valuations, and capital markets. My long-term goal is a front-office finance role in professional sports. Outside of work I'm training for the Tokyo Marathon and building things on the side.</p>
+      </div>
+    </section>
+
+    <section class="cards-section" id="projects">
       <div class="container">
         <h2 class="section-label">Interests</h2>
         <div class="cards-grid">
