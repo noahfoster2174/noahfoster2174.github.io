@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Noah Foster</title>
   <meta name="description" content="Noah Foster — Senior Finance Analyst at Amazon Advertising. Building toward sports. Running toward Tokyo." />
-  <!-- Open Graph -->
   <meta property="og:title" content="Noah Foster" />
   <meta property="og:description" content="Senior Finance Analyst at Amazon Advertising. Building toward sports. Running toward Tokyo." />
   <meta property="og:type" content="website" />
@@ -27,262 +26,59 @@
       --border: #e5e5e5;
     }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #fff;
-      color: var(--text);
-      line-height: 1.6;
-    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: var(--text); line-height: 1.6; }
 
-    header {
-      border-bottom: 1px solid var(--border);
-      padding: 2rem 0 1.5rem;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-    .site-title {
-      font-family: 'Spectral', serif;
-      font-size: 2.4rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
-    .site-title span {
-      display: inline-block;
-      border-bottom: 3px solid var(--red);
-      padding-bottom: 2px;
-    }
-    nav {
-      margin-top: 0.75rem;
-      display: flex;
-      gap: 1.5rem;
-    }
-    nav a {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      text-decoration: none;
-      font-weight: 600;
-    }
+    header { border-bottom: 1px solid var(--border); padding: 2rem 0 1.5rem; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+    .site-title { font-family: 'Spectral', serif; font-size: 2.4rem; font-weight: 700; letter-spacing: -0.5px; }
+    .site-title a { text-decoration: none; color: inherit; }
+    .site-title span { display: inline-block; border-bottom: 3px solid var(--red); padding-bottom: 2px; }
+    nav { margin-top: 0.75rem; display: flex; gap: 1.5rem; }
+    nav a { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); text-decoration: none; font-weight: 600; }
     nav a:hover { color: var(--red); }
 
-    .hero {
-      padding: 3.5rem 0 2.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .hero p {
-      font-family: 'Spectral', serif;
-      font-size: 1.5rem;
-      color: var(--muted);
-      max-width: 560px;
-      line-height: 1.5;
-    }
-    .hero p em {
-      color: var(--red);
-      font-style: normal;
-      font-weight: 600;
-    }
+    .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--red); margin-bottom: 1.5rem; }
 
-    /* ── About ── */
-    .about-section {
-      padding: 3.5rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .about-section p {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 680px;
-      line-height: 1.75;
-    }
+    /* ── Hero ── */
+    .hero { padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--border); }
+    .hero p { font-family: 'Spectral', serif; font-size: 1.5rem; color: var(--muted); max-width: 560px; line-height: 1.5; }
+    .hero p em { color: var(--red); font-style: normal; font-weight: 600; }
 
-    /* ── Skills Strip ── */
-    .skills-strip {
-      padding: 2rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .skills-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      list-style: none;
-    }
-    .skills-list li {
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text);
-      background: #f5f5f5;
-      padding: 0.4rem 0.85rem;
-      border-radius: 2px;
-    }
+    /* ── Intro ── */
+    .intro-section { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+    .intro-line { font-family: 'Spectral', serif; font-size: 1.15rem; color: var(--muted); }
 
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--red);
-      margin-bottom: 1.5rem;
-    }
+    /* ── Featured Project ── */
+    .featured-section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
+    .featured-card img { width: 100%; height: 280px; object-fit: cover; display: block; border: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .featured-title { font-family: 'Spectral', serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .featured-desc { font-size: 0.95rem; color: var(--muted); max-width: 640px; line-height: 1.7; margin-bottom: 1rem; }
+    .featured-cta { font-size: 0.85rem; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.08em; }
 
-    .cards-section {
-      padding: 3rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-    }
-    @media (max-width: 600px) {
-      .cards-grid { grid-template-columns: 1fr; }
-    }
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      display: block;
-      border: 1px solid var(--border);
-    }
-    .card {
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    }
-    .card-body {
-      padding: 1rem 0 0;
-    }
-    .card-title {
-      font-family: 'Spectral', serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-    .card-desc {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    .card-placeholder-img {
-      width: 100%;
-      height: 200px;
-      background: #f5f5f5;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .card-placeholder-img::after {
-      content: '—';
-      font-size: 1.5rem;
-      color: var(--border);
-    }
+    /* ── CTAs ── */
+    .cta-section { padding: 3rem 0; }
+    .cta-group { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .cta-link { font-family: 'Spectral', serif; font-size: 1.2rem; color: var(--text); text-decoration: none; border-bottom: 2px solid var(--red); padding-bottom: 2px; }
+    .cta-link:hover { color: var(--red); }
 
-    .quotes-section {
-      padding: 3rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .quote-featured {
-      font-family: 'Spectral', serif;
-      font-size: 1.6rem;
-      line-height: 1.45;
-      max-width: 680px;
-      margin: 0 auto 2rem;
-      text-align: center;
-      position: relative;
-    }
-    .quote-featured::before {
-      content: '"';
-      font-size: 5rem;
-      color: var(--red);
-      line-height: 0;
-      position: absolute;
-      top: 1.5rem;
-      left: -1rem;
-      font-family: 'Spectral', serif;
-      opacity: 0.15;
-    }
-    .quote-featured cite {
-      display: block;
-      font-size: 0.9rem;
-      font-style: normal;
-      color: var(--muted);
-      margin-top: 0.75rem;
-    }
-    .quotes-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      max-width: 560px;
-      margin: 0 auto;
-    }
-    .quotes-list li {
-      font-size: 0.95rem;
-      color: var(--muted);
-      padding-left: 1rem;
-      border-left: 2px solid var(--border);
-    }
-
-    footer {
-      border-top: 3px solid var(--red);
-      padding: 2rem 0;
-    }
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .footer-copy {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-    .footer-contact {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .footer-contact a {
-      font-size: 0.85rem;
-      color: var(--muted);
-      text-decoration: none;
-    }
-    .footer-contact a:hover {
-      color: var(--red);
-    }
-
-    /* ── Scroll animations ── */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* ── Footer ── */
+    footer { border-top: 3px solid var(--red); padding: 2rem 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-size: 0.85rem; color: var(--muted); }
+    .footer-contact { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+    .footer-contact a { font-size: 0.85rem; color: var(--muted); text-decoration: none; }
+    .footer-contact a:hover { color: var(--red); }
   </style>
-
-<noscript>
-  <style>.fade-in { opacity: 1; transform: none; }</style>
-</noscript>
 </head>
 <body>
 
   <header>
     <div class="container">
-      <h1 class="site-title"><span>Noah Foster</span></h1>
+      <h1 class="site-title"><a href="index.html"><span>Noah Foster</span></a></h1>
       <nav aria-label="Main">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
+        <a href="about.html">About</a>
+        <a href="about.html#projects">Projects</a>
+        <a href="feed.html">Feed</a>
         <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </nav>
     </div>
@@ -295,78 +91,32 @@
       </div>
     </section>
 
-    <section class="about-section fade-in" id="about">
+    <section class="intro-section">
       <div class="container">
-        <h2 class="section-label">About</h2>
-        <p>I'm a Senior Finance Analyst at Amazon Advertising in New York, where I lead valuation and deal structuring for Fortune 100 global advertising partnerships ranging up to $385MM annually. Before Amazon, I spent four years at Capital One across deal finance, partnership valuations, and capital markets. My long-term goal is a front-office finance role in professional sports. Outside of work I'm training for the Tokyo Marathon and building things on the side.</p>
+        <p class="intro-line">I build at the intersection of finance, sports, and technology.</p>
       </div>
     </section>
 
-    <section class="skills-strip fade-in" aria-label="Skills">
+    <section class="featured-section">
       <div class="container">
-        <ul class="skills-list">
-          <li>Python</li>
-          <li>SQL</li>
-          <li>Snowflake</li>
-          <li>Tableau</li>
-          <li>AWS</li>
-          <li>Bloomberg</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="cards-section fade-in" id="projects">
-      <div class="container">
-        <h2 class="section-label">Projects</h2>
-        <div class="cards-grid">
-
-          <div class="card">
-            <img src="https://picsum.photos/seed/noahsite/600/400" alt="noahfoster.com" loading="lazy" />
-            <div class="card-body">
-              <h3 class="card-title">noahfoster.com</h3>
-              <p class="card-desc">This site — designed and built with Claude from scratch.</p>
-            </div>
+        <h2 class="section-label">Featured Project</h2>
+        <div class="featured-card">
+          <img src="https://picsum.photos/seed/nycmovie/1000/400" alt="NYC Movie App" loading="lazy" />
+          <div class="featured-body">
+            <h3 class="featured-title">NYC Movie App</h3>
+            <p class="featured-desc">A personal tool that aggregates AMC, Alamo Drafthouse, and advance screening listings in one place — with support for film festivals and special events. Built for my NYC moviegoing habit.</p>
+            <span class="featured-cta">In development →</span>
           </div>
-
-          <div class="card card--placeholder">
-            <div class="card-placeholder-img"></div>
-            <div class="card-body">
-              <h3 class="card-title">Coming Soon</h3>
-              <p class="card-desc">Next project in progress.</p>
-            </div>
-          </div>
-
-          <div class="card card--placeholder">
-            <div class="card-placeholder-img"></div>
-            <div class="card-body">
-              <h3 class="card-title">Coming Soon</h3>
-              <p class="card-desc">Next project in progress.</p>
-            </div>
-          </div>
-
-          <div class="card card--placeholder">
-            <div class="card-placeholder-img"></div>
-            <div class="card-body">
-              <h3 class="card-title">Coming Soon</h3>
-              <p class="card-desc">Next project in progress.</p>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
 
-    <section class="quotes-section fade-in">
+    <section class="cta-section">
       <div class="container">
-        <h2 class="section-label">Quotes</h2>
-        <blockquote class="quote-featured">
-          The greatest glory in living lies not in never falling, but in rising every time we fall.
-          <cite>— Nelson Mandela</cite>
-        </blockquote>
-        <ul class="quotes-list">
-          <li>"The way to get started is to quit talking and begin doing."</li>
-          <li>"Your time is limited, so don't waste it living someone else's life."</li>
-        </ul>
+        <div class="cta-group">
+          <a href="about.html#projects" class="cta-link">See all projects →</a>
+          <a href="about.html" class="cta-link">About me →</a>
+        </div>
       </div>
     </section>
   </main>
@@ -383,18 +133,5 @@
     </div>
   </footer>
 
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-</script>
 </body>
 </html>
