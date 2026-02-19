@@ -38,11 +38,13 @@
     .feed-col-title span { border-bottom: 2px solid var(--red); padding-bottom: 2px; }
 
     /* ── Strava ── */
-    .run-item { padding: 1rem 0; border-bottom: 1px solid var(--border); }
+    .run-item { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
     .run-item:last-child { border-bottom: none; }
+    .run-content { flex: 1; min-width: 0; }
     .run-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.25rem; }
     .run-stats { font-size: 0.85rem; color: var(--muted); }
     .run-date { font-size: 0.8rem; color: var(--border); margin-top: 0.2rem; }
+    .run-map { width: 90px; height: 64px; flex-shrink: 0; display: block; }
 
     /* ── Letterboxd ── */
     .film-item { display: flex; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
@@ -120,6 +122,50 @@
       el.appendChild(p);
     }
 
+    // ── Polyline decoder (Google Encoded Polyline Algorithm) ──
+    function decodePolyline(encoded) {
+      const points = [];
+      let index = 0, lat = 0, lng = 0;
+      while (index < encoded.length) {
+        let b, shift = 0, result = 0;
+        do { b = encoded.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
+        lat += (result & 1) ? ~(result >> 1) : (result >> 1);
+        shift = 0; result = 0;
+        do { b = encoded.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
+        lng += (result & 1) ? ~(result >> 1) : (result >> 1);
+        points.push([lat / 1e5, lng / 1e5]);
+      }
+      return points;
+    }
+
+    function drawRoute(canvas, polyline) {
+      if (!polyline) return;
+      const points = decodePolyline(polyline);
+      if (points.length < 2) return;
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width, H = canvas.height;
+      let minLat = Infinity, maxLat = -Infinity, minLng = Infinity, maxLng = -Infinity;
+      points.forEach(([lat, lng]) => {
+        if (lat < minLat) minLat = lat; if (lat > maxLat) maxLat = lat;
+        if (lng < minLng) minLng = lng; if (lng > maxLng) maxLng = lng;
+      });
+      const pad = 6;
+      const scale = Math.min((W - pad * 2) / (maxLng - minLng || 1), (H - pad * 2) / (maxLat - minLat || 1));
+      const offX = (W - (maxLng - minLng) * scale) / 2;
+      const offY = (H - (maxLat - minLat) * scale) / 2;
+      ctx.strokeStyle = '#E22D32';
+      ctx.lineWidth = 1.5;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      points.forEach(([lat, lng], i) => {
+        const x = (lng - minLng) * scale + offX;
+        const y = H - ((lat - minLat) * scale + offY);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+    }
+
     // ── Strava ──
     async function loadStrava() {
       const container = document.getElementById('strava-feed');
@@ -133,24 +179,35 @@
         }
         container.replaceChildren();
         activities.slice(0, 5).forEach(a => {
-          const km = (a.distance / 1000).toFixed(2);
+          const miles = (a.distance / 1609.34).toFixed(2);
           const mins = Math.floor(a.moving_time / 60);
           const secs = String(a.moving_time % 60).padStart(2, '0');
-          const paceRaw = a.distance > 0 ? a.moving_time / (a.distance / 1000) : 0;
+          const paceRaw = a.distance > 0 ? a.moving_time / (a.distance / 1609.34) : 0;
           const paceMins = Math.floor(paceRaw / 60);
           const paceSecs = String(Math.round(paceRaw % 60)).padStart(2, '0');
           const date = new Date(a.start_date_local).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
           const item = makeEl('div', 'run-item');
+          const content = makeEl('div', 'run-content');
           const name = makeEl('div', 'run-name');
           setText(name, a.name || 'Run');
           const stats = makeEl('div', 'run-stats');
-          setText(stats, `${km} km \u00b7 ${mins}:${secs} \u00b7 ${paceMins}:${paceSecs}/km`);
+          setText(stats, `${miles} mi \u00b7 ${mins}:${secs} \u00b7 ${paceMins}:${paceSecs}/mi`);
           const dateEl = makeEl('div', 'run-date');
           setText(dateEl, date);
-          item.appendChild(name);
-          item.appendChild(stats);
-          item.appendChild(dateEl);
+          content.appendChild(name);
+          content.appendChild(stats);
+          content.appendChild(dateEl);
+          item.appendChild(content);
+
+          if (a.polyline) {
+            const canvas = makeEl('canvas', 'run-map');
+            canvas.width = 90;
+            canvas.height = 64;
+            item.appendChild(canvas);
+            drawRoute(canvas, a.polyline);
+          }
+
           container.appendChild(item);
         });
       } catch {

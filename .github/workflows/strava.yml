@@ -36,12 +36,13 @@ jobs:
           import sys, json
           activities = json.load(sys.stdin)
           keep_keys = ['name', 'distance', 'moving_time', 'start_date_local', 'type']
-          runs = [
-            {k: a[k] for k in keep_keys if k in a}
-            for a in activities
-            if a.get('type') == 'Run'
-          ][:5]
-          print(json.dumps(runs, indent=2))
+          runs = []
+          for a in activities:
+            if a.get('type') == 'Run':
+              entry = {k: a[k] for k in keep_keys if k in a}
+              entry['polyline'] = a.get('map', {}).get('summary_polyline', '')
+              runs.append(entry)
+          print(json.dumps(runs[:5], indent=2))
           " > strava.json
 
       - name: Commit if changed
