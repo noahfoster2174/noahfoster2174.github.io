@@ -177,8 +177,13 @@
         const unit = makeEl('span');
         setText(unit, 'mi this week');
         total.appendChild(unit);
+        const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const runDays = [...new Set(weekRuns.map(a => new Date(a.start_date_local).getDay()))]
+          .sort((a, b) => a - b)
+          .map(d => DAY_NAMES[d])
+          .join(' · ');
         const meta = makeEl('div', 'week-meta');
-        setText(meta, `${weekRuns.length} run${weekRuns.length !== 1 ? 's' : ''} · Mon–today`);
+        setText(meta, runDays || 'No runs yet this week');
         summaryEl.appendChild(total);
         summaryEl.appendChild(meta);
 
