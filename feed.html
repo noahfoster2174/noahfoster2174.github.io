@@ -4,18 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Feed — Noah Foster</title>
-  <meta name="description" content="What Noah Foster is running and watching." />
+  <meta name="description" content="What Noah Foster is training for, building, and watching." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%23E22D32'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='white'>NF</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    :root { --red: #E22D32; --text: #1a1a1a; --muted: #555; --border: #e5e5e5; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: var(--text); line-height: 1.6; }
+    :root { --red: #E22D32; --text: #1a1a1a; --muted: #666; --border: #e5e5e5; --bg: #fafaf8; --surface: #f5f5f5; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+
     header { border-bottom: 1px solid var(--border); padding: 2rem 0 1.5rem; }
     .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
     .site-title { font-family: 'Spectral', serif; font-size: 2.4rem; font-weight: 700; letter-spacing: -0.5px; }
@@ -24,7 +23,57 @@
     nav { margin-top: 0.75rem; display: flex; gap: 1.5rem; }
     nav a { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); text-decoration: none; font-weight: 600; }
     nav a:hover, nav a[aria-current] { color: var(--red); }
+    nav a:focus-visible,
+    .feed-link:focus-visible,
+    .footer-contact a:focus-visible {
+      outline: 2px solid var(--red);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .skip-link { position: absolute; top: -100%; left: 1rem; background: var(--red); color: #fff; padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 700; text-decoration: none; border-radius: 0 0 4px 4px; z-index: 100; }
+    .skip-link:focus { top: 0; }
+
     .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--red); margin-bottom: 1.5rem; }
+
+    /* ── Feed blocks ── */
+    .feed-block { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
+    .feed-block:last-of-type { border-bottom: none; }
+    .feed-block-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; }
+    .feed-link { font-size: 0.85rem; color: var(--muted); text-decoration: none; font-weight: 600; }
+    .feed-link:hover { color: var(--red); }
+
+    /* ── Currently Training ── */
+    .training-hero { margin-bottom: 1.5rem; }
+    .training-race { font-family: 'Spectral', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+    .training-race em { color: var(--red); font-style: normal; }
+    .training-desc { font-size: 1rem; color: var(--muted); line-height: 1.7; max-width: 600px; }
+    .training-stats { display: flex; gap: 3rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    @media (max-width: 500px) { .training-stats { gap: 2rem; } }
+    .training-stat { display: flex; flex-direction: column; gap: 0.1rem; }
+    .training-stat-value { font-family: 'Spectral', serif; font-size: 2rem; font-weight: 700; line-height: 1; }
+    .training-stat-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+
+    /* ── Currently Building ── */
+    .building-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .building-item { display: flex; gap: 1rem; align-items: baseline; }
+    .building-name { font-family: 'Spectral', serif; font-size: 1.05rem; font-weight: 600; flex-shrink: 0; }
+    .building-desc { font-size: 0.9rem; color: var(--muted); }
+    .building-sep { color: var(--border); flex-shrink: 0; }
+
+    /* ── Recently Watched ── */
+    .film-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+    @media (max-width: 600px) { .film-grid { grid-template-columns: repeat(2, 1fr); } }
+    .film-card { display: flex; flex-direction: column; gap: 0.5rem; }
+    .film-poster { width: 100%; aspect-ratio: 2/3; object-fit: cover; border: 1px solid var(--border); background: var(--surface); display: block; }
+    .film-poster-placeholder { width: 100%; aspect-ratio: 2/3; background: var(--surface); border: 1px solid var(--border); }
+    .film-title { font-weight: 600; font-size: 0.85rem; line-height: 1.3; }
+    .film-rating { font-size: 0.85rem; color: var(--red); }
+
+    /* ── Empty / loading states ── */
+    .feed-state { font-size: 0.9rem; color: var(--muted); font-style: italic; padding: 1rem 0; }
+
+    /* ── Footer ── */
     footer { border-top: 3px solid var(--red); padding: 2rem 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-copy { font-size: 0.85rem; color: var(--muted); }
@@ -32,40 +81,9 @@
     .footer-contact a { font-size: 0.85rem; color: var(--muted); text-decoration: none; }
     .footer-contact a:hover { color: var(--red); }
 
-    /* ── Feed ── */
-    .feed-section { padding: 3rem 0; }
-    .feed-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-    @media (max-width: 700px) { .feed-grid { grid-template-columns: 1fr; gap: 3rem; } }
-    .feed-col-title { font-family: 'Spectral', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--border); }
-    .feed-col-title span { border-bottom: 2px solid var(--red); padding-bottom: 2px; }
-
-    /* ── Weekly summary ── */
-    .week-summary { padding: 1rem 0 1.25rem; border-bottom: 1px solid var(--border); margin-bottom: 0.25rem; }
-    .week-total { font-family: 'Spectral', serif; font-size: 2rem; font-weight: 700; line-height: 1; }
-    .week-total span { font-size: 1rem; font-weight: 400; color: var(--muted); margin-left: 0.3rem; }
-    .week-meta { font-size: 0.8rem; color: var(--muted); margin-top: 0.35rem; }
-
-    /* ── Strava ── */
-    .run-item { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
-    .run-item:last-child { border-bottom: none; }
-    .run-content { flex: 1; min-width: 0; }
-    .run-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.25rem; }
-    .run-stats { font-size: 0.85rem; color: var(--muted); }
-    .run-date { font-size: 0.8rem; color: var(--border); margin-top: 0.2rem; }
-    .run-map { width: 150px; height: 110px; flex-shrink: 0; border: 1px solid var(--border); }
-
-    /* ── Letterboxd ── */
-    .film-item { display: flex; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
-    .film-item:last-child { border-bottom: none; }
-    .film-poster { width: 40px; height: 60px; object-fit: cover; border: 1px solid var(--border); flex-shrink: 0; background: #f5f5f5; }
-    .film-poster-placeholder { width: 40px; height: 60px; background: #f5f5f5; border: 1px solid var(--border); flex-shrink: 0; }
-    .film-info { flex: 1; min-width: 0; }
-    .film-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; }
-    .film-rating { font-size: 0.85rem; color: var(--red); }
-    .film-date { font-size: 0.8rem; color: var(--muted); }
-
-    /* ── Empty / loading states ── */
-    .feed-state { font-size: 0.9rem; color: var(--muted); font-style: italic; padding: 1rem 0; }
+    /* ── Scroll animations ── */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
 
     /* ── Page transition curtain ── */
     .curtain { position: fixed; inset: 0; background: var(--red); z-index: 9999; transform: translateY(-100%); pointer-events: none; }
@@ -74,102 +92,132 @@
     @keyframes curtainEnter { from { transform: translateY(0); } to { transform: translateY(-100%); } }
     @keyframes curtainExit  { from { transform: translateY(-100%); } to { transform: translateY(0); } }
   </style>
+  <noscript><style>.fade-in { opacity: 1; transform: none; }</style></noscript>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to content</a>
 
   <header>
     <div class="container">
       <h1 class="site-title"><a href="index.html"><span>Noah Foster</span></a></h1>
       <nav aria-label="Main">
-        <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
         <a href="feed.html" aria-current="page">Feed</a>
+        <a href="about.html">About</a>
         <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/noahfoster2174" target="_blank" rel="noopener noreferrer">GitHub</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="feed-section">
+  <main id="main-content">
+
+    <!-- ── Currently Training ── -->
+    <section class="feed-block fade-in">
       <div class="container">
-        <h2 class="section-label" style="margin-bottom:2rem;">Feed</h2>
-        <div class="feed-grid">
-          <div class="feed-col">
-            <h3 class="feed-col-title"><span>Running</span></h3>
-            <div id="week-summary"></div>
-            <div id="strava-feed"><p class="feed-state">Loading runs...</p></div>
+        <div class="feed-block-header">
+          <h2 class="section-label">Currently Training</h2>
+          <a href="https://www.strava.com/athletes/129221305" target="_blank" rel="noopener noreferrer" class="feed-link">Strava &nearr;</a>
+        </div>
+        <div class="training-hero">
+          <h3 class="training-race"><em>Tokyo</em> Marathon 2026</h3>
+          <p class="training-desc">Training for my first World Major — running 40+ miles a week through New York City. The race is March 2, 2026.</p>
+        </div>
+        <div class="training-stats" id="training-stats" style="display:none">
+          <div class="training-stat">
+            <span class="training-stat-value" id="stat-miles">—</span>
+            <span class="training-stat-label">Miles this week</span>
           </div>
-          <div class="feed-col">
-            <h3 class="feed-col-title"><span>Watching</span></h3>
-            <div id="week-films-summary"></div>
-            <div id="letterboxd-feed"><p class="feed-state">Loading films...</p></div>
+          <div class="training-stat">
+            <span class="training-stat-value" id="stat-runs">—</span>
+            <span class="training-stat-label">Runs this week</span>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- ── Currently Building ── -->
+    <section class="feed-block fade-in">
+      <div class="container">
+        <div class="feed-block-header">
+          <h2 class="section-label">Currently Building</h2>
+          <a href="projects.html" class="feed-link">All projects &rarr;</a>
+        </div>
+        <ul class="building-list">
+          <li class="building-item">
+            <span class="building-name">Reelz</span>
+            <span class="building-sep">&mdash;</span>
+            <span class="building-desc">Home media automation with a personal movie download app.</span>
+          </li>
+          <li class="building-item">
+            <span class="building-name">Prediction Markets</span>
+            <span class="building-sep">&mdash;</span>
+            <span class="building-desc">A P&L dashboard tracking handle, fees, and earnings across agents.</span>
+          </li>
+          <li class="building-item">
+            <span class="building-name">noahfoster.com</span>
+            <span class="building-sep">&mdash;</span>
+            <span class="building-desc">Designed and built with Claude Code as a portfolio and experiment.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── Recently Watched ── -->
+    <section class="feed-block fade-in">
+      <div class="container">
+        <div class="feed-block-header">
+          <h2 class="section-label">Recently Watched</h2>
+          <a href="https://letterboxd.com/noahfoster/" target="_blank" rel="noopener noreferrer" class="feed-link">Letterboxd &nearr;</a>
+        </div>
+        <div class="film-grid" id="film-grid">
+          <p class="feed-state">Loading films...</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer>
     <div class="container">
       <div class="footer-inner">
-        <span class="footer-copy">© 2026 Noah Foster</span>
+        <span class="footer-copy">&copy; 2026 Noah Foster</span>
         <div class="footer-contact">
           <a href="mailto:noahfoster6@gmail.com">noahfoster6@gmail.com</a>
           <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/noahfoster2174" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script>
-    // Safe text helper — never use innerHTML with untrusted data
-    function setText(el, text) { el.textContent = text; }
+  <div class="curtain" id="curtain"></div>
 
+  <script>
+    // ── Helpers ──
+    function setText(el, text) { el.textContent = text; }
     function makeEl(tag, cls) {
       const el = document.createElement(tag);
       if (cls) el.className = cls;
       return el;
     }
 
-    function setEmpty(id, msg) {
-      const el = document.getElementById(id);
-      el.replaceChildren();
-      const p = makeEl('p', 'feed-state');
-      setText(p, msg);
-      el.appendChild(p);
-    }
+    // ── Scroll animations ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // ── Polyline decoder (Google Encoded Polyline Algorithm) ──
-    function decodePolyline(encoded) {
-      const points = [];
-      let index = 0, lat = 0, lng = 0;
-      while (index < encoded.length) {
-        let b, shift = 0, result = 0;
-        do { b = encoded.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
-        lat += (result & 1) ? ~(result >> 1) : (result >> 1);
-        shift = 0; result = 0;
-        do { b = encoded.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
-        lng += (result & 1) ? ~(result >> 1) : (result >> 1);
-        points.push([lat / 1e5, lng / 1e5]);
-      }
-      return points;
-    }
-
-
-    // ── Strava ──
-    async function loadStrava() {
-      const container = document.getElementById('strava-feed');
+    // ── Training stats from Strava ──
+    async function loadTrainingStats() {
       try {
         const res = await fetch('strava.json');
-        if (!res.ok) throw new Error();
+        if (!res.ok) return;
         const activities = await res.json();
-        if (!Array.isArray(activities) || !activities.length) {
-          setEmpty('strava-feed', 'No runs logged yet.');
-          return;
-        }
-        // ── Weekly summary ──
+        if (!Array.isArray(activities) || !activities.length) return;
+
         const now = new Date();
-        const dayOfWeek = now.getDay(); // 0=Sun
+        const dayOfWeek = now.getDay();
         const daysFromMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
         const weekStart = new Date(now);
         weekStart.setDate(now.getDate() - daysFromMonday);
@@ -177,77 +225,18 @@
 
         const weekRuns = activities.filter(a => new Date(a.start_date_local) >= weekStart);
         const weekMiles = (weekRuns.reduce((sum, a) => sum + a.distance, 0) / 1609.34).toFixed(1);
-        const summaryEl = document.getElementById('week-summary');
-        summaryEl.className = 'week-summary';
-        summaryEl.replaceChildren();
-        const total = makeEl('div', 'week-total');
-        total.appendChild(document.createTextNode(weekMiles));
-        const unit = makeEl('span');
-        setText(unit, 'mi this week');
-        total.appendChild(unit);
-        const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        const runDays = [...new Set(weekRuns.map(a => new Date(a.start_date_local).getDay()))]
-          .sort((a, b) => a - b)
-          .map(d => DAY_NAMES[d])
-          .join(' · ');
-        const meta = makeEl('div', 'week-meta');
-        setText(meta, runDays || 'No runs yet this week');
-        summaryEl.appendChild(total);
-        summaryEl.appendChild(meta);
 
-        container.replaceChildren();
-        activities.slice(0, 5).forEach(a => {
-          const miles = (a.distance / 1609.34).toFixed(2);
-          const mins = Math.floor(a.moving_time / 60);
-          const secs = String(a.moving_time % 60).padStart(2, '0');
-          const paceRaw = a.distance > 0 ? a.moving_time / (a.distance / 1609.34) : 0;
-          const paceMins = Math.floor(paceRaw / 60);
-          const paceSecs = String(Math.round(paceRaw % 60)).padStart(2, '0');
-          const date = new Date(a.start_date_local).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-
-          const item = makeEl('div', 'run-item');
-          const content = makeEl('div', 'run-content');
-          const name = makeEl('div', 'run-name');
-          setText(name, a.name || 'Run');
-          const stats = makeEl('div', 'run-stats');
-          setText(stats, `${miles} mi \u00b7 ${mins}m ${secs}s \u00b7 ${paceMins}:${paceSecs}/mi`);
-          const dateEl = makeEl('div', 'run-date');
-          setText(dateEl, date);
-          content.appendChild(name);
-          content.appendChild(stats);
-          content.appendChild(dateEl);
-          item.appendChild(content);
-
-          let mapDiv = null;
-          if (a.polyline) {
-            mapDiv = makeEl('div', 'run-map');
-            item.appendChild(mapDiv);
-          }
-
-          // Append to DOM before Leaflet init so element has a measured size
-          container.appendChild(item);
-
-          if (mapDiv && a.polyline) {
-            const points = decodePolyline(a.polyline);
-            const lmap = L.map(mapDiv, {
-              zoomControl: false, attributionControl: false,
-              dragging: false, touchZoom: false,
-              scrollWheelZoom: false, doubleClickZoom: false,
-              boxZoom: false, keyboard: false,
-            });
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(lmap);
-            const poly = L.polyline(points, { color: '#E22D32', weight: 2.5 }).addTo(lmap);
-            lmap.fitBounds(poly.getBounds(), { padding: [10, 10] });
-          }
-        });
-      } catch {
-        setEmpty('strava-feed', 'No runs logged yet.');
-      }
+        if (weekRuns.length > 0) {
+          setText(document.getElementById('stat-miles'), weekMiles);
+          setText(document.getElementById('stat-runs'), String(weekRuns.length));
+          document.getElementById('training-stats').style.display = '';
+        }
+      } catch {}
     }
 
-    // ── Letterboxd ──
+    // ── Letterboxd poster grid ──
     async function loadLetterboxd() {
-      const container = document.getElementById('letterboxd-feed');
+      const container = document.getElementById('film-grid');
       try {
         const rssUrl = 'https://letterboxd.com/noahfoster/rss/';
         const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl);
@@ -257,49 +246,18 @@
         const items = Array.from(xml.querySelectorAll('item')).slice(0, 8);
 
         if (!items.length) {
-          setEmpty('letterboxd-feed', 'No films logged yet.');
+          container.replaceChildren();
+          const p = makeEl('p', 'feed-state');
+          setText(p, 'No films logged yet.');
+          container.appendChild(p);
           return;
-        }
-        // ── Weekly film summary ──
-        const now = new Date();
-        const daysFromMon = now.getDay() === 0 ? 6 : now.getDay() - 1;
-        const weekStart = new Date(now);
-        weekStart.setDate(now.getDate() - daysFromMon);
-        weekStart.setHours(0, 0, 0, 0);
-
-        const weekItems = items.filter(item => {
-          const d = item.querySelector('pubDate')?.textContent;
-          return d && new Date(d) >= weekStart;
-        });
-
-        const filmSummaryEl = document.getElementById('week-films-summary');
-        filmSummaryEl.className = 'week-summary';
-        filmSummaryEl.replaceChildren();
-        const filmTotal = makeEl('div', 'week-total');
-        filmTotal.appendChild(document.createTextNode(weekItems.length));
-        const filmUnit = makeEl('span');
-        setText(filmUnit, `film${weekItems.length !== 1 ? 's' : ''} this week`);
-        filmTotal.appendChild(filmUnit);
-        filmSummaryEl.appendChild(filmTotal);
-
-        if (weekItems.length) {
-          const filmMeta = makeEl('div', 'week-meta');
-          const abbrevTitles = weekItems.map(item => {
-            const raw = item.querySelector('title')?.textContent || '';
-            const title = raw.replace(/,\s*\d{4}.*$/, '').replace(/\s*-\s*[\u2605\u2606\u00bd]+.*$/, '').trim();
-            return title.length > 14 ? title.slice(0, 13) + '\u2026' : title;
-          }).join(' \u00b7 ');
-          setText(filmMeta, abbrevTitles);
-          filmSummaryEl.appendChild(filmMeta);
         }
 
         container.replaceChildren();
         items.forEach(item => {
-          // Title format: "Film Name, Year - ★★★★½" — strip year and rating suffix
           const rawTitle = item.querySelector('title')?.textContent || '';
           const title = rawTitle.replace(/,\s*\d{4}.*$/, '').replace(/\s*-\s*[\u2605\u2606\u00bd]+.*$/, '').trim();
 
-          // Rating from letterboxd:memberRating namespace element
           const memberRating = item.getElementsByTagNameNS('https://letterboxd.com', 'memberRating')[0]?.textContent;
           let rating = '';
           if (memberRating) {
@@ -307,56 +265,45 @@
             rating = '\u2605'.repeat(Math.floor(val)) + (val % 1 >= 0.5 ? '\u00bd' : '');
           }
 
-          const pubDate = item.querySelector('pubDate')?.textContent || '';
-          const date = pubDate ? new Date(pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
-
-          // Poster from first <img> in description CDATA
           const desc = item.querySelector('description')?.textContent || '';
           const imgMatch = desc.match(/src="(https:\/\/[^"]+)"/);
 
-          const filmItem = makeEl('div', 'film-item');
+          const card = makeEl('div', 'film-card');
 
           if (imgMatch) {
             const img = makeEl('img', 'film-poster');
             img.src = imgMatch[1];
-            img.alt = '';
+            img.alt = title;
             img.loading = 'lazy';
-            filmItem.appendChild(img);
+            card.appendChild(img);
           } else {
-            filmItem.appendChild(makeEl('div', 'film-poster-placeholder'));
+            card.appendChild(makeEl('div', 'film-poster-placeholder'));
           }
 
-          const info = makeEl('div', 'film-info');
           const titleEl = makeEl('div', 'film-title');
           setText(titleEl, title);
-          info.appendChild(titleEl);
+          card.appendChild(titleEl);
 
           if (rating) {
             const ratingEl = makeEl('div', 'film-rating');
             setText(ratingEl, rating);
-            info.appendChild(ratingEl);
+            card.appendChild(ratingEl);
           }
 
-          if (date) {
-            const dateEl = makeEl('div', 'film-date');
-            setText(dateEl, date);
-            info.appendChild(dateEl);
-          }
-
-          filmItem.appendChild(info);
-          container.appendChild(filmItem);
+          container.appendChild(card);
         });
       } catch {
-        setEmpty('letterboxd-feed', 'No films logged yet.');
+        container.replaceChildren();
+        const p = makeEl('p', 'feed-state');
+        setText(p, 'No films logged yet.');
+        container.appendChild(p);
       }
     }
 
-    loadStrava();
+    loadTrainingStats();
     loadLetterboxd();
-  </script>
 
-  <div class="curtain" id="curtain"></div>
-  <script>
+    // ── Page transition curtain ──
     const curtain = document.getElementById('curtain');
     if (curtain) {
       curtain.classList.add('enter');

@@ -18,8 +18,8 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    :root { --red: #E22D32; --text: #1a1a1a; --muted: #555; --border: #e5e5e5; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: var(--text); line-height: 1.6; }
+    :root { --red: #E22D32; --text: #1a1a1a; --muted: #666; --border: #e5e5e5; --bg: #fafaf8; --surface: #f5f5f5; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
 
     header { border-bottom: 1px solid var(--border); padding: 2rem 0 1.5rem; }
     .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
@@ -41,31 +41,53 @@
     .bio-grid { display: grid; grid-template-columns: 200px 1fr; gap: 3rem; align-items: start; }
     @media (max-width: 640px) { .bio-grid { grid-template-columns: 1fr; } }
     .bio-photo { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--border); }
-    .bio-text p { font-size: 1rem; color: var(--muted); line-height: 1.75; }
+    .bio-text p { font-size: 1rem; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
+    .bio-text p:last-child { margin-bottom: 0; }
 
-    /* ── Experience ── */
-    .experience-section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
-    .exp-list { display: flex; flex-direction: column; gap: 2.5rem; }
-    .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 3rem; align-items: start; }
-    @media (max-width: 640px) { .exp-item { grid-template-columns: 1fr; gap: 0.5rem; } }
-    .exp-meta { display: flex; flex-direction: column; gap: 0.2rem; }
-    .exp-company { font-weight: 700; font-size: 0.95rem; }
-    .exp-period { font-size: 0.8rem; color: var(--muted); }
-    .exp-role { font-size: 0.9rem; font-weight: 600; color: var(--red); margin-bottom: 0.6rem; }
-    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
-    .exp-bullets li { font-size: 0.9rem; color: var(--muted); padding-left: 1.1rem; position: relative; line-height: 1.5; }
-    .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--border); }
+    /* ── Timeline ── */
+    .timeline-section { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-entry {
+      position: relative;
+      padding-bottom: 2.5rem;
+    }
+    .timeline-entry:last-child { padding-bottom: 0; }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid var(--red);
+      background: var(--bg);
+    }
+    .timeline-entry--current::before { background: var(--red); }
+    .timeline-period { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.3rem; }
+    .timeline-company { font-family: 'Spectral', serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 0.15rem; letter-spacing: -0.01em; }
+    .timeline-role { font-size: 0.9rem; font-weight: 600; color: var(--red); margin-bottom: 0.4rem; }
+    .timeline-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
 
     /* ── Skills ── */
-    .skills-section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
-    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    @media (max-width: 600px) { .skills-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
-    .skills-cat-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text); margin-bottom: 0.75rem; }
-    .skills-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-    .skills-list li { font-size: 0.9rem; color: var(--muted); }
+    .skills-section { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
+    .skills-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-pill { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text); background: var(--border); border-radius: 9999px; padding: 0.25rem 0.75rem; }
 
     /* ── CTA ── */
-    .about-cta-section { padding: 3rem 0; }
+    .about-cta-section { padding: 3.5rem 0; }
     .cta-link { font-family: 'Spectral', serif; font-size: 1.2rem; color: var(--text); text-decoration: none; border-bottom: 2px solid var(--red); padding-bottom: 2px; }
     .cta-link:hover { color: var(--red); }
     .cta-link:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 2px; }
@@ -99,10 +121,11 @@
     <div class="container">
       <h1 class="site-title"><a href="index.html"><span>Noah Foster</span></a></h1>
       <nav aria-label="Main">
-        <a href="about.html" aria-current="page">About</a>
         <a href="projects.html">Projects</a>
         <a href="feed.html">Feed</a>
+        <a href="about.html" aria-current="page">About</a>
         <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/noahfoster2174" target="_blank" rel="noopener noreferrer">GitHub</a>
       </nav>
     </div>
   </header>
@@ -115,43 +138,38 @@
           <img src="photo.jpg" alt="Noah Foster" class="bio-photo" onerror="this.src='https://placehold.co/300x300/f5f5f5/555?text=NF'" />
           <div class="bio-text">
             <h2 class="section-label">About</h2>
-            <p>Senior Finance Analyst at Amazon Advertising in New York, where I lead valuation and deal structuring for Fortune 100 global advertising partnerships. My long-term goal is a front-office finance role in professional sports — and I'm building toward it by learning to code, training for the 2026 Tokyo Marathon, and working through a personal project roadmap.</p>
+            <p>Senior Financial Analyst at Amazon in New York, working on the advertising deals desk. Before Amazon, I spent four years at Capital One Financial working across deal finance, partnership valuations, and capital markets.</p>
+            <p>My long-term goal is a front-office finance role in professional sports. I'm building toward it by learning to code with Claude Code, shipping personal projects, and developing a sharper technical toolkit alongside my finance background.</p>
+            <p>Outside of work, I'm training for the 2026 Tokyo Marathon — currently running 40+ miles a week. I like building things, watching movies, and figuring out how systems work.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="experience-section fade-in">
+    <section class="timeline-section fade-in">
       <div class="container">
         <h2 class="section-label">Experience</h2>
-        <div class="exp-list">
+        <div class="timeline">
 
-          <div class="exp-item">
-            <div class="exp-meta">
-              <span class="exp-company">Amazon Advertising</span>
-              <span class="exp-period">2023 – Present · New York</span>
-            </div>
-            <div>
-              <div class="exp-role">Senior Finance Analyst</div>
-              <ul class="exp-bullets">
-                <li>Lead valuation and deal structuring for Fortune 100 global advertising partnerships</li>
-                <li>Manage partnerships ranging up to $385MM annually</li>
-              </ul>
-            </div>
+          <div class="timeline-entry timeline-entry--current">
+            <div class="timeline-period">2024 – Present</div>
+            <div class="timeline-company">Amazon</div>
+            <div class="timeline-role">Senior Financial Analyst</div>
+            <p class="timeline-desc">Advertising Deals Desk — valuation and deal structuring for Fortune 100 global advertising partnerships.</p>
           </div>
 
-          <div class="exp-item">
-            <div class="exp-meta">
-              <span class="exp-company">Capital One</span>
-              <span class="exp-period">2019 – 2023</span>
-            </div>
-            <div>
-              <div class="exp-role">Finance Analyst</div>
-              <ul class="exp-bullets">
-                <li>Deal finance, partnership valuations, and capital markets</li>
-                <li>Four years across multiple finance functions</li>
-              </ul>
-            </div>
+          <div class="timeline-entry">
+            <div class="timeline-period">2020 – 2024</div>
+            <div class="timeline-company">Capital One</div>
+            <div class="timeline-role">Senior Financial Analyst</div>
+            <p class="timeline-desc">Four years across the Finance Rotation Program, Auto Finance, and Card Partnerships.</p>
+          </div>
+
+          <div class="timeline-entry">
+            <div class="timeline-period">2016 – 2020</div>
+            <div class="timeline-company">University of Maryland</div>
+            <div class="timeline-role">B.S. Finance</div>
+            <p class="timeline-desc">Robert H. Smith School of Business.</p>
           </div>
 
         </div>
@@ -161,39 +179,20 @@
     <section class="skills-section fade-in">
       <div class="container">
         <h2 class="section-label">Skills</h2>
-        <div class="skills-grid">
-
-          <div class="skills-cat">
-            <h3 class="skills-cat-label">Finance</h3>
-            <ul class="skills-list">
-              <li>Financial Modeling</li>
-              <li>Deal Structuring</li>
-              <li>Partnership Valuations</li>
-              <li>Capital Markets</li>
-            </ul>
-          </div>
-
-          <div class="skills-cat">
-            <h3 class="skills-cat-label">Data &amp; Analytics</h3>
-            <ul class="skills-list">
-              <li>Python</li>
-              <li>SQL</li>
-              <li>Snowflake</li>
-              <li>Tableau</li>
-              <li>Bloomberg</li>
-            </ul>
-          </div>
-
-          <div class="skills-cat">
-            <h3 class="skills-cat-label">Technology</h3>
-            <ul class="skills-list">
-              <li>AWS</li>
-              <li>Claude Code</li>
-              <li>React</li>
-              <li>Git / GitHub</li>
-            </ul>
-          </div>
-
+        <div class="skills-pills">
+          <span class="skill-pill">Financial Modeling</span>
+          <span class="skill-pill">Deal Structuring</span>
+          <span class="skill-pill">Partnership Valuations</span>
+          <span class="skill-pill">Capital Markets</span>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">SQL</span>
+          <span class="skill-pill">Snowflake</span>
+          <span class="skill-pill">Tableau</span>
+          <span class="skill-pill">Bloomberg</span>
+          <span class="skill-pill">AWS</span>
+          <span class="skill-pill">Claude Code</span>
+          <span class="skill-pill">React</span>
+          <span class="skill-pill">Git / GitHub</span>
         </div>
       </div>
     </section>
@@ -213,6 +212,7 @@
         <div class="footer-contact">
           <a href="mailto:noahfoster6@gmail.com">noahfoster6@gmail.com</a>
           <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/noahfoster2174" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
       </div>
     </div>

@@ -18,8 +18,8 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    :root { --red: #E22D32; --text: #1a1a1a; --muted: #555; --border: #e5e5e5; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: var(--text); line-height: 1.6; }
+    :root { --red: #E22D32; --text: #1a1a1a; --muted: #666; --border: #e5e5e5; --bg: #fafaf8; --surface: #f5f5f5; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
 
     header { border-bottom: 1px solid var(--border); padding: 2rem 0 1.5rem; }
     .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
@@ -36,18 +36,58 @@
 
     .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--red); margin-bottom: 1.5rem; }
 
-    /* ── Cards ── */
-    .cards-section { padding: 3rem 0; }
-    .cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-    @media (max-width: 600px) { .cards-grid { grid-template-columns: 1fr; } }
-    .card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-    .card img { width: 100%; height: 200px; object-fit: cover; display: block; border: 1px solid var(--border); }
-    .card-body { padding: 1rem 0 0; }
-    .card-title { font-family: 'Spectral', serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 0.25rem; }
-    .card-desc { font-size: 0.9rem; color: var(--muted); }
-    .card-placeholder-img { width: 100%; height: 200px; background: #f5f5f5; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
-    .card-placeholder-img::after { content: '\2014'; font-size: 1.5rem; color: var(--border); }
+    /* ── Filter bar ── */
+    .filter-bar { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .filter-btn { background: none; border: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; padding-bottom: 0.25rem; color: var(--muted); font-family: inherit; }
+    .filter-btn.active { color: var(--red); border-bottom: 2px solid var(--red); }
+    .filter-btn:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 2px; }
+
+    /* ── Catalogue ── */
+    .catalogue-section { padding: 3.5rem 0; }
+    .catalogue-list { list-style: none; counter-reset: none; }
+    .catalogue-item {
+      display: grid;
+      grid-template-columns: 4rem 1fr;
+      gap: 1.5rem;
+      align-items: baseline;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .catalogue-item:first-child { padding-top: 0; }
+    .catalogue-item:last-child { border-bottom: none; }
+    .catalogue-num {
+      font-family: 'Spectral', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--border);
+      line-height: 1;
+    }
+    .catalogue-title {
+      font-family: 'Spectral', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .catalogue-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.6rem; line-height: 1.6; }
+    .status-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+    }
+    .status-badge--dev { background: rgba(226,45,50,0.1); color: var(--red); }
+    .status-badge--planned { background: #f0f0f0; color: var(--muted); }
+    .status-badge--done { background: #1a1a1a; color: #999; }
+    .catalogue-meta { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .catalogue-github { font-size: 0.75rem; color: var(--muted); text-decoration: none; font-weight: 600; }
+    .catalogue-github:hover { color: var(--red); }
+    @media (max-width: 600px) {
+      .catalogue-item { grid-template-columns: 2.5rem 1fr; gap: 1rem; }
+      .catalogue-num { font-size: 1.5rem; }
+    }
 
     /* ── Footer ── */
     footer { border-top: 3px solid var(--red); padding: 2rem 0; }
@@ -78,69 +118,111 @@
     <div class="container">
       <h1 class="site-title"><a href="index.html"><span>Noah Foster</span></a></h1>
       <nav aria-label="Main">
-        <a href="about.html">About</a>
         <a href="projects.html" aria-current="page">Projects</a>
         <a href="feed.html">Feed</a>
+        <a href="about.html">About</a>
         <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/noahfoster2174" target="_blank" rel="noopener noreferrer">GitHub</a>
       </nav>
     </div>
   </header>
 
   <main id="main-content">
-    <section class="cards-section fade-in">
+    <section class="catalogue-section fade-in">
       <div class="container">
         <h2 class="section-label">Projects</h2>
-        <div class="cards-grid">
-
-          <div class="card">
-            <img src="https://picsum.photos/seed/noahsite/600/400" alt="noahfoster.com" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
-            <div class="card-body">
-              <h3 class="card-title">noahfoster.com</h3>
-              <p class="card-desc">This site — designed and built with Claude from scratch. My first project as I learn to code.</p>
-            </div>
-          </div>
-
-          <div class="card">
-            <img src="https://picsum.photos/seed/nycmovie/600/400" alt="NYC Movie App" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
-            <div class="card-body">
-              <h3 class="card-title">NYC Movie App</h3>
-              <p class="card-desc">A personal tool that aggregates AMC, Alamo Drafthouse, and advance screening listings in one place — with support for film festivals and special events.</p>
-            </div>
-          </div>
-
-          <div class="card">
-            <img src="https://picsum.photos/seed/nycmetro/600/400" alt="NYC Metro App" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
-            <div class="card-body">
-              <h3 class="card-title">NYC Metro App</h3>
-              <p class="card-desc">A real-time subway companion app for New York City, inspired by the transit tools I actually want to use. Built to practice API integration and mobile-first design.</p>
-            </div>
-          </div>
-
-          <div class="card">
-            <img src="https://picsum.photos/seed/hedgefund/600/400" alt="AI Hedge Fund" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
-            <div class="card-body">
-              <h3 class="card-title">AI Hedge Fund</h3>
-              <p class="card-desc">Three competing strategies — Long/Short AI, Active Management AI, and myself as CIO — paper trading for six months before deploying real capital.</p>
-            </div>
-          </div>
-
-          <div class="card">
-            <img src="https://picsum.photos/seed/sportsbetting/600/400" alt="Sports Betting Models" loading="lazy" width="600" height="400" onerror="this.style.background='#f5f5f5'" />
-            <div class="card-body">
-              <h3 class="card-title">Sports Betting Models</h3>
-              <p class="card-desc">A suite of data-driven models for NFL and NBA prop betting, with team-specific analysis for the Patriots, Celtics, and Red Sox.</p>
-            </div>
-          </div>
-
-          <div class="card card--placeholder">
-            <div class="card-placeholder-img"></div>
-            <div class="card-body">
-              <h3 class="card-title">Coming Soon</h3>
-              <p class="card-desc">Next project in progress.</p>
-            </div>
-          </div>
-
+        <div class="filter-bar">
+          <button class="filter-btn" data-filter="all">All</button>
+          <button class="filter-btn active" data-filter="active">Active</button>
+          <button class="filter-btn" data-filter="planned">Planned</button>
         </div>
+        <ol class="catalogue-list">
+
+          <li class="catalogue-item fade-in" data-status="done">
+            <span class="catalogue-num" aria-hidden="true">01</span>
+            <div class="catalogue-body">
+              <h3 class="catalogue-title">Gmail Cleanup Automation</h3>
+              <p class="catalogue-desc">An automated pipeline that categorizes and cleans up Gmail using Claude Haiku and Playwright. Runs weekly via launchd.</p>
+              <div class="catalogue-meta">
+                <span class="status-badge status-badge--done">Complete</span>
+                <a href="https://github.com/noahfoster2174/gmail_cleanup" target="_blank" rel="noopener noreferrer" class="catalogue-github">GitHub &nearr;</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="catalogue-item fade-in" data-status="dev">
+            <span class="catalogue-num" aria-hidden="true">02</span>
+            <div class="catalogue-body">
+              <h3 class="catalogue-title">Prediction Market Business</h3>
+              <p class="catalogue-desc">A data-driven prediction markets operation with a custom dashboard tracking handle, fees, and P&L across agents.</p>
+              <div class="catalogue-meta">
+                <span class="status-badge status-badge--dev">In Development</span>
+                <a href="https://github.com/noahfoster2174/prediction-markets" target="_blank" rel="noopener noreferrer" class="catalogue-github">GitHub &nearr;</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="catalogue-item fade-in" data-status="dev">
+            <span class="catalogue-num" aria-hidden="true">03</span>
+            <div class="catalogue-body">
+              <h3 class="catalogue-title">Reelz</h3>
+              <p class="catalogue-desc">A home media automation system with a personal movie download app, powered by Docker, Plex, and a suite of indexers.</p>
+              <div class="catalogue-meta">
+                <span class="status-badge status-badge--dev">In Development</span>
+                <a href="https://github.com/noahfoster2174/media-stack" target="_blank" rel="noopener noreferrer" class="catalogue-github">GitHub &nearr;</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="catalogue-item fade-in" data-status="dev">
+            <span class="catalogue-num" aria-hidden="true">04</span>
+            <div class="catalogue-body">
+              <h3 class="catalogue-title">noahfoster.com</h3>
+              <p class="catalogue-desc">This site — designed and built with Claude Code as a portfolio and personal experiment.</p>
+              <div class="catalogue-meta">
+                <span class="status-badge status-badge--dev">In Development</span>
+                <a href="https://github.com/noahfoster2174/noahfoster2174.github.io" target="_blank" rel="noopener noreferrer" class="catalogue-github">GitHub &nearr;</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="catalogue-item fade-in" data-status="planned">
+            <span class="catalogue-num" aria-hidden="true">05</span>
+            <div class="catalogue-body">
+              <h3 class="catalogue-title">NYC Movie App</h3>
+              <p class="catalogue-desc">Aggregates AMC, Alamo Drafthouse, and indie NYC theater showtimes into one clean interface.</p>
+              <span class="status-badge status-badge--planned">Planned</span>
+            </div>
+          </li>
+
+          <li class="catalogue-item fade-in" data-status="planned">
+            <span class="catalogue-num" aria-hidden="true">06</span>
+            <div class="catalogue-body">
+              <h3 class="catalogue-title">NYC Metro App</h3>
+              <p class="catalogue-desc">A real-time subway companion app with live train positions, service alerts, and trip planning.</p>
+              <span class="status-badge status-badge--planned">Planned</span>
+            </div>
+          </li>
+
+          <li class="catalogue-item fade-in" data-status="planned">
+            <span class="catalogue-num" aria-hidden="true">07</span>
+            <div class="catalogue-body">
+              <h3 class="catalogue-title">AI Hedge Fund</h3>
+              <p class="catalogue-desc">Three competing AI strategies managing a simulated portfolio with real-time market data.</p>
+              <span class="status-badge status-badge--planned">Planned</span>
+            </div>
+          </li>
+
+          <li class="catalogue-item fade-in" data-status="planned">
+            <span class="catalogue-num" aria-hidden="true">08</span>
+            <div class="catalogue-body">
+              <h3 class="catalogue-title">Sports Betting Models</h3>
+              <p class="catalogue-desc">Data-driven models for evaluating sports betting markets.</p>
+              <span class="status-badge status-badge--planned">Planned</span>
+            </div>
+          </li>
+
+        </ol>
       </div>
     </section>
   </main>
@@ -152,6 +234,7 @@
         <div class="footer-contact">
           <a href="mailto:noahfoster6@gmail.com">noahfoster6@gmail.com</a>
           <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/noahfoster2174" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
       </div>
     </div>
@@ -159,6 +242,21 @@
 
   <div class="curtain" id="curtain"></div>
   <script>
+    // ── Project filters ──
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.catalogue-item');
+    function applyFilter(filter) {
+      filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+      items.forEach(item => {
+        const status = item.dataset.status;
+        if (filter === 'all') { item.style.display = ''; }
+        else if (filter === 'active') { item.style.display = (status === 'done' || status === 'dev') ? '' : 'none'; }
+        else if (filter === 'planned') { item.style.display = status === 'planned' ? '' : 'none'; }
+      });
+    }
+    filterBtns.forEach(btn => btn.addEventListener('click', () => applyFilter(btn.dataset.filter)));
+    applyFilter('active');
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }

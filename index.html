@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Noah Foster</title>
-  <meta name="description" content="Noah Foster — Senior Finance Analyst at Amazon Advertising. Building toward sports. Running toward Tokyo." />
+  <meta name="description" content="Noah Foster — Finance, advertising, and building things in New York City." />
   <meta property="og:title" content="Noah Foster" />
-  <meta property="og:description" content="Senior Finance Analyst at Amazon Advertising. Building toward sports. Running toward Tokyo." />
+  <meta property="og:description" content="Finance, advertising, and building things in New York City." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://noahfoster2174.github.io" />
   <meta property="og:image" content="https://placehold.co/1200x630/E22D32/ffffff?text=Noah+Foster" />
@@ -22,11 +22,13 @@
     :root {
       --red: #E22D32;
       --text: #1a1a1a;
-      --muted: #555;
+      --muted: #666;
       --border: #e5e5e5;
+      --bg: #fafaf8;
+      --surface: #f5f5f5;
     }
 
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; overflow-x: hidden; }
 
     header { border-bottom: 1px solid var(--border); padding: 2rem 0 1.5rem; position: relative; z-index: 1; }
     .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
@@ -43,6 +45,9 @@
       outline-offset: 3px;
       border-radius: 2px;
     }
+
+    .skip-link { position: absolute; top: -100%; left: 1rem; background: var(--red); color: #fff; padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 700; text-decoration: none; border-radius: 0 0 4px 4px; z-index: 100; }
+    .skip-link:focus { top: 0; }
 
     .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--red); margin-bottom: 1.5rem; }
 
@@ -69,12 +74,18 @@
       font-family: 'Spectral', serif;
       font-size: clamp(1.6rem, 3.5vw, 2.4rem);
       color: var(--muted);
-      line-height: 1.4;
-      opacity: 0;
-      transform: translateY(24px);
-      animation: heroReveal 0.7s ease 0.1s forwards;
+      line-height: 1.5;
     }
     .hero-tagline em { color: var(--red); font-style: normal; font-weight: 600; }
+    .hero-line {
+      display: block;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: heroReveal 0.6s ease forwards;
+    }
+    .hero-line:nth-child(1) { animation-delay: 0.1s; }
+    .hero-line:nth-child(2) { animation-delay: 0.35s; }
+    .hero-line:nth-child(3) { animation-delay: 0.6s; }
 
     @keyframes heroReveal {
       to { opacity: 1; transform: translateY(0); }
@@ -87,40 +98,57 @@
       flex-direction: column;
       gap: 1.5rem;
       opacity: 0;
-      animation: heroReveal 0.7s ease 0.35s forwards;
+      animation: heroReveal 0.7s ease 0.85s forwards;
     }
     @media (max-width: 700px) {
       .hero-stats { border-left: none; border-top: 2px solid var(--red); padding-left: 0; padding-top: 1.5rem; flex-direction: row; flex-wrap: wrap; gap: 1.25rem 2rem; }
     }
-    .stat-block { display: flex; flex-direction: column; gap: 0.1rem; }
+    .stat-block { display: flex; flex-direction: column; gap: 0.1rem; transition: transform 0.2s ease; }
+    .stat-block:hover { transform: translateX(4px); }
     .stat-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--border); }
     .stat-value { font-size: 0.95rem; color: var(--text); font-weight: 500; }
-    .stat-live .stat-label { color: var(--red); }
-    .stat-live .stat-value { font-family: 'Spectral', serif; font-size: 1.3rem; font-weight: 700; }
 
-    /* ── Intro ── */
-    .intro-section { padding: 2rem 0; border-bottom: 1px solid var(--border); }
-    .intro-line { font-family: 'Spectral', serif; font-size: 1.15rem; color: var(--muted); }
+    /* ── Cycling text ── */
+    .cycle-wrap { position: relative; display: inline-block; min-width: 5ch; }
+    .cycle-word {
+      display: inline-block;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .cycle-word.out { opacity: 0; transform: translateY(-12px); }
+    .cycle-word.in  { opacity: 1; transform: translateY(0); }
+
+    /* ── Now stat (cycling) ── */
+    .stat-now .stat-value {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .stat-now .stat-value.out { opacity: 0; transform: translateY(8px); }
+
+    /* ── Parallax ── */
+    .hero-inner { transition: transform 0.15s ease-out; }
 
     /* ── Featured Project ── */
-    .featured-section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
+    .featured-section { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
     .featured-card {
-      background: #1a1a1a;
+      background: #141414;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 3rem;
       padding: 3rem;
       align-items: center;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+    .featured-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
     @media (max-width: 640px) {
       .featured-card { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem; }
     }
-    .featured-title { font-family: 'Spectral', serif; font-size: 2rem; font-weight: 700; color: #fff; line-height: 1.2; }
+    .featured-title { font-family: 'Spectral', serif; font-size: 2rem; font-weight: 700; color: #fff; line-height: 1.2; letter-spacing: -0.01em; }
     .featured-desc { font-size: 0.95rem; color: #999; line-height: 1.7; margin-bottom: 1.25rem; }
     .featured-cta { font-size: 0.85rem; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.08em; }
 
     /* ── CTAs ── */
-    .cta-section { padding: 3rem 0; }
+    .cta-section { padding: 3.5rem 0; }
     .cta-group { display: flex; gap: 2rem; flex-wrap: wrap; }
     .cta-link { font-family: 'Spectral', serif; font-size: 1.2rem; color: var(--text); text-decoration: none; border-bottom: 2px solid var(--red); padding-bottom: 2px; }
     .cta-link:hover { color: var(--red); }
@@ -152,63 +180,62 @@
   </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to content</a>
 
   <header>
     <div class="container">
       <h1 class="site-title"><a href="index.html"><span>Noah Foster</span></a></h1>
       <nav aria-label="Main">
-        <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
         <a href="feed.html">Feed</a>
+        <a href="about.html">About</a>
         <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/noahfoster2174" target="_blank" rel="noopener noreferrer">GitHub</a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <section class="hero">
       <div class="container">
         <div class="hero-inner">
-          <p class="hero-tagline">Senior Finance Analyst at <em>Amazon Advertising</em>. Building toward sports. Running toward Tokyo.</p>
+          <p class="hero-tagline">
+            <span class="hero-line">Working in <em>advertising</em>.</span>
+            <span class="hero-line">Building toward <em>sports</em>.</span>
+            <span class="hero-line">Running toward <em>Tokyo</em>.</span>
+          </p>
           <div class="hero-stats">
             <div class="stat-block">
-              <span class="stat-label">Role</span>
-              <span class="stat-value">Senior Finance Analyst</span>
-              <span class="stat-value">Amazon Advertising</span>
+              <span class="stat-label">Industry</span>
+              <span class="stat-value">Advertising</span>
             </div>
             <div class="stat-block">
               <span class="stat-label">Based</span>
               <span class="stat-value">New York City</span>
             </div>
             <div class="stat-block">
-              <span class="stat-label">Goal</span>
+              <span class="stat-label">Next Race</span>
               <span class="stat-value">Tokyo Marathon 2026</span>
             </div>
-            <div class="stat-block stat-live" id="hero-miles" style="display:none">
-              <span class="stat-label">This week</span>
-              <span class="stat-value" id="hero-miles-value">—</span>
+            <div class="stat-block stat-now">
+              <span class="stat-label">Now</span>
+              <span class="stat-value" id="now-value">Shipping code</span>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="intro-section fade-in">
-      <div class="container">
-        <p class="intro-line">I build at the intersection of finance, sports, and technology.</p>
       </div>
     </section>
 
     <section class="featured-section fade-in">
       <div class="container">
         <h2 class="section-label">Featured Project</h2>
-        <div class="featured-card">
-          <h3 class="featured-title">NYC Movie App</h3>
+        <a href="projects.html" class="featured-card">
+          <h3 class="featured-title">Reelz</h3>
           <div class="featured-body">
-            <p class="featured-desc">A personal tool that aggregates AMC, Alamo Drafthouse, and advance screening listings in one place — with support for film festivals and special events. Built for my NYC moviegoing habit.</p>
+            <p class="featured-desc">A home media automation system with a personal movie download app — powered by Docker, Plex, and a suite of indexers. Built for my NYC apartment.</p>
             <span class="featured-cta">In development →</span>
           </div>
-        </div>
+        </a>
       </div>
     </section>
 
@@ -229,6 +256,7 @@
         <div class="footer-contact">
           <a href="mailto:noahfoster6@gmail.com">noahfoster6@gmail.com</a>
           <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/noahfoster2174" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
       </div>
     </div>
@@ -236,7 +264,7 @@
 
   <div class="curtain" id="curtain"></div>
 
-  <noscript><style>.fade-in { opacity: 1; transform: none; } .hero-tagline, .hero-stats { opacity: 1; transform: none; }</style></noscript>
+  <noscript><style>.fade-in { opacity: 1; transform: none; } .hero-line, .hero-stats { opacity: 1; transform: none; animation: none; }</style></noscript>
   <script>
     // ── Scroll animations ──
     const observer = new IntersectionObserver((entries) => {
@@ -244,27 +272,34 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // ── Live miles from Strava ──
-    (async () => {
-      try {
-        const res = await fetch('strava.json');
-        if (!res.ok) return;
-        const activities = await res.json();
-        if (!Array.isArray(activities)) return;
-        const now = new Date();
-        const daysFromMon = now.getDay() === 0 ? 6 : now.getDay() - 1;
-        const weekStart = new Date(now);
-        weekStart.setDate(now.getDate() - daysFromMon);
-        weekStart.setHours(0, 0, 0, 0);
-        const miles = activities
-          .filter(a => new Date(a.start_date_local) >= weekStart)
-          .reduce((sum, a) => sum + a.distance, 0) / 1609.34;
-        if (miles > 0) {
-          document.getElementById('hero-miles-value').textContent = miles.toFixed(1) + ' mi';
-          document.getElementById('hero-miles').style.display = '';
-        }
-      } catch {}
-    })();
+    // ── Cycling "Now" text ──
+    const nowEl = document.getElementById('now-value');
+    if (nowEl) {
+      const phrases = ['Shipping code', 'Training for Tokyo', 'Tracking predictions', 'Building Reelz', 'Watching movies'];
+      let idx = 0;
+      setInterval(() => {
+        nowEl.classList.add('out');
+        setTimeout(() => {
+          idx = (idx + 1) % phrases.length;
+          nowEl.textContent = phrases[idx];
+          nowEl.classList.remove('out');
+        }, 300);
+      }, 3000);
+    }
+
+    // ── Mouse parallax on hero ──
+    const heroInner = document.querySelector('.hero-inner');
+    if (heroInner && window.matchMedia('(pointer: fine)').matches) {
+      document.querySelector('.hero').addEventListener('mousemove', (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        heroInner.style.transform = `translate(${x * 8}px, ${y * 6}px)`;
+      });
+      document.querySelector('.hero').addEventListener('mouseleave', () => {
+        heroInner.style.transform = '';
+      });
+    }
 
     // ── Page transition curtain ──
     const curtain = document.getElementById('curtain');
