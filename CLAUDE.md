@@ -20,17 +20,18 @@ Portfolio website. Static site hosted on GitHub Pages.
 
 ## Design System
 - CSS variables (`:root` on each page, no shared stylesheet):
-  - `--red: #E22D32` — brand accent
-  - `--text: #1a1a1a` — body text
-  - `--muted: #666` — secondary text
-  - `--border: #e5e5e5` — borders, dividers
-  - `--bg: #f8f7f4` — warm cream background
-  - `--surface: #f5f5f5` — card/hover surfaces
-  - `--dark: #141414` — dark card backgrounds
-  - `--light-text: #aaa` — text on dark backgrounds
+  - `--accent: #2D6A4F` — forest green accent (renamed from --red)
+  - `--text: #1A1A1A` — charcoal body text
+  - `--muted: #5E6E5E` — sage gray secondary text
+  - `--border: #D5DCD5` — soft sage borders
+  - `--bg: #F7F6F1` — warm cream background
+  - `--surface: #EDECE7` — sage-tinted surfaces
+  - `--dark: #1A2B22` — deep forest dark backgrounds
+  - `--light-text: #A8B5A8` — muted sage text on dark backgrounds
+- Palette: Forest + Cream — deep green accent on warm cream, sage-tinted grays
 - Fonts: Spectral (serif, headings/accents) + system sans-serif (body)
 - Transitions: 0.15s ease on all interactive text elements (nav, CTAs, links, pills, filters)
-- Page transition: red curtain animation between internal pages (0.35–0.45s)
+- Page transition: green curtain animation between internal pages (0.35–0.45s)
 - Scroll animations: fade-in with IntersectionObserver
 
 ## Status
