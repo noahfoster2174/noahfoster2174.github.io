@@ -43,9 +43,15 @@ Recent runs are cached in `strava.json` by a GitHub Actions workflow at `.github
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--red` | `#E22D32` | Accent color, borders, highlights |
-| `--text` | `#1a1a1a` | Primary text |
-| `--muted` | `#555` | Secondary text |
-| `--border` | `#e5e5e5` | Dividers, card borders |
+| `--accent` | `#2D6A4F` | Forest green accent, borders, highlights |
+| `--text` | `#1A1A1A` | Charcoal body text |
+| `--muted` | `#5E6E5E` | Sage gray secondary text |
+| `--border` | `#D5DCD5` | Soft sage dividers, card borders |
+| `--bg` | `#F7F6F1` | Warm cream background |
+| `--surface` | `#EDECE7` | Sage-tinted surfaces |
+| `--dark` | `#1A2B22` | Deep forest dark backgrounds |
+| `--light-text` | `#A8B5A8` | Muted sage text on dark backgrounds |
+
+Palette: Forest + Cream — deep green accent on warm cream, sage-tinted grays
 
 Fonts: [Spectral](https://fonts.google.com/specimen/Spectral) (serif, headings) + system sans-serif (body)
