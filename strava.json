@@ -1,5 +1,13 @@
 [
   {
+    "name": "tempo thursday",
+    "distance": 7046.2,
+    "moving_time": 2035,
+    "start_date_local": "2026-05-14T08:57:16Z",
+    "type": "Run",
+    "polyline": "qmkwF|cqbMEBILALBRERKdGBVAT?`ABTKZ?LCJE^?d@DZGRCfAE^@PCRIDMBIEO@@FIGIBEASFS?C@I?UGuB?EEU?GAeA@u@IO@_@Eg@?_AEODUBMJe@LUNIJIFSZYn@GFaApBY^U`@GBQVAFQRGBQZUTCFQTMJCFEBAFMJSXWRKPE@q@|@Wf@e@j@S`@Y^Sb@OHMNs@`AOZk@r@e@h@eB|BcIxKQ\\OLKRk@p@u@nAw@`Ai@z@SVi@ZGVGLi@l@ERa@`@OVe@j@SZ]d@GDKPQLAFW\\KRSJKNw@v@{N|RCDALKTURAFMPCFKDMTKFKLU?CDWBc@UEm@SCMOGAIQEA]QW[EAOS_@QKQI]GIMKMU]e@c@_AGCa@a@[Q[KOIm@QE?EHG@?BEJKDUCIQESMIAIKGKQIII@KCG@CKEBGWG?CM_@KMQKEIIu@]o@g@cAs@qB{ALc@RSDOL{@HS@OFKBQHQHY?]BUFOPK?OHMt@{CBUHOnAeFJm@NMZODBPTPBFCHI?GCOHO`@c@DKNMVa@RQ@GPK@GDAPUPO~@g@TUDANOLGJAXYFAZQNQh@YVGJIJAn@e@`Ae@DAbA?VMp@y@t@YJCHKJCJIb@QVQd@I@ERSRAJITBb@I`F{BVM@QHILCNKf@GTWLENONGLMTCfA_@TOj@KHGh@SLKJAv@c@v@Yt@c@D?JGVGTOn@QPO^Ip@]F?PKXGl@[`@[VIb@[rBaARMRGLId@UJCRK|DiBRID?`Ae@H?f@YF?NMjB{@P@TELKHD`@GRMTWROL]TEZWFAXBJANEZJt@HLHH\\TCh@JNC\\@f@Mh@?VC\\TD@VCVHNID?DEFADDLDh@Fl@ATHJ?DBVCA_@FGL{J"
+  },
+  {
     "name": "bridges",
     "distance": 11429.8,
     "moving_time": 3605,
@@ -30,13 +38,5 @@
     "start_date_local": "2026-05-05T17:59:38Z",
     "type": "Run",
     "polyline": "qkcwFvrnbMNI\\Ej@A|AJHBP@\\LT@^DVEPDN?x@WVKh@a@^g@Ng@HMFwAAYK]C[Ss@Yu@WY@IEOCa@GOQYw@{@a@y@a@aAQKLKIOGUQ?AQGg@Om@M{@QeBIa@C[GUEo@GS?OM{@Kc@GKGYK]Uc@AOMa@i@}@cAeAIBQQOIOQe@]IA]UgAc@SMk@Ka@CIE[?[DKAO@O?]Da@PO?k@Rq@d@[JOHKBCDWJi@Lg@@iASm@FONGAi@NEFODQNSFGF]Pu@n@[NM@[Ju@b@ML]?a@HmChAgA^a@Dm@?UCOBs@?c@H_@LgAh@{Al@]FUNK@CDYJ]VSHI@_@VMBMHMBKJULGJMFQ^W^GPGFELKJIDGTOVIFIXMTKb@Sf@GRQP[h@q@b@_AN]AMDICSAc@JADMBq@h@q@FOACAS?o@QG@a@SSSa@WC?GGE?OMICACG@QG_@EWASBWHe@V_@d@@JGLOh@Mp@AV@|@H`@LZFFZf@PJFL`@X`@PTTDBDAh@^J@^`@B@\\b@LTXVj@\\JDXTRHNAJB`@Nb@@VJNAf@BNCf@Hz@Ah@ID@PGN@HEF@PEhA?j@DZHh@X`@`@xBfCv@^ZLt@`@l@d@NVD?p@l@DJNLLPB@x@hAh@bATv@D@Tv@Jb@BBTt@LTTj@V`@Td@n@v@d@ZPHHHVJj@JnAEf@Y^[RYRc@Ty@@[FUB[DUHaANu@d@_At@}@R[RQXk@n@}A@ILW"
-  },
-  {
-    "name": "bk5k warmup",
-    "distance": 580.0,
-    "moving_time": 211,
-    "start_date_local": "2026-05-05T17:45:39Z",
-    "type": "Run",
-    "polyline": "}cdwFt|nbMl@g@p@]b@EpABBMNELDR@LC"
   }
 ]
