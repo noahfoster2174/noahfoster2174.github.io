@@ -1,0 +1,37 @@
+[
+  {
+    "repo": "noahfoster2174.github.io",
+    "url": "https://github.com/noahfoster2174/noahfoster2174.github.io",
+    "last_commit": "2026-07-12T16:17:57Z",
+    "commits_30d": 2,
+    "latest": "fix: replace dead allorigins.win proxy with letterboxd.json pipeline"
+  },
+  {
+    "repo": "media-stack",
+    "url": "https://github.com/noahfoster2174/media-stack",
+    "last_commit": "2026-07-01T23:48:55Z",
+    "commits_30d": 1,
+    "latest": "Make Reelz a self-healing daily driver + harden the stack"
+  },
+  {
+    "repo": "meal-planner",
+    "url": "https://github.com/noahfoster2174/meal-planner",
+    "last_commit": "2026-03-10T01:32:11Z",
+    "commits_30d": 1,
+    "latest": "Initial commit: meal planner web app"
+  },
+  {
+    "repo": "noahfoster2174",
+    "url": "https://github.com/noahfoster2174/noahfoster2174",
+    "last_commit": "2026-02-25T02:57:07Z",
+    "commits_30d": 2,
+    "latest": "Add Reelz project (media-stack now public)"
+  },
+  {
+    "repo": "gmail_cleanup",
+    "url": "https://github.com/noahfoster2174/gmail_cleanup",
+    "last_commit": "2026-02-20T21:37:13Z",
+    "commits_30d": 13,
+    "latest": "docs: add README with setup, usage, architecture, and security notes"
+  }
+]

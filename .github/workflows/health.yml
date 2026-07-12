@@ -1,0 +1,76 @@
+name: Site Health Check
+
+# Fails loudly (GitHub emails the owner) when the live site is down, a data
+# file is invalid JSON, or the Strava pipeline has stopped committing.
+# Forced-failure test: dispatch with max_age_days = 0.
+
+on:
+  schedule:
+    - cron: '0 13 * * 1,4'
+  workflow_dispatch:
+    inputs:
+      max_age_days:
+        description: 'Fail if strava.json was last committed more than this many days ago'
+        default: '7'
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      MAX_AGE_DAYS: ${{ inputs.max_age_days || '7' }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check pages, data files, and Strava freshness
+        run: |
+          python3 - <<'EOF'
+          import json, os, sys, urllib.request
+          from datetime import datetime, timezone
+
+          SITE = 'https://noahfoster2174.github.io'
+          failures = []
+
+          def fetch(url, headers=None):
+              req = urllib.request.Request(url, headers=headers or {})
+              return urllib.request.urlopen(req, timeout=30)
+
+          for page in ['index.html', 'about.html', 'projects.html', 'feed.html']:
+              try:
+                  r = fetch(f'{SITE}/{page}')
+                  if r.status != 200:
+                      failures.append(f'{page}: HTTP {r.status}')
+              except Exception as e:
+                  failures.append(f'{page}: unreachable ({e})')
+
+          for name in ['strava.json', 'strava-history.json', 'letterboxd.json', 'github.json']:
+              try:
+                  json.load(fetch(f'{SITE}/{name}'))
+              except Exception as e:
+                  failures.append(f'{name}: invalid or unreachable ({e})')
+
+          try:
+              api = ('https://api.github.com/repos/noahfoster2174/'
+                     'noahfoster2174.github.io/commits?path=strava.json&per_page=1')
+              headers = {'Authorization': f"Bearer {os.environ['GH_TOKEN']}",
+                         'Accept': 'application/vnd.github+json'}
+              commits = json.load(fetch(api, headers))
+              last = datetime.fromisoformat(
+                  commits[0]['commit']['committer']['date'].replace('Z', '+00:00'))
+              age_days = (datetime.now(timezone.utc) - last).total_seconds() / 86400
+              max_age = float(os.environ.get('MAX_AGE_DAYS') or 7)
+              if age_days > max_age:
+                  failures.append(
+                      f'strava.json last committed {age_days:.1f} days ago '
+                      f'(limit {max_age:g}) - pipeline may be broken or disabled')
+          except Exception as e:
+              failures.append(f'freshness check failed: {e}')
+
+          for f in failures:
+              print(f'::error::{f}')
+          if failures:
+              sys.exit(1)
+          print('All checks passed.')
+          EOF
