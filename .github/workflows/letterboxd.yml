@@ -1,0 +1,48 @@
+name: Fetch Letterboxd Films
+
+on:
+  schedule:
+    - cron: '30 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch and parse Letterboxd RSS
+        run: |
+          curl -s "https://letterboxd.com/noahfoster/rss/" \
+            | python3 -c "
+          import sys, json, re
+          import xml.etree.ElementTree as ET
+          NS = {'lb': 'https://letterboxd.com'}
+          root = ET.fromstring(sys.stdin.read())
+          films = []
+          for item in root.iter('item'):
+              lb_title = item.find('lb:filmTitle', NS)
+              title = lb_title.text if lb_title is not None else (item.findtext('title') or '')
+              rating = item.findtext('lb:memberRating', default='', namespaces=NS)
+              watched = item.findtext('lb:watchedDate', default='', namespaces=NS)
+              year = item.findtext('lb:filmYear', default='', namespaces=NS)
+              desc = item.findtext('description') or ''
+              m = re.search(r'src=\"(https://[^\"]+)\"', desc)
+              films.append({
+                  'title': title.strip(),
+                  'year': year,
+                  'rating': rating,
+                  'watched': watched,
+                  'poster': m.group(1) if m else '',
+              })
+          print(json.dumps(films[:8], indent=2))
+          " > letterboxd.json
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add letterboxd.json
+          git diff --cached --quiet || git commit -m "chore: update letterboxd film data"
+          git pull --rebase origin master
+          git push

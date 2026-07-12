@@ -120,8 +120,8 @@
           <a href="https://www.strava.com/athletes/129221305" target="_blank" rel="noopener noreferrer" class="feed-link">Strava &nearr;</a>
         </div>
         <div class="training-hero">
-          <h3 class="training-race"><em>Tokyo</em> Marathon 2026</h3>
-          <p class="training-desc">Training for my first World Major — running 40+ miles a week through New York City. The race is March 2, 2026.</p>
+          <h3 class="training-race">Marathon <em>miles</em></h3>
+          <p class="training-desc">Base building through the New York summer — 40+ miles a week. The numbers below come straight from Strava.</p>
         </div>
         <div class="training-stats" id="training-stats" style="display:none">
           <div class="training-stat">
@@ -163,8 +163,8 @@
       </div>
     </section>
 
-    <!-- ── Recently Watched ── -->
-    <section class="feed-block fade-in">
+    <!-- ── Recently Watched (hidden when letterboxd.json is empty) ── -->
+    <section class="feed-block fade-in" id="films-block">
       <div class="container">
         <div class="feed-block-header">
           <h2 class="section-label">Recently Watched</h2>
@@ -235,45 +235,25 @@
     }
 
     // ── Letterboxd poster grid ──
+    // Reads letterboxd.json, cached by .github/workflows/letterboxd.yml
+    // (same pattern as strava.json). Section hides entirely when empty.
     async function loadLetterboxd() {
+      const section = document.getElementById('films-block');
       const container = document.getElementById('film-grid');
       try {
-        const rssUrl = 'https://letterboxd.com/noahfoster/rss/';
-        const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl);
-        const res = await fetch(proxyUrl);
-        const data = await res.json();
-        const xml = new DOMParser().parseFromString(data.contents, 'text/xml');
-        const items = Array.from(xml.querySelectorAll('item')).slice(0, 8);
-
-        if (!items.length) {
-          container.replaceChildren();
-          const p = makeEl('p', 'feed-state');
-          setText(p, 'No films logged yet.');
-          container.appendChild(p);
-          return;
-        }
+        const res = await fetch('letterboxd.json');
+        if (!res.ok) throw new Error('fetch failed');
+        const films = await res.json();
+        if (!Array.isArray(films) || !films.length) throw new Error('no films');
 
         container.replaceChildren();
-        items.forEach(item => {
-          const rawTitle = item.querySelector('title')?.textContent || '';
-          const title = rawTitle.replace(/,\s*\d{4}.*$/, '').replace(/\s*-\s*[\u2605\u2606\u00bd]+.*$/, '').trim();
-
-          const memberRating = item.getElementsByTagNameNS('https://letterboxd.com', 'memberRating')[0]?.textContent;
-          let rating = '';
-          if (memberRating) {
-            const val = parseFloat(memberRating);
-            rating = '\u2605'.repeat(Math.floor(val)) + (val % 1 >= 0.5 ? '\u00bd' : '');
-          }
-
-          const desc = item.querySelector('description')?.textContent || '';
-          const imgMatch = desc.match(/src="(https:\/\/[^"]+)"/);
-
+        films.slice(0, 8).forEach(film => {
           const card = makeEl('div', 'film-card');
 
-          if (imgMatch) {
+          if (film.poster) {
             const img = makeEl('img', 'film-poster');
-            img.src = imgMatch[1];
-            img.alt = title;
+            img.src = film.poster;
+            img.alt = film.title;
             img.loading = 'lazy';
             card.appendChild(img);
           } else {
@@ -281,22 +261,21 @@
           }
 
           const titleEl = makeEl('div', 'film-title');
-          setText(titleEl, title);
+          setText(titleEl, film.title);
           card.appendChild(titleEl);
 
-          if (rating) {
+          if (film.rating) {
+            const val = parseFloat(film.rating);
+            const stars = '\u2605'.repeat(Math.floor(val)) + (val % 1 >= 0.5 ? '\u00bd' : '');
             const ratingEl = makeEl('div', 'film-rating');
-            setText(ratingEl, rating);
+            setText(ratingEl, stars);
             card.appendChild(ratingEl);
           }
 
           container.appendChild(card);
         });
       } catch {
-        container.replaceChildren();
-        const p = makeEl('p', 'feed-state');
-        setText(p, 'No films logged yet.');
-        container.appendChild(p);
+        section.style.display = 'none';
       }
     }
 
