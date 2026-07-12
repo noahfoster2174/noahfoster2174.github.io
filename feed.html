@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Feed — Noah Foster</title>
   <meta name="description" content="What Noah Foster is training for, building, and watching." />
+  <meta property="og:title" content="Feed — Noah Foster" />
+  <meta property="og:description" content="What Noah Foster is training for, building, and watching." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://noahfoster2174.github.io/feed.html" />
+  <meta property="og:image" content="https://noahfoster2174.github.io/assets/og.png" />
+  <meta property="og:site_name" content="Noah Foster" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%232D6A4F'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='white'>NF</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,6 +59,10 @@
     .training-stat { display: flex; flex-direction: column; gap: 0.1rem; }
     .training-stat-value { font-family: 'Spectral', serif; font-size: 2rem; font-weight: 700; line-height: 1; }
     .training-stat-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+    .training-graph { margin-top: 2rem; }
+    .training-graph svg { display: block; width: 100%; height: auto; }
+    .graph-value { font-family: 'Spectral', serif; font-size: 13px; font-weight: 600; fill: var(--muted); }
+    .graph-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; fill: var(--light-text); }
 
     /* ── Currently Building ── */
     .building-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
@@ -60,6 +70,7 @@
     .building-name { font-family: 'Spectral', serif; font-size: 1.05rem; font-weight: 600; flex-shrink: 0; }
     .building-desc { font-size: 0.9rem; color: var(--muted); }
     .building-sep { color: var(--border); flex-shrink: 0; }
+    .building-signal { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; color: var(--light-text); margin-top: 0.2rem; }
 
     /* ── Recently Watched ── */
     .film-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
@@ -133,6 +144,7 @@
             <span class="training-stat-label">Runs this week</span>
           </div>
         </div>
+        <div class="training-graph" id="training-graph" hidden></div>
       </div>
     </section>
 
@@ -144,7 +156,7 @@
           <a href="projects.html" class="feed-link">All projects &rarr;</a>
         </div>
         <ul class="building-list">
-          <li class="building-item">
+          <li class="building-item" data-repo="media-stack">
             <span class="building-name">Reelz</span>
             <span class="building-sep">&mdash;</span>
             <span class="building-desc">Home media automation with a personal movie download app.</span>
@@ -154,7 +166,7 @@
             <span class="building-sep">&mdash;</span>
             <span class="building-desc">A P&L dashboard tracking handle, fees, and earnings across agents.</span>
           </li>
-          <li class="building-item">
+          <li class="building-item" data-repo="noahfoster2174.github.io">
             <span class="building-name">noahfoster.com</span>
             <span class="building-sep">&mdash;</span>
             <span class="building-desc">Designed and built with Claude Code as a portfolio and experiment.</span>
@@ -208,30 +220,136 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // ── Training stats from Strava ──
+    // ── Training stats + mileage graph from Strava ──
+    // Strava's start_date_local carries a fake "Z" suffix (the value is local
+    // time), so all bucketing works on the yyyy-mm-dd substring — never
+    // new Date(fullTimestamp), which would shift evening runs across days.
+    function localDayStr(dt) {
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0');
+    }
+    function mondayKey(dayStr) {
+      const [y, m, d] = dayStr.split('-').map(Number);
+      const dt = new Date(y, m - 1, d);
+      dt.setDate(dt.getDate() - ((dt.getDay() + 6) % 7));
+      return localDayStr(dt);
+    }
+    function addDays(dayStr, n) {
+      const [y, m, d] = dayStr.split('-').map(Number);
+      const dt = new Date(y, m - 1, d);
+      dt.setDate(dt.getDate() + n);
+      return localDayStr(dt);
+    }
+
     async function loadTrainingStats() {
+      let runs = null;
       try {
-        const res = await fetch('strava.json');
-        if (!res.ok) return;
-        const activities = await res.json();
-        if (!Array.isArray(activities) || !activities.length) return;
-
-        const now = new Date();
-        const dayOfWeek = now.getDay();
-        const daysFromMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
-        const weekStart = new Date(now);
-        weekStart.setDate(now.getDate() - daysFromMonday);
-        weekStart.setHours(0, 0, 0, 0);
-
-        const weekRuns = activities.filter(a => new Date(a.start_date_local) >= weekStart);
-        const weekMiles = (weekRuns.reduce((sum, a) => sum + a.distance, 0) / 1609.34).toFixed(1);
-
-        if (weekRuns.length > 0) {
-          setText(document.getElementById('stat-miles'), weekMiles);
-          setText(document.getElementById('stat-runs'), String(weekRuns.length));
-          document.getElementById('training-stats').style.display = '';
+        const res = await fetch('strava-history.json');
+        if (res.ok) {
+          const hist = await res.json();
+          if (Array.isArray(hist) && hist.length) {
+            runs = hist.map(e => ({ day: e.d.slice(0, 10), mi: e.mi }));
+          }
         }
       } catch {}
+      if (!runs) {
+        try {
+          const res = await fetch('strava.json');
+          if (!res.ok) return;
+          const acts = await res.json();
+          if (!Array.isArray(acts) || !acts.length) return;
+          runs = acts.map(a => ({ day: (a.start_date_local || '').slice(0, 10), mi: a.distance / 1609.34 }));
+        } catch { return; }
+      }
+
+      const weeks = new Map();
+      runs.forEach(r => {
+        if (!r.day) return;
+        const key = mondayKey(r.day);
+        const w = weeks.get(key) || { mi: 0, runs: 0 };
+        w.mi += r.mi;
+        w.runs += 1;
+        weeks.set(key, w);
+      });
+
+      const currentKey = mondayKey(localDayStr(new Date()));
+      const cur = weeks.get(currentKey);
+      if (cur) {
+        setText(document.getElementById('stat-miles'), cur.mi.toFixed(1));
+        setText(document.getElementById('stat-runs'), String(cur.runs));
+        document.getElementById('training-stats').style.display = '';
+      }
+
+      renderMileageGraph(weeks, currentKey);
+    }
+
+    // 12-week bar chart, built as inline SVG with the site's design tokens.
+    function renderMileageGraph(weeks, currentKey) {
+      const wrap = document.getElementById('training-graph');
+      if (!wrap || weeks.size < 2) return;
+
+      const firstKey = [...weeks.keys()].sort()[0];
+      let keys = [];
+      for (let k = currentKey; k >= firstKey && keys.length < 12; k = addDays(k, -7)) keys.push(k);
+      keys.reverse();
+      if (keys.length < 2) return;
+
+      const NS = 'http://www.w3.org/2000/svg';
+      const W = 700, H = 170, padT = 24, padB = 26;
+      const slot = W / keys.length;
+      const barW = Math.min(slot * 0.62, 46);
+      const plotH = H - padT - padB;
+      const maxMi = Math.max(...keys.map(k => (weeks.get(k) || { mi: 0 }).mi), 1);
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+      const svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      svg.setAttribute('role', 'img');
+      svg.setAttribute('aria-label', 'Weekly running mileage, last ' + keys.length + ' weeks');
+
+      const baseline = document.createElementNS(NS, 'line');
+      baseline.setAttribute('x1', 0); baseline.setAttribute('x2', W);
+      baseline.setAttribute('y1', H - padB); baseline.setAttribute('y2', H - padB);
+      baseline.setAttribute('stroke', 'var(--border)');
+      svg.appendChild(baseline);
+
+      keys.forEach((k, i) => {
+        const mi = (weeks.get(k) || { mi: 0 }).mi;
+        const cx = slot * i + slot / 2;
+        const h = Math.max((mi / maxMi) * plotH, mi > 0 ? 3 : 0);
+
+        if (h > 0) {
+          const bar = document.createElementNS(NS, 'rect');
+          bar.setAttribute('x', cx - barW / 2);
+          bar.setAttribute('y', H - padB - h);
+          bar.setAttribute('width', barW);
+          bar.setAttribute('height', h);
+          bar.setAttribute('fill', 'var(--accent)');
+          if (k === currentKey) bar.setAttribute('opacity', '0.45');
+          svg.appendChild(bar);
+
+          const val = document.createElementNS(NS, 'text');
+          val.setAttribute('x', cx);
+          val.setAttribute('y', H - padB - h - 7);
+          val.setAttribute('text-anchor', 'middle');
+          val.setAttribute('class', 'graph-value');
+          val.textContent = mi.toFixed(1);
+          svg.appendChild(val);
+        }
+
+        if ((keys.length - 1 - i) % 2 === 0) {
+          const [, m, d] = k.split('-').map(Number);
+          const lbl = document.createElementNS(NS, 'text');
+          lbl.setAttribute('x', cx);
+          lbl.setAttribute('y', H - 8);
+          lbl.setAttribute('text-anchor', 'middle');
+          lbl.setAttribute('class', 'graph-label');
+          lbl.textContent = months[m - 1] + ' ' + d;
+          svg.appendChild(lbl);
+        }
+      });
+
+      wrap.replaceChildren(svg);
+      wrap.hidden = false;
     }
 
     // ── Letterboxd poster grid ──
@@ -279,7 +397,33 @@
       }
     }
 
+    // ── Live "Currently Building" signals from github.json ──
+    // Counts only commits authored by Noah (bot data-pipeline commits are
+    // excluded upstream), so the signal reflects real building activity.
+    async function loadBuilding() {
+      try {
+        const res = await fetch('github.json');
+        if (!res.ok) return;
+        const repos = await res.json();
+        if (!Array.isArray(repos)) return;
+        const byName = new Map(repos.map(r => [r.repo, r]));
+        document.querySelectorAll('.building-item[data-repo]').forEach(item => {
+          const r = byName.get(item.dataset.repo);
+          if (!r || !r.last_commit) return;
+          const days = Math.max(0, Math.floor((Date.now() - new Date(r.last_commit)) / 86400000));
+          const when = days === 0 ? 'today' : days === 1 ? 'yesterday' : days + 'd ago';
+          const parts = [];
+          if (r.commits_30d > 1) parts.push(r.commits_30d + ' recent commits');
+          parts.push('last commit ' + when);
+          const sig = makeEl('span', 'building-signal');
+          setText(sig, parts.join(' · '));
+          item.querySelector('.building-desc').appendChild(sig);
+        });
+      } catch {}
+    }
+
     loadTrainingStats();
+    loadBuilding();
     loadLetterboxd();
 
     // ── Page transition curtain ──

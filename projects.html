@@ -9,7 +9,7 @@
   <meta property="og:description" content="Web apps, automation tools, and financial modeling systems." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://noahfoster2174.github.io/projects.html" />
-  <meta property="og:image" content="https://placehold.co/1200x630/2D6A4F/ffffff?text=Noah+Foster" />
+  <meta property="og:image" content="https://noahfoster2174.github.io/assets/og.png" />
   <meta property="og:site_name" content="Noah Foster" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%232D6A4F'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='white'>NF</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -88,9 +88,14 @@
     .catalogue-meta { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
     .catalogue-github { font-size: 0.75rem; color: var(--muted); text-decoration: none; font-weight: 600; transition: color 0.15s ease; }
     .catalogue-github:hover { color: var(--accent); }
+    /* Optional thumbnail column — only on items that have a real screenshot */
+    .catalogue-item--thumb { grid-template-columns: 4rem 1fr 200px; align-items: start; }
+    .catalogue-thumb { width: 100%; aspect-ratio: 16/10; object-fit: cover; object-position: top; border: 1px solid var(--border); display: block; }
     @media (max-width: 600px) {
       .catalogue-item { grid-template-columns: 2.5rem 1fr; gap: 1rem; }
       .catalogue-num { font-size: 1.5rem; }
+      .catalogue-item--thumb { grid-template-columns: 2.5rem 1fr; }
+      .catalogue-item--thumb .catalogue-thumb { grid-column: 2; margin-top: 0.25rem; }
     }
 
     /* ── Footer ── */
@@ -177,7 +182,7 @@
             </div>
           </li>
 
-          <li class="catalogue-item fade-in" data-status="dev">
+          <li class="catalogue-item catalogue-item--thumb fade-in" data-status="dev">
             <span class="catalogue-num" aria-hidden="true">04</span>
             <div class="catalogue-body">
               <h3 class="catalogue-title">noahfoster.com</h3>
@@ -187,6 +192,7 @@
                 <a href="https://github.com/noahfoster2174/noahfoster2174.github.io" target="_blank" rel="noopener noreferrer" class="catalogue-github">GitHub &nearr;</a>
               </div>
             </div>
+            <img src="assets/projects/site.png" alt="Homepage of this site" class="catalogue-thumb" loading="lazy" />
           </li>
 
           <li class="catalogue-item fade-in" data-status="planned">
