@@ -2,9 +2,9 @@
   {
     "repo": "noahfoster2174.github.io",
     "url": "https://github.com/noahfoster2174/noahfoster2174.github.io",
-    "last_commit": "2026-07-12T16:17:57Z",
-    "commits_30d": 2,
-    "latest": "fix: replace dead allorigins.win proxy with letterboxd.json pipeline"
+    "last_commit": "2026-07-12T16:58:47Z",
+    "commits_30d": 5,
+    "latest": "docs: pipelines, health check, photo instructions; drop dead main.css"
   },
   {
     "repo": "media-stack",
