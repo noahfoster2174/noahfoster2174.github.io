@@ -6,10 +6,11 @@ Portfolio website. Static site hosted on GitHub Pages.
 - HTML5, CSS3, vanilla JavaScript — no frameworks, no bundlers, no build steps
 - GitHub Pages (noahfoster2174.github.io)
 - GitHub Actions: Strava data pipeline (fetches runs every 6h → strava.json)
+- GitHub Actions: Letterboxd data pipeline (fetches RSS every 6h → letterboxd.json)
 
 ## External Integrations
 - Strava API (athlete 129221305)
-- Letterboxd RSS (user: noahfoster)
+- Letterboxd RSS (user: noahfoster) — account currently has 0 films logged; the feed section hides itself until films appear
 
 ## Pages
 - index.html    — minimal homepage (hero, featured project, two CTAs)
@@ -35,8 +36,9 @@ Portfolio website. Static site hosted on GitHub Pages.
 - Scroll animations: fade-in with IntersectionObserver
 
 ## Status
-Design polish complete. All four pages live with warm palette, micro-transitions, hover states, and contrast-passing text. Needs:
-- Real photos (profile photo, project images)
+Design polish complete. Content refreshed 2026-07 (Apollo Global Management replaces Amazon; Tokyo Marathon references removed; Letterboxd loader moved from the dead allorigins.win proxy to the letterboxd.json pipeline). Needs:
+- Real photos (profile photo, project images) — photo.jpg still missing, bio falls back to a placeholder
+- og:image still points at placehold.co placeholders
 - Content updates as projects evolve
 
 Do not add new features or pages until existing content is finalized.

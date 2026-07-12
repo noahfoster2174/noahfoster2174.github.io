@@ -7,7 +7,7 @@ Personal portfolio site. Live at **[noahfoster2174.github.io](https://noahfoster
 - Vanilla HTML5, CSS3, JavaScript — no frameworks, no build tools
 - Hosted on [GitHub Pages](https://pages.github.com/)
 - Strava run data via GitHub Actions (fetches every 6 hours → `strava.json`)
-- Letterboxd film log via RSS (client-side, parsed through rss2json)
+- Letterboxd film log via GitHub Actions (fetches every 6 hours → `letterboxd.json`; the feed section hides itself while the log is empty)
 
 ## Pages
 
@@ -30,6 +30,10 @@ python -m http.server 8000
 ## Strava integration
 
 Recent runs are cached in `strava.json` by a GitHub Actions workflow at `.github/workflows/strava.yml`. The workflow refreshes the Strava access token using stored secrets, fetches the last 5 runs, and commits the result if changed.
+
+## Letterboxd integration
+
+Recent films are cached in `letterboxd.json` by `.github/workflows/letterboxd.yml`, which parses the public RSS feed (no secrets needed) and commits the result if changed. `feed.html` reads the local JSON and hides the Recently Watched section when the list is empty.
 
 **Required GitHub secrets** (Settings → Secrets → Actions):
 
