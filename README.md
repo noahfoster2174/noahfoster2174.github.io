@@ -6,8 +6,10 @@ Personal portfolio site. Live at **[noahfoster2174.github.io](https://noahfoster
 
 - Vanilla HTML5, CSS3, JavaScript — no frameworks, no build tools
 - Hosted on [GitHub Pages](https://pages.github.com/)
-- Strava run data via GitHub Actions (fetches every 6 hours → `strava.json`)
-- Letterboxd film log via GitHub Actions (fetches every 6 hours → `letterboxd.json`; the feed section hides itself while the log is empty)
+- Strava run data via GitHub Actions (every 6h → `strava.json` last-5-runs + `strava-history.json` full history feeding the weekly mileage graph)
+- Letterboxd film log via GitHub Actions (every 6h → `letterboxd.json`; the feed section hides itself while the log is empty)
+- GitHub commit activity via GitHub Actions (every 6h → `github.json`, Noah-authored commits only)
+- Health check via GitHub Actions (Mon+Thu): fails loudly — and GitHub emails the owner — if pages aren't 200, any JSON is invalid, or `strava.json` hasn't been committed in 7 days. Test it: dispatch with `max_age_days: 0`.
 
 ## Pages
 
@@ -34,6 +36,18 @@ Recent runs are cached in `strava.json` by a GitHub Actions workflow at `.github
 ## Letterboxd integration
 
 Recent films are cached in `letterboxd.json` by `.github/workflows/letterboxd.yml`, which parses the public RSS feed (no secrets needed) and commits the result if changed. `feed.html` reads the local JSON and hides the Recently Watched section when the list is empty.
+
+## GitHub activity integration
+
+`.github/workflows/github.yml` runs `scripts/build_github_json.py` (built-in `GITHUB_TOKEN`, no extra secrets) to cache recent Noah-authored commits per repo in `github.json`. Bot commits from the data pipelines are excluded, so the "Currently Building" signals on the feed reflect real work. Scheduled crons are staggered (`:00` Strava, `:30` Letterboxd, `:45` GitHub) and every workflow rebases before pushing to avoid races.
+
+## Profile photo
+
+Drop a square JPG (≥600px) named `photo.jpg` in the repo root and the About page picks it up automatically; until then it falls back to an inline SVG monogram (no external services).
+
+## Timezone note
+
+Strava's `start_date_local` values end in a fake `Z` — they are local times, not UTC. All client code buckets runs by the `yyyy-mm-dd` substring, and `strava-history.json` stores timestamps with the `Z` stripped. Don't parse full timestamps with `new Date()`.
 
 **Required GitHub secrets** (Settings → Secrets → Actions):
 

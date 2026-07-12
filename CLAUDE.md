@@ -5,8 +5,11 @@ Portfolio website. Static site hosted on GitHub Pages.
 ## Stack
 - HTML5, CSS3, vanilla JavaScript — no frameworks, no bundlers, no build steps
 - GitHub Pages (noahfoster2174.github.io)
-- GitHub Actions: Strava data pipeline (fetches runs every 6h → strava.json)
-- GitHub Actions: Letterboxd data pipeline (fetches RSS every 6h → letterboxd.json)
+- GitHub Actions data pipelines (all commit only-if-changed, staggered crons, pull --rebase before push):
+  - strava.yml (:00 every 6h) → strava.json (last 5 runs) + strava-history.json (full run history via scripts/strava_sync.py)
+  - letterboxd.yml (:30 every 6h) → letterboxd.json
+  - github.yml (:45 every 6h) → github.json (recent Noah-authored commits per repo via scripts/build_github_json.py; bot commits excluded)
+- GitHub Actions health check: health.yml (Mon+Thu) fails loudly → GitHub emails Noah when pages aren't 200, JSON is invalid, or strava.json commit age > 7 days. Forced-failure test: dispatch with max_age_days=0.
 
 ## External Integrations
 - Strava API (athlete 129221305)
@@ -36,12 +39,14 @@ Portfolio website. Static site hosted on GitHub Pages.
 - Scroll animations: fade-in with IntersectionObserver
 
 ## Status
-Design polish complete. Content refreshed 2026-07 (Apollo Global Management replaces Amazon; Tokyo Marathon references removed; Letterboxd loader moved from the dead allorigins.win proxy to the letterboxd.json pipeline). Needs:
-- Real photos (profile photo, project images) — photo.jpg still missing, bio falls back to a placeholder
-- og:image still points at placehold.co placeholders
-- Content updates as projects evolve
+Live-data upgrade shipped 2026-07-12: weekly mileage graph on feed (from strava-history.json, client-built SVG), live "last week" training stat on the homepage, commit-activity signals on Currently Building (github.json), health-check monitoring, real OG image (assets/og.png), zero external runtime dependencies except Google Fonts and Letterboxd poster URLs.
 
-Do not add new features or pages until existing content is finalized.
+Timezone rule for Strava data: start_date_local carries a fake "Z" suffix (value is local time). Always bucket by the yyyy-mm-dd substring; never new Date(fullTimestamp).
+
+Needs:
+- Real profile photo: drop a square JPG (>=600px) named photo.jpg in the repo root — no code change needed (falls back to an inline SVG monogram until then)
+- Reelz screenshot to replace the SVG motif in the homepage featured card (swap the svg for an img in .featured-visual)
+- Films: Noah logs films on Letterboxd going forward; the feed section auto-fills from letterboxd.json (hidden while empty)
 
 ## Docs
 Design history and planning iterations live in Noze: projects/personal-site/docs/
