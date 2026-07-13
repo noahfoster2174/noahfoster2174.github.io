@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Noah Foster</title>
-  <meta name="description" content="Noah Foster — finance by day, side projects and marathon training the rest of the time. New York." />
+  <meta name="description" content="Noah Foster — New York. Finance, small side projects, marathons." />
   <meta property="og:title" content="Noah Foster" />
-  <meta property="og:description" content="Finance by day, side projects and marathon training the rest of the time. New York." />
+  <meta property="og:description" content="New York. Finance, small side projects, marathons." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://noahfoster2174.github.io" />
   <meta property="og:image" content="https://noahfoster2174.github.io/assets/og.png" />
@@ -51,109 +51,20 @@
     .skip-link { position: absolute; top: -100%; left: 1rem; background: var(--accent); color: #fff; padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 700; text-decoration: none; border-radius: 0 0 4px 4px; z-index: 100; }
     .skip-link:focus { top: 0; }
 
-    .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 1.5rem; }
-
-    /* ── Hero ── */
-    .hero {
-      min-height: calc(100vh - 97px);
+    /* ── Intro ── */
+    .intro {
+      min-height: calc(100vh - 260px);
       display: flex;
       align-items: center;
-      border-bottom: 1px solid var(--border);
     }
-    .hero-inner {
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 4rem;
-      align-items: center;
-      width: 100%;
-      padding: 4rem 0;
-    }
-    @media (max-width: 700px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 0; }
-    }
-
-    .hero-tagline {
+    .intro-inner { max-width: 620px; padding: 4rem 0; }
+    .intro-text {
       font-family: 'Spectral', serif;
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
       color: var(--muted);
-      line-height: 1.5;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
     }
-    .hero-tagline em { color: var(--accent); font-style: normal; font-weight: 600; }
-    .hero-line {
-      display: block;
-      opacity: 0;
-      transform: translateY(24px);
-      animation: heroReveal 0.6s ease forwards;
-    }
-    .hero-line:nth-child(1) { animation-delay: 0.1s; }
-    .hero-line:nth-child(2) { animation-delay: 0.35s; }
-    .hero-line:nth-child(3) { animation-delay: 0.6s; }
-
-    @keyframes heroReveal {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-stats {
-      border-left: 2px solid var(--accent);
-      padding-left: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      opacity: 0;
-      animation: heroReveal 0.7s ease 0.85s forwards;
-    }
-    @media (max-width: 700px) {
-      .hero-stats { border-left: none; border-top: 2px solid var(--accent); padding-left: 0; padding-top: 1.5rem; flex-direction: row; flex-wrap: wrap; gap: 1.25rem 2rem; }
-    }
-    .stat-block { display: flex; flex-direction: column; gap: 0.1rem; transition: transform 0.2s ease; }
-    .stat-block:hover { transform: translateX(4px); }
-    .stat-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--light-text); }
-    .stat-value { font-size: 0.95rem; color: var(--text); font-weight: 500; }
-
-    /* ── Cycling text ── */
-    .cycle-wrap { position: relative; display: inline-block; min-width: 5ch; }
-    .cycle-word {
-      display: inline-block;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-    .cycle-word.out { opacity: 0; transform: translateY(-12px); }
-    .cycle-word.in  { opacity: 1; transform: translateY(0); }
-
-    /* ── Now stat (cycling) ── */
-    .stat-now .stat-value {
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-    .stat-now .stat-value.out { opacity: 0; transform: translateY(8px); }
-
-    /* ── Parallax ── */
-    .hero-inner { transition: transform 0.15s ease-out; }
-
-    /* ── Featured Project ── */
-    .featured-section { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
-    .featured-card {
-      background: var(--dark);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      padding: 3rem;
-      align-items: center;
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.06);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .featured-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
-    @media (max-width: 640px) {
-      .featured-card { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem; }
-    }
-    .featured-title { font-family: 'Spectral', serif; font-size: 2rem; font-weight: 700; color: #fff; line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 0.75rem; }
-    .featured-desc { font-size: 0.95rem; color: var(--light-text); line-height: 1.7; margin-bottom: 1.25rem; }
-    .featured-cta { font-size: 0.85rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; }
-    /* Swap the SVG for a real screenshot <img> later without touching layout. */
-    .featured-visual svg, .featured-visual img { display: block; width: 100%; height: auto; }
-    @media (max-width: 640px) { .featured-visual { order: 2; } }
-
-    /* ── CTAs ── */
-    .cta-section { padding: 3.5rem 0; }
     .cta-group { display: flex; gap: 2rem; flex-wrap: wrap; }
     .cta-link { font-family: 'Spectral', serif; font-size: 1.2rem; color: var(--text); text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 2px; transition: color 0.15s ease; }
     .cta-link:hover { color: var(--accent); }
@@ -166,7 +77,7 @@
     .footer-contact a { font-size: 0.85rem; color: var(--muted); text-decoration: none; transition: color 0.15s ease; }
     .footer-contact a:hover { color: var(--accent); }
 
-    /* ── Scroll animations ── */
+    /* ── Fade-in ── */
     .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
@@ -201,66 +112,15 @@
   </header>
 
   <main id="main-content">
-    <section class="hero">
+    <section class="intro">
       <div class="container">
-        <div class="hero-inner">
-          <p class="hero-tagline">
-            <span class="hero-line">I work in <em>finance</em>.</span>
-            <span class="hero-line">I <em>build things</em> on the side.</span>
-            <span class="hero-line">Mostly though, I <em>run</em>.</span>
-          </p>
-          <div class="hero-stats">
-            <div class="stat-block">
-              <span class="stat-label">Day job</span>
-              <span class="stat-value">Apollo Global Management</span>
-            </div>
-            <div class="stat-block">
-              <span class="stat-label">Based</span>
-              <span class="stat-value">New York City</span>
-            </div>
-            <div class="stat-block">
-              <span class="stat-label">Running</span>
-              <span class="stat-value" id="training-stat">Training for a marathon</span>
-            </div>
-            <div class="stat-block stat-now">
-              <span class="stat-label">Now</span>
-              <span class="stat-value" id="now-value">Building Reelz</span>
-            </div>
+        <div class="intro-inner fade-in">
+          <p class="intro-text">I'm Noah. I live in New York and work in finance. The rest of the time I build small software projects and train for marathons.</p>
+          <div class="cta-group">
+            <a href="projects.html" class="cta-link">Projects →</a>
+            <a href="feed.html" class="cta-link">What I'm up to →</a>
+            <a href="about.html" class="cta-link">About →</a>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="featured-section fade-in">
-      <div class="container">
-        <h2 class="section-label">Featured Project</h2>
-        <a href="projects.html" class="featured-card">
-          <div class="featured-text">
-            <h3 class="featured-title">Reelz</h3>
-            <p class="featured-desc">A home media automation system with a personal movie download app — powered by Docker, Plex, and a suite of indexers. Built for my NYC apartment.</p>
-            <span class="featured-cta">In development →</span>
-          </div>
-          <div class="featured-visual" aria-hidden="true">
-            <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-              <g fill="#A8B5A8" opacity="0.22">
-                <rect x="14" y="8" width="9" height="12" rx="2"/><rect x="50" y="8" width="9" height="12" rx="2"/><rect x="86" y="8" width="9" height="12" rx="2"/><rect x="122" y="8" width="9" height="12" rx="2"/><rect x="158" y="8" width="9" height="12" rx="2"/><rect x="194" y="8" width="9" height="12" rx="2"/><rect x="230" y="8" width="9" height="12" rx="2"/><rect x="266" y="8" width="9" height="12" rx="2"/><rect x="297" y="8" width="9" height="12" rx="2"/>
-                <rect x="14" y="180" width="9" height="12" rx="2"/><rect x="50" y="180" width="9" height="12" rx="2"/><rect x="86" y="180" width="9" height="12" rx="2"/><rect x="122" y="180" width="9" height="12" rx="2"/><rect x="158" y="180" width="9" height="12" rx="2"/><rect x="194" y="180" width="9" height="12" rx="2"/><rect x="230" y="180" width="9" height="12" rx="2"/><rect x="266" y="180" width="9" height="12" rx="2"/><rect x="297" y="180" width="9" height="12" rx="2"/>
-              </g>
-              <rect x="18" y="34" width="82" height="132" rx="4" fill="none" stroke="#A8B5A8" stroke-opacity="0.35" stroke-width="1.5"/>
-              <rect x="119" y="34" width="82" height="132" rx="4" fill="#2D6A4F"/>
-              <path d="M150 86 l26 14 -26 14 z" fill="#F7F6F1" opacity="0.92"/>
-              <rect x="220" y="34" width="82" height="132" rx="4" fill="none" stroke="#A8B5A8" stroke-opacity="0.35" stroke-width="1.5"/>
-            </svg>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="cta-section fade-in">
-      <div class="container">
-        <div class="cta-group">
-          <a href="projects.html" class="cta-link">See all projects →</a>
-          <a href="about.html" class="cta-link">About me →</a>
         </div>
       </div>
     </section>
@@ -281,71 +141,13 @@
 
   <div class="curtain" id="curtain"></div>
 
-  <noscript><style>.fade-in { opacity: 1; transform: none; } .hero-line, .hero-stats { opacity: 1; transform: none; animation: none; }</style></noscript>
+  <noscript><style>.fade-in { opacity: 1; transform: none; }</style></noscript>
   <script>
-    // ── Scroll animations ──
+    // ── Fade-in ──
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // ── Cycling "Now" text ──
-    const nowEl = document.getElementById('now-value');
-    if (nowEl) {
-      const phrases = ['Building Reelz', 'Watching movies', 'Out running', 'Tweaking this site'];
-      let idx = 0;
-      setInterval(() => {
-        nowEl.classList.add('out');
-        setTimeout(() => {
-          idx = (idx + 1) % phrases.length;
-          nowEl.textContent = phrases[idx];
-          nowEl.classList.remove('out');
-        }, 300);
-      }, 3000);
-    }
-
-    // ── Live training stat (last full week from strava-history.json) ──
-    // Dates are bucketed by their yyyy-mm-dd substring; Strava's "Z" suffix
-    // is fake local time, so full-timestamp parsing is deliberately avoided.
-    (async () => {
-      const el = document.getElementById('training-stat');
-      if (!el) return;
-      try {
-        const res = await fetch('strava-history.json');
-        if (!res.ok) return;
-        const hist = await res.json();
-        if (!Array.isArray(hist) || !hist.length) return;
-        const dayStr = dt => dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0');
-        const monday = s => {
-          const [y, m, d] = s.split('-').map(Number);
-          const dt = new Date(y, m - 1, d);
-          dt.setDate(dt.getDate() - ((dt.getDay() + 6) % 7));
-          return dayStr(dt);
-        };
-        const curMon = monday(dayStr(new Date()));
-        const [y, m, d] = curMon.split('-').map(Number);
-        const prev = new Date(y, m - 1, d);
-        prev.setDate(prev.getDate() - 7);
-        const lastMon = dayStr(prev);
-        const mi = hist.filter(e => monday(e.d.slice(0, 10)) === lastMon)
-                       .reduce((s, e) => s + e.mi, 0);
-        if (mi > 0) el.textContent = mi.toFixed(1) + ' mi last week';
-      } catch {}
-    })();
-
-    // ── Mouse parallax on hero ──
-    const heroInner = document.querySelector('.hero-inner');
-    if (heroInner && window.matchMedia('(pointer: fine)').matches) {
-      document.querySelector('.hero').addEventListener('mousemove', (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        heroInner.style.transform = `translate(${x * 8}px, ${y * 6}px)`;
-      });
-      document.querySelector('.hero').addEventListener('mouseleave', () => {
-        heroInner.style.transform = '';
-      });
-    }
 
     // ── Page transition curtain ──
     const curtain = document.getElementById('curtain');

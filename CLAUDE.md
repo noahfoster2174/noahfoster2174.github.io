@@ -16,7 +16,7 @@ Portfolio website. Static site hosted on GitHub Pages.
 - Letterboxd RSS (user: noahfoster) — account currently has 0 films logged; the feed section hides itself until films appear
 
 ## Pages
-- index.html    — minimal homepage (hero, featured project, two CTAs)
+- index.html    — deliberately quiet homepage (short intro + three links; no stats, tickers, or featured cards — Noah's call 2026-07-13, don't re-add flair here)
 - about.html    — bio, work experience, skills
 - projects.html — project cards
 - feed.html     — Strava runs + Letterboxd films (safe DOM rendering, no innerHTML)
@@ -39,7 +39,7 @@ Portfolio website. Static site hosted on GitHub Pages.
 - Scroll animations: fade-in with IntersectionObserver
 
 ## Status
-Live-data upgrade shipped 2026-07-12: weekly mileage graph on feed (from strava-history.json, client-built SVG), live "last week" training stat on the homepage, commit-activity signals on Currently Building (github.json), health-check monitoring, real OG image (assets/og.png), zero external runtime dependencies except Google Fonts and Letterboxd poster URLs.
+Live-data upgrade shipped 2026-07-12: weekly mileage graph + honest average on feed (from strava-history.json, client-built SVG), commit-activity signals on Currently Building (github.json), health-check monitoring, real OG image (assets/og.png), zero external runtime dependencies except Google Fonts and Letterboxd poster URLs. Homepage simplified 2026-07-13 to a plain intro — all live data now lives on the feed.
 
 Timezone rule for Strava data: start_date_local carries a fake "Z" suffix (value is local time). Always bucket by the yyyy-mm-dd substring; never new Date(fullTimestamp).
 
