@@ -17,7 +17,7 @@ Portfolio website. Static site hosted on GitHub Pages.
 
 ## Pages
 - index.html    — title card only: name + links, no copy at all (Noah's explicit call 2026-07-13; do not add self-description, stats, or features here)
-- about.html    — bio, work experience, skills
+- about.html    — stat blocks (day job / based / live weekly miles / now ticker), experience timeline, skills — no bio paragraphs, Noah's call 2026-07-13
 - projects.html — project cards
 - feed.html     — Strava runs + Letterboxd films (safe DOM rendering, no innerHTML)
 - strava.json   — cached Strava data (auto-updated by GitHub Actions)

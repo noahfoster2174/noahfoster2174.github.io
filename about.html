@@ -41,10 +41,20 @@
     .bio-grid { display: grid; grid-template-columns: 200px 1fr; gap: 3rem; align-items: start; }
     @media (max-width: 640px) { .bio-grid { grid-template-columns: 1fr; } }
     .bio-photo { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--border); }
-    .bio-text p { font-size: 1rem; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
-    .bio-text p:last-child { margin-bottom: 0; }
-    .bio-text a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); transition: color 0.15s ease; }
-    .bio-text a:hover { color: var(--text); }
+    .bio-stats {
+      border-left: 2px solid var(--accent);
+      padding-left: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    @media (max-width: 640px) {
+      .bio-stats { border-left: none; border-top: 2px solid var(--accent); padding-left: 0; padding-top: 1.5rem; flex-direction: row; flex-wrap: wrap; gap: 1.25rem 2rem; }
+    }
+    .stat-block { display: flex; flex-direction: column; gap: 0.1rem; }
+    .stat-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--light-text); }
+    .stat-value { font-size: 0.95rem; color: var(--text); font-weight: 500; transition: opacity 0.3s ease, transform 0.3s ease; }
+    .stat-value.out { opacity: 0; transform: translateY(8px); }
 
     /* ── Timeline ── */
     .timeline-section { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
@@ -142,9 +152,24 @@
           <img src="photo.jpg" alt="Noah Foster" class="bio-photo" onerror="this.onerror=null;this.src=&quot;data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'><rect width='300' height='300' fill='%23EDECE7'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='72' fill='%235E6E5E'>NF</text></svg>&quot;" />
           <div class="bio-text">
             <h2 class="section-label">About</h2>
-            <p>Strategic Finance Associate at Apollo Global Management in New York. Before Apollo, I was a Senior Financial Analyst at Amazon on the advertising deals desk, and before that spent four years at Capital One across deal finance, partnership valuations, and capital markets.</p>
-            <p>I like pairing a finance background with a technical toolkit — designing, building, and shipping personal projects with Claude Code, from home media automation to this site's own data pipelines.</p>
-            <p>Outside of work, I'm a marathoner — my weekly mileage is on the <a href="feed.html">feed</a>, straight from Strava. I like building things, watching movies, and figuring out how systems work.</p>
+            <div class="bio-stats">
+              <div class="stat-block">
+                <span class="stat-label">Day job</span>
+                <span class="stat-value">Apollo Global Management</span>
+              </div>
+              <div class="stat-block">
+                <span class="stat-label">Based</span>
+                <span class="stat-value">New York City</span>
+              </div>
+              <div class="stat-block">
+                <span class="stat-label">Running</span>
+                <span class="stat-value" id="training-stat">Training for a marathon</span>
+              </div>
+              <div class="stat-block">
+                <span class="stat-label">Now</span>
+                <span class="stat-value" id="now-value">Building Reelz</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -237,6 +262,50 @@
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── Live running stat (last full week from strava-history.json) ──
+    // Strava's start_date_local has a fake "Z" suffix (it's local time), so
+    // dates are bucketed by their yyyy-mm-dd substring, never full parsing.
+    (async () => {
+      const el = document.getElementById('training-stat');
+      if (!el) return;
+      try {
+        const res = await fetch('strava-history.json');
+        if (!res.ok) return;
+        const hist = await res.json();
+        if (!Array.isArray(hist) || !hist.length) return;
+        const dayStr = dt => dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0');
+        const monday = s => {
+          const [y, m, d] = s.split('-').map(Number);
+          const dt = new Date(y, m - 1, d);
+          dt.setDate(dt.getDate() - ((dt.getDay() + 6) % 7));
+          return dayStr(dt);
+        };
+        const curMon = monday(dayStr(new Date()));
+        const [y, m, d] = curMon.split('-').map(Number);
+        const prev = new Date(y, m - 1, d);
+        prev.setDate(prev.getDate() - 7);
+        const lastMon = dayStr(prev);
+        const mi = hist.filter(e => monday(e.d.slice(0, 10)) === lastMon)
+                       .reduce((s, e) => s + e.mi, 0);
+        if (mi > 0) el.textContent = mi.toFixed(1) + ' mi last week';
+      } catch {}
+    })();
+
+    // ── Cycling "Now" text ──
+    const nowEl = document.getElementById('now-value');
+    if (nowEl) {
+      const phrases = ['Building Reelz', 'Watching movies', 'Out running', 'Tweaking this site'];
+      let idx = 0;
+      setInterval(() => {
+        nowEl.classList.add('out');
+        setTimeout(() => {
+          idx = (idx + 1) % phrases.length;
+          nowEl.textContent = phrases[idx];
+          nowEl.classList.remove('out');
+        }, 300);
+      }, 3000);
+    }
 
     const curtain = document.getElementById('curtain');
     if (curtain) {
