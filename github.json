@@ -1,5 +1,12 @@
 [
   {
+    "repo": "noahfoster2174",
+    "url": "https://github.com/noahfoster2174/noahfoster2174",
+    "last_commit": "2026-07-13T00:10:29Z",
+    "commits_30d": 1,
+    "latest": "Update profile: Apollo Strategic Finance, self-updating site, retire Tokyo copy"
+  },
+  {
     "repo": "noahfoster2174.github.io",
     "url": "https://github.com/noahfoster2174/noahfoster2174.github.io",
     "last_commit": "2026-07-12T16:58:47Z",
@@ -19,13 +26,6 @@
     "last_commit": "2026-03-10T01:32:11Z",
     "commits_30d": 1,
     "latest": "Initial commit: meal planner web app"
-  },
-  {
-    "repo": "noahfoster2174",
-    "url": "https://github.com/noahfoster2174/noahfoster2174",
-    "last_commit": "2026-02-25T02:57:07Z",
-    "commits_30d": 2,
-    "latest": "Add Reelz project (media-stack now public)"
   },
   {
     "repo": "gmail_cleanup",
