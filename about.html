@@ -38,8 +38,8 @@
 
     /* ── Bio ── */
     .bio-section { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
-    .bio-grid { display: grid; grid-template-columns: 200px 1fr; gap: 3rem; align-items: start; }
-    @media (max-width: 640px) { .bio-grid { grid-template-columns: 1fr; } }
+    .bio-grid { display: grid; grid-template-columns: 200px max-content; gap: 3rem; align-items: center; justify-content: center; }
+    @media (max-width: 640px) { .bio-grid { grid-template-columns: 1fr; justify-items: center; } .bio-stats { justify-content: center; } }
     .bio-photo { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--border); }
     .bio-stats {
       border-left: 2px solid var(--accent);
