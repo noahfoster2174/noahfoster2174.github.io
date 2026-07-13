@@ -132,7 +132,7 @@
         </div>
         <div class="training-hero">
           <h3 class="training-race">Marathon <em>miles</em></h3>
-          <p class="training-desc">Base building through the New York summer — 40+ miles a week. The numbers below come straight from Strava.</p>
+          <p class="training-desc" id="training-desc">Base building through the New York summer. The numbers below come straight from Strava.</p>
         </div>
         <div class="training-stats" id="training-stats" style="display:none">
           <div class="training-stat">
@@ -160,11 +160,6 @@
             <span class="building-name">Reelz</span>
             <span class="building-sep">&mdash;</span>
             <span class="building-desc">Home media automation with a personal movie download app.</span>
-          </li>
-          <li class="building-item">
-            <span class="building-name">Prediction Markets</span>
-            <span class="building-sep">&mdash;</span>
-            <span class="building-desc">A P&L dashboard tracking handle, fees, and earnings across agents.</span>
           </li>
           <li class="building-item" data-repo="noahfoster2174.github.io">
             <span class="building-name">noahfoster.com</span>
@@ -300,6 +295,15 @@
       const plotH = H - padT - padB;
       const maxMi = Math.max(...keys.map(k => (weeks.get(k) || { mi: 0 }).mi), 1);
       const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+      // Honest average over the full weeks shown (the in-progress week is
+      // excluded; weeks with no runs count as zero).
+      const fullKeys = keys.filter(k => k !== currentKey);
+      if (fullKeys.length >= 2) {
+        const avg = fullKeys.reduce((s, k) => s + ((weeks.get(k) || { mi: 0 }).mi), 0) / fullKeys.length;
+        const desc = document.getElementById('training-desc');
+        if (desc) desc.textContent = 'Averaging ' + avg.toFixed(1) + ' miles a week over the last ' + fullKeys.length + ' full weeks — pulled straight from Strava.';
+      }
 
       const svg = document.createElementNS(NS, 'svg');
       svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
