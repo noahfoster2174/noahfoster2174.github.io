@@ -36,12 +36,6 @@
 
     .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 1.5rem; }
 
-    /* ── Filter bar ── */
-    .filter-bar { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; }
-    .filter-btn { background: none; border: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; padding-bottom: 0.25rem; color: var(--muted); font-family: inherit; transition: color 0.15s ease, border-color 0.15s ease; }
-    .filter-btn.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
-    .filter-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
-
     /* ── Catalogue ── */
     .catalogue-section { padding: 3.5rem 0; }
     .catalogue-list { list-style: none; counter-reset: none; }
@@ -83,7 +77,6 @@
       border-radius: 9999px;
     }
     .status-badge--dev { background: rgba(45,106,79,0.1); color: var(--accent); }
-    .status-badge--planned { background: var(--surface); color: var(--muted); }
     .status-badge--done { background: var(--dark); color: var(--light-text); }
     .catalogue-meta { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
     .catalogue-github { font-size: 0.75rem; color: var(--muted); text-decoration: none; font-weight: 600; transition: color 0.15s ease; }
@@ -140,11 +133,6 @@
     <section class="catalogue-section fade-in">
       <div class="container">
         <h2 class="section-label">Projects</h2>
-        <div class="filter-bar">
-          <button class="filter-btn" data-filter="all">All</button>
-          <button class="filter-btn active" data-filter="active">Active</button>
-          <button class="filter-btn" data-filter="planned">Planned</button>
-        </div>
         <ol class="catalogue-list">
 
           <li class="catalogue-item fade-in" data-status="done">
@@ -184,42 +172,6 @@
             <img src="assets/projects/site.png" alt="Homepage of this site" class="catalogue-thumb" loading="lazy" />
           </li>
 
-          <li class="catalogue-item fade-in" data-status="planned">
-            <span class="catalogue-num" aria-hidden="true">04</span>
-            <div class="catalogue-body">
-              <h3 class="catalogue-title">NYC Movie App</h3>
-              <p class="catalogue-desc">Aggregates AMC, Alamo Drafthouse, and indie NYC theater showtimes into one clean interface.</p>
-              <span class="status-badge status-badge--planned">Planned</span>
-            </div>
-          </li>
-
-          <li class="catalogue-item fade-in" data-status="planned">
-            <span class="catalogue-num" aria-hidden="true">05</span>
-            <div class="catalogue-body">
-              <h3 class="catalogue-title">NYC Metro App</h3>
-              <p class="catalogue-desc">A real-time subway companion app with live train positions, service alerts, and trip planning.</p>
-              <span class="status-badge status-badge--planned">Planned</span>
-            </div>
-          </li>
-
-          <li class="catalogue-item fade-in" data-status="planned">
-            <span class="catalogue-num" aria-hidden="true">06</span>
-            <div class="catalogue-body">
-              <h3 class="catalogue-title">AI Hedge Fund</h3>
-              <p class="catalogue-desc">Three competing AI strategies managing a simulated portfolio with real-time market data.</p>
-              <span class="status-badge status-badge--planned">Planned</span>
-            </div>
-          </li>
-
-          <li class="catalogue-item fade-in" data-status="planned">
-            <span class="catalogue-num" aria-hidden="true">07</span>
-            <div class="catalogue-body">
-              <h3 class="catalogue-title">Sports Betting Models</h3>
-              <p class="catalogue-desc">Data-driven models for evaluating sports betting markets.</p>
-              <span class="status-badge status-badge--planned">Planned</span>
-            </div>
-          </li>
-
         </ol>
       </div>
     </section>
@@ -240,21 +192,6 @@
 
   <div class="curtain" id="curtain"></div>
   <script>
-    // ── Project filters ──
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const items = document.querySelectorAll('.catalogue-item');
-    function applyFilter(filter) {
-      filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
-      items.forEach(item => {
-        const status = item.dataset.status;
-        if (filter === 'all') { item.style.display = ''; }
-        else if (filter === 'active') { item.style.display = (status === 'done' || status === 'dev') ? '' : 'none'; }
-        else if (filter === 'planned') { item.style.display = status === 'planned' ? '' : 'none'; }
-      });
-    }
-    filterBtns.forEach(btn => btn.addEventListener('click', () => applyFilter(btn.dataset.filter)));
-    applyFilter('active');
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
