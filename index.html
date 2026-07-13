@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Noah Foster</title>
-  <meta name="description" content="Noah Foster — New York. Finance, small side projects, marathons." />
+  <meta name="description" content="Noah Foster — New York." />
   <meta property="og:title" content="Noah Foster" />
-  <meta property="og:description" content="New York. Finance, small side projects, marathons." />
+  <meta property="og:description" content="New York." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://noahfoster2174.github.io" />
   <meta property="og:image" content="https://noahfoster2174.github.io/assets/og.png" />
@@ -14,10 +14,9 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%232D6A4F'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='white'>NF</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
 
     :root {
       --accent: #2D6A4F;
@@ -25,70 +24,54 @@
       --muted: #5E6E5E;
       --border: #D5DCD5;
       --bg: #F7F6F1;
-      --surface: #EDECE7;
-      --dark: #1A2B22;
-      --light-text: #A8B5A8;
     }
 
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; overflow-x: hidden; }
-
-    header { border-bottom: 1px solid var(--border); padding: 2rem 0 1.5rem; position: relative; z-index: 1; }
-    .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
-    .site-title { font-family: 'Spectral', serif; font-size: 2.4rem; font-weight: 700; letter-spacing: -0.5px; }
-    .site-title a { text-decoration: none; color: inherit; }
-    .site-title span { display: inline-block; border-bottom: 3px solid var(--accent); padding-bottom: 2px; }
-    nav { margin-top: 0.75rem; display: flex; gap: 1.5rem; }
-    nav a { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); text-decoration: none; font-weight: 600; transition: color 0.15s ease; }
-    nav a:hover { color: var(--accent); }
-    nav a:focus-visible,
-    .cta-link:focus-visible,
-    .footer-contact a:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-      border-radius: 2px;
-    }
-
-    .skip-link { position: absolute; top: -100%; left: 1rem; background: var(--accent); color: #fff; padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 700; text-decoration: none; border-radius: 0 0 4px 4px; z-index: 100; }
-    .skip-link:focus { top: 0; }
-
-    /* ── Intro ── */
-    .intro {
-      min-height: calc(100vh - 260px);
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
       display: flex;
       align-items: center;
+      justify-content: center;
     }
-    .intro-inner { max-width: 620px; padding: 4rem 0; }
-    .intro-text {
+
+    .card { text-align: center; padding: 2rem; }
+
+    h1 {
       font-family: 'Spectral', serif;
-      font-size: clamp(1.4rem, 3vw, 1.9rem);
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 2.5rem;
+      font-size: clamp(2.8rem, 8vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.1;
     }
-    .cta-group { display: flex; gap: 2rem; flex-wrap: wrap; }
-    .cta-link { font-family: 'Spectral', serif; font-size: 1.2rem; color: var(--text); text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 2px; transition: color 0.15s ease; }
-    .cta-link:hover { color: var(--accent); }
+    h1 span { display: inline-block; border-bottom: 4px solid var(--accent); padding-bottom: 6px; }
 
-    /* ── Footer ── */
-    footer { border-top: 3px solid var(--accent); padding: 2rem 0; }
-    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-    .footer-copy { font-size: 0.85rem; color: var(--muted); }
-    .footer-contact { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
-    .footer-contact a { font-size: 0.85rem; color: var(--muted); text-decoration: none; transition: color 0.15s ease; }
-    .footer-contact a:hover { color: var(--accent); }
+    nav {
+      margin-top: 2.25rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem 1.75rem;
+    }
+    nav a {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    nav a:hover { color: var(--accent); }
+    nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
-    /* ── Fade-in ── */
-    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .card { opacity: 0; transform: translateY(16px); animation: reveal 0.6s ease 0.1s forwards; }
+    @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) { .card { animation: none; opacity: 1; transform: none; } }
 
     /* ── Page transition curtain ── */
-    .curtain {
-      position: fixed; inset: 0;
-      background: var(--accent);
-      z-index: 9999;
-      transform: translateY(-100%);
-      pointer-events: none;
-    }
+    .curtain { position: fixed; inset: 0; background: var(--accent); z-index: 9999; transform: translateY(-100%); pointer-events: none; }
     .curtain.enter { animation: curtainEnter 0.45s cubic-bezier(0.77,0,0.18,1) forwards; }
     .curtain.exit  { animation: curtainExit  0.35s cubic-bezier(0.77,0,0.18,1) forwards; pointer-events: all; }
     @keyframes curtainEnter { from { transform: translateY(0); } to { transform: translateY(-100%); } }
@@ -96,60 +79,23 @@
   </style>
 </head>
 <body>
-<a href="#main-content" class="skip-link">Skip to content</a>
 
-  <header>
-    <div class="container">
-      <h1 class="site-title"><a href="index.html"><span>Noah Foster</span></a></h1>
-      <nav aria-label="Main">
-        <a href="projects.html">Projects</a>
-        <a href="feed.html">Feed</a>
-        <a href="about.html">About</a>
-        <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://github.com/noahfoster2174" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main-content">
-    <section class="intro">
-      <div class="container">
-        <div class="intro-inner fade-in">
-          <p class="intro-text">I'm Noah. I live in New York and work in finance. The rest of the time I build small software projects and train for marathons.</p>
-          <div class="cta-group">
-            <a href="projects.html" class="cta-link">Projects →</a>
-            <a href="feed.html" class="cta-link">What I'm up to →</a>
-            <a href="about.html" class="cta-link">About →</a>
-          </div>
-        </div>
-      </div>
-    </section>
+  <main class="card">
+    <h1><span>Noah Foster</span></h1>
+    <nav aria-label="Main">
+      <a href="projects.html">Projects</a>
+      <a href="feed.html">Feed</a>
+      <a href="about.html">About</a>
+      <a href="https://github.com/noahfoster2174" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="mailto:noahfoster6@gmail.com">Email</a>
+    </nav>
   </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <span class="footer-copy">© 2026 Noah Foster</span>
-        <div class="footer-contact">
-          <a href="mailto:noahfoster6@gmail.com">noahfoster6@gmail.com</a>
-          <a href="https://www.linkedin.com/in/noahbfoster/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="https://github.com/noahfoster2174" target="_blank" rel="noopener noreferrer">GitHub</a>
-        </div>
-      </div>
-    </div>
-  </footer>
 
   <div class="curtain" id="curtain"></div>
 
-  <noscript><style>.fade-in { opacity: 1; transform: none; }</style></noscript>
+  <noscript><style>.card { animation: none; opacity: 1; transform: none; }</style></noscript>
   <script>
-    // ── Fade-in ──
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // ── Page transition curtain ──
     const curtain = document.getElementById('curtain');
     if (curtain) {
       curtain.classList.add('enter');

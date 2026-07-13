@@ -15,7 +15,7 @@ Personal portfolio site. Live at **[noahfoster2174.github.io](https://noahfoster
 
 | File | Description |
 |------|-------------|
-| `index.html` | Homepage — short intro and links, kept deliberately plain |
+| `index.html` | Homepage — a title card: name and links, nothing else |
 | `about.html` | Bio, work experience, skills |
 | `projects.html` | Project cards |
 | `feed.html` | Live Strava runs + Letterboxd film log |

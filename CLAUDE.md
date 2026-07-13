@@ -16,7 +16,7 @@ Portfolio website. Static site hosted on GitHub Pages.
 - Letterboxd RSS (user: noahfoster) — account currently has 0 films logged; the feed section hides itself until films appear
 
 ## Pages
-- index.html    — deliberately quiet homepage (short intro + three links; no stats, tickers, or featured cards — Noah's call 2026-07-13, don't re-add flair here)
+- index.html    — title card only: name + links, no copy at all (Noah's explicit call 2026-07-13; do not add self-description, stats, or features here)
 - about.html    — bio, work experience, skills
 - projects.html — project cards
 - feed.html     — Strava runs + Letterboxd films (safe DOM rendering, no innerHTML)
