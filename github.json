@@ -2,9 +2,9 @@
   {
     "repo": "media-stack",
     "url": "https://github.com/noahfoster2174/media-stack",
-    "last_commit": "2026-07-15T00:44:25Z",
-    "commits_30d": 2,
-    "latest": "Fix stale-page caching + make Mullvad user-controlled"
+    "last_commit": "2026-07-15T05:37:31Z",
+    "commits_30d": 4,
+    "latest": "Remove TMDB trending from chat context"
   },
   {
     "repo": "noahfoster2174.github.io",
