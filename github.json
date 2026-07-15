@@ -1,5 +1,12 @@
 [
   {
+    "repo": "media-stack",
+    "url": "https://github.com/noahfoster2174/media-stack",
+    "last_commit": "2026-07-15T00:44:25Z",
+    "commits_30d": 2,
+    "latest": "Fix stale-page caching + make Mullvad user-controlled"
+  },
+  {
     "repo": "noahfoster2174.github.io",
     "url": "https://github.com/noahfoster2174/noahfoster2174.github.io",
     "last_commit": "2026-07-13T14:22:10Z",
@@ -12,13 +19,6 @@
     "last_commit": "2026-07-13T13:46:34Z",
     "commits_30d": 3,
     "latest": "Profile: build things with Claude"
-  },
-  {
-    "repo": "media-stack",
-    "url": "https://github.com/noahfoster2174/media-stack",
-    "last_commit": "2026-07-01T23:48:55Z",
-    "commits_30d": 1,
-    "latest": "Make Reelz a self-healing daily driver + harden the stack"
   },
   {
     "repo": "meal-planner",
