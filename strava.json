@@ -1,5 +1,13 @@
 [
   {
+    "name": "bodega 1600",
+    "distance": 1630.9,
+    "moving_time": 428,
+    "start_date_local": "2026-07-15T20:36:23Z",
+    "type": "Run",
+    "polyline": ""
+  },
+  {
     "name": "tempo thursday",
     "distance": 7327.2,
     "moving_time": 2071,
@@ -30,13 +38,5 @@
     "start_date_local": "2026-07-06T07:43:37Z",
     "type": "Run",
     "polyline": "wlkwFjcqbM}Ar@kAVk@`@mBh@CR@z@SZDLOZBXGHYDGJTV@~@o@EWMm@Bu@S[FOWw@Us@CONcCVGTK?Q^g@h@}@`@a@Hs@KYVs@BOJK`@y@V[~@aAVg@b@oARIEAFoAVSPsCbBk@n@sAPY^uAt@yCz@eEtB_Ct@uA`AuA`@{A|@sA\\a@\\kA^aA`@OPw@ZsAfAmBh@}DdBKXGAKZSPa@Hc@Ek@Jg@b@u@Ti@d@i@A}@rA{A~AMp@IIMZN\\jAz@fAXHN`BbATEHe@JGM{@@iAIk@H}@IGCQIsBTi@b@[n@U@gAJIAMMCCI@cAMeAAkAIWCgCQkCAgADIOaBFa@M_@@WIk@FgAQiBDUQkAF}@YyCB_@Ia@B_@G]@c@Mg@E{DGq@DMCe@MSqAw@}@c@g@xAQnA?`@QX]lAQjAIHGt@QPeAYQDu@ISg@aAa@[A[UGQ_@KJe@E_@NJf@mBZ{Al@eDL]Bg@f@gCLkAp@{Bb@qCj@yBVo@@k@d@aCf@sADy@HINDGQh@yCdAcENaAVw@`@sBT{AVc@Rs@ToCd@mB?WTs@Fs@n@uBb@wCx@eDr@gDDs@Ve@J{@RgArAaGd@i@J}@z@eDtAwHd@eBDw@GiAWEK\\D\\CX}@p@IdAYhAY~@Ch@q@bA@z@Kr@]x@Cz@Mr@u@jBKl@SZBXzAf@dDd@RZdAb@XDp@M\\JVZXUb@Cf@RrALvA]b@B`AOrAVXWf@EdALTHLLj@e@d@?d@_@fCo@n@_@`GkBj@GDm@Vk@^k@zAyADM`@IHGFe@TUHa@TQXe@h@[n@w@Nm@~@_BPUJCJ]^[fAcBVMZk@z@_AZQpA[l@Bn@V|@@dAL\\LhAAVp@NfBFnALr@?^Jb@FjBJ^DfAIlBBtAM`CJR@XILItACjAFrBGj@IRBjEMhCF^G\\Dd@O~AAbBLn@GBKnAArDI~ABj@Eh@Bp@WpAg@JEZB`@`@PP`@Ht@A^M\\InFSfCFb@GHL`@Mh@D`@Mz@FxBp@XxBEVMHHd@IXH|@St@FVg@f@Tt@B|BEd@SXNf@YN@p@[f@aAHEPe@`@a@ZSP?TXKj@E|BOfA@fBFbBIr@MT?^JNH~A"
-  },
-  {
-    "name": "happy 4th",
-    "distance": 5020.4,
-    "moving_time": 1673,
-    "start_date_local": "2026-07-04T10:25:55Z",
-    "type": "Run",
-    "polyline": "cmcaDffehNCRM?KNCL?Jh@n@D@DHVl@PLJb@JH`@nA?r@DFD^AJ?^G`A?l@WnBELWfAMXETMVMj@Yp@Mn@KVETS\\Mj@BNE?GHCFALGHWDM\\APHJBPGT?NEPC^GNAPS~@Cf@GDE?QG[E]Ks@Ba@Eq@SI?MDCZHWDCDH?EWGW@KIQAWDKFk@Ic@ACCC_A@QHg@JSLIZAb@Fr@I`@Kh@JJAXHXBx@T\\DTAf@TDANLGb@APGTAVMl@K?k@[UAICU@OCMBa@?OC[S[@GXGNAP@JEV?HEj@ABIBIEQCYIGIBOGIs@OIEEMEe@@e@Ec@@i@Ji@NYLE`AF`@Cz@MNFX?j@JZL`@Ft@Dh@TLB@FQdAA`@E\\EHM@KCQIa@Mo@G]?iAWq@Li@EC@IFAZAL@BDBN?RF\\FD?DGDSDa@BEDETCKA`@NL?`@HZD`@C|@HRDHADg@AODq@FO?QAE_@S_@Ii@Ai@GUEQIOAOEUBYEs@D_@Fc@Kc@?KDILINGPG|@?ZADB`@BJ@TLX?DDHFDr@HJCHO?]CW@KHQTCZHJ?DAXF?ID?FDTFZ@PD\\BVER@^BJDh@B@CDYCK?YFUFu@IOWC[Km@B]E[Qq@?GHEJ?f@Kd@Ed@EHQCi@F[CE@I?a@HUAS@SCMG?g@Bk@BOTm@JI"
   }
 ]
