@@ -1,5 +1,13 @@
 [
   {
+    "name": "morning run",
+    "distance": 11582.0,
+    "moving_time": 4001,
+    "start_date_local": "2026-07-22T06:35:22Z",
+    "type": "Run",
+    "polyline": "ckjwF~ppbMNIFYHKxAUNU^W`DqA\\g@@SXmAP[Ba@NSZEv@mC|BfC`@OfBqATER[JCDDZMt@w@~CeBd@_@?MVKHa@dB}@NQDQb@GDMJ?|BwAl@Up@_@FKZMLa@fB}@VS@sAl@DHE?GTEh@@fAg@HEFUh@Id@e@N@JWbAYb@YLWRAtIwFLSNOd@SD]FIVE\\Lh@k@RKPYhAg@DGDYb@UVE~@k@?GL@TU|@a@r@m@Ra@NGJQP?T_@h@Sv@Ip@Fb@Un@K\\OdAAf@E@I@HHBh@DjBa@BGdAEb@Nt@r@XhAj@t@PF~BrA|BfCzA|@|@T~BZ~@AdD]n@Al@BlAb@n@`@zBjCvB`AlC~BhAxAj@~@h@rAv@lC^x@hArBn@r@r@`@fAX|@Ed@Od@_@dAeCRqAHoA^wA^q@rAaBpAaDZm@nAmAl@YxBADOx@Hb@Ed@FfCId@Ur@k@^o@pAoANA`Ak@r@MbA?jB`@j@D|@AjAU~@c@^g@d@cBF]@i@GG@KOi@K_A[kAUWy@_BiAuAI]m@qA{@yDKeAC}@Oq@E}@i@_Cs@kBS_@Oi@}AeBKAg@g@m@]gCgAwBUsAJ[XuA\\_@VY@MLe@Rg@Nw@DgAM[Di@b@{@RiAh@o@t@i@JsCjAkAPiDtAmD?i@LwBbAk@l@e@HUGe@PSX_AVyA~@kCtDGZ[p@Kj@]x@gA~@i@R{AFwCv@o@@}@OuC}AsAIk@Rg@^GHBLg@j@e@bAOR[J{CXm@POK_@?_@BUPgABs@Zw@Bk@`@cABUZOKM@q@hAg@`@m@VMVq@f@KRcAVe@l@SDoAz@CJSBg@^q@BWPBJs@^c@f@]L[d@YLiCpBK?YVc@Zk@P]ZOBYXc@JMT[TQ@ORm@d@EJOD_@ZMTWPiAp@MEa@RQXk@XSTSFe@\\EHQBAF]NONMB_@ZQ?_An@g@NsApA}@`@KLa@Ja@b@m@T{@h@?FONBHGHq@Xg@^Un@OJIReBfA]?{@`AcElCd@hBIj@{@W_BDe@n@w@d@K^KHKCD\\_@lAu@IqAk@U@[TaADu@d@sA`@[BWFMPe@Ko@HKLUF[Ka@B"
+  },
+  {
     "name": "sunday service",
     "distance": 12100.3,
     "moving_time": 3910,
@@ -30,13 +38,5 @@
     "start_date_local": "2026-07-16T18:33:26Z",
     "type": "Run",
     "polyline": "k`ywFlynbMYMIMa@Qy@Ao@\\UVwAb@ONw@Lg@KOBONwAK{@MkCm@Y]Mg@a@y@FGIa@Wu@_@s@wAgAi@QELq@a@oAcB}@aCe@u@sA_AiB}@w@Ea@J]h@e@Re@HiBGUMuBwBSBgAiDy@{@a@KoAP{Aw@oCc@_CaAwA_AMCYg@s@y@kAeBeCcBu@Ou@c@k@a@KScAq@m@_A}@}C?WKi@?i@JkAGkANWTIBYMcAOe@U[mGmEm@a@s@Om@g@{Au@OQMAeAcAa@MuB_Bo@Su@q@y@_@w@m@wAQSGoCJw@[y@Ig@Jw@^e@n@c@XgBSoCsA_Ay@eCoCOa@c@c@oAeB}@Ky@Pq@?qCc@YHwBo@s@{@A[a@s@m@sB_@_@g@K_@JWTCDBJIPIp@?TLh@T\\Vl@^bA?bB]v@c@Ti@CcBeA_@s@s@g@]g@g@]y@e@c@OKB]Us@Di@`@s@z@eAxBDP_@`AI`@@XMbAE~AIZEj@Wr@LdATb@v@h@`@LXAZIZa@`@kAA[LSD]Na@JSp@g@xAF`@AjAg@^EfAL^Nz@t@BNd@n@^hA`@~Bh@fAt@l@n@Kn@^d@f@T`ADr@b@zBf@xAj@bAVXFAx@n@b@Jj@^N@PPfBl@RPd@HZVhApAh@nAFd@v@nAn@Tj@HjCIh@J^VTTXl@Nd@^rBPd@`@zAj@jA|@v@DLd@ZFLh@R^ZVFRPbARhBCh@UxAe@b@ATKv@Eh@FnAj@lAdA^h@n@d@Zd@z@fC^j@NJtAb@zBMhBTpA~@V`@NFPb@LHRn@|@tAHT\\^P@JLDLE\\PXrCtC^l@|AhDNNf@Nd@v@ZPt@Th@Fd@VxF_@z@Qz@@^b@\\nAPZ@\\L|@H`@NZdA~@pC|AzCjAt@f@RBt@^fA|@Z\\Zj@ZXf@rAt@x@FTXb@RNLZRLnAtAXH~A|@TDf@Ep@c@j@q@z@IZ}@^m@p@_@l@D~@t@VHPkAl@wBb@sALOf@yADYPYF]FGFY?a@NUd@gBp@wAB[P[Da@Za@`@w@Ja@@e@Vy@HKr@v@hAp@\\w@ZgAVc@"
-  },
-  {
-    "name": "bodega 1600",
-    "distance": 1630.9,
-    "moving_time": 428,
-    "start_date_local": "2026-07-15T20:36:23Z",
-    "type": "Run",
-    "polyline": ""
   }
 ]
