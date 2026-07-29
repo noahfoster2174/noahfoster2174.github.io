@@ -1,5 +1,13 @@
 [
   {
+    "name": "morning run",
+    "distance": 11081.2,
+    "moving_time": 3854,
+    "start_date_local": "2026-07-29T07:06:10Z",
+    "type": "Run",
+    "polyline": "qxjwF~wpbMHAZDj@KjBq@tAq@x@UhBu@b@Ip@EVKzBqBd@[ZQLKLWZyAPYTGXW`@M`AE`AIj@Mb@QTUp@aA`@a@nA{@nBeAz@m@j@i@n@w@RMZ[bAk@b@_@RKN_@LOd@WlAe@ZSZKj@YlB{ApAi@LQLe@JMTEjAa@hB}@dAo@hNcJv@m@`@k@d@I|@e@pA_Ad@a@jAq@nA_A|@e@p@k@f@k@FAHDVd@^Zj@Nb@Ch@QnAm@`@MZEbADJSP@FCT_@Tk@T[VMhAMd@ATBd@XPNPXLn@NZd@j@d@b@fBbAf@b@vA`Bf@^l@X`AVxBXl@?r@CvAQrAIj@@z@Lh@VVRbBrB^\\`@Xx@Zn@^f@^~AzA`AnAh@~@d@fAx@nCl@xANZbAtAhA~@`@LXFX@hAUTK\\Wd@q@^{@Ns@ToCV}@^s@|AmBn@yAX{@Vi@\\c@p@k@f@W^K`BAd@IXCxAHXE`A@^Gp@Ub@]xBoCJ?PEl@]\\Kh@G^?rBb@|@Jn@Af@IPId@a@fAsAXULSHq@Cy@MiA]}ASg@]g@OYgA{A]m@Yq@g@wAc@sBUaCQeAKc@GcAKq@ScAY{@a@s@u@kA_AgAe@a@uAw@aC_Ao@GWAm@@s@DkA^eBx@aA^]Jm@Ji@Co@I_@BgAj@eAb@_Al@y@Zg@Zg@R[L_@D[FaE~Ac@HgC?e@FyB`ASPW^KH_B^aBv@w@Va@TWXcAtA]t@k@~@e@rAe@x@c@h@UNUJm@LuADq@Li@X[LSBY?c@Gs@Q_BaAc@Qe@Gc@?e@Je@Vi@j@[z@S^SNa@Pu@R_@DqABw@Eg@Lm@Hg@N}@JUE]?MDm@b@m@Rw@KK?Y\\Id@KT[Vw@h@q@n@{BlAyChB{AfAeF`DkDtBoEzCcAh@sI~FaAj@_@NoAt@aAt@MF_@R[F_@^gBtAk@V{BxAmBrAoA`AyBzAu@n@iAnA{@p@q@Zg@NU_@?GE?c@f@a@VqBdAgElBmChBYNqAd@e@Hg@Bi@\\WZ"
+  },
+  {
     "name": "tempo tuesday",
     "distance": 7068.0,
     "moving_time": 2180,
@@ -30,13 +38,5 @@
     "start_date_local": "2026-07-24T08:55:23Z",
     "type": "Run",
     "polyline": "mlkwFnbqbMEDIBO^MDSNIn@MBEDLjAARFD@BBt@JN?DOpA@b@Gz@I|@BLA^Ih@FF@D@XIXCdAER?NNKE?KHAPOFJF[AO@OIYAE@MJMBAG_@Ea@MKGEAKHI@CCq@?WBOCO@KEEBMBUG[CK@KFMCO@SEq@@OEo@Hc@PSLe@d@e@~@a@l@e@bAQRa@p@]^Wh@u@dA[Nc@l@QXe@f@a@n@Uh@OJk@x@YXYb@QNMT]b@IRm@v@QPQZONQHCHQRMTKHQRQHUj@EAUj@]b@IN[b@IPOJg@v@]b@[j@m@l@Y`@IPYVg@z@UTELQTQJq@dAWZSPQZi@r@UNQZGREDo@|@s@x@y@hA[l@Y\\OLS\\UT[h@OJADUVQZo@r@CJSTKRy@~@}@zAYRIJ_@x@E@YZOJQ`@QXOLU\\MLSVITGJ[RW^IFSh@QJa@l@UPCAOFK?WAECE@GHI@ESAa@IKKCKQ[UIOSICIGIUEEEE?a@SEEFi@AIWYQa@U[CE@KKQIII?COGIE?IDU`@KCSQUM}Au@EKEAMKUKMOMEq@q@M@KOIGa@a@SMQAIGOCMOi@]QCCEc@WMAE_@q@[OQA@ICWSWIDUV_@BQN[@GX_@AI?YBWZi@Jo@JQBQCQFi@R_@DSDKD]DK@KLQ?MFULSLi@BUFK@QX_AD]Rg@@KLMBAD@E@f@GTJHEJQ@Wb@a@@EFGDO|@cAHIDQn@k@JCVULCf@[N@FO\\YDIJA^W^MVCd@a@JCHIRE@CL?f@ONS`@OZIRQF@PAVQPGJ?DEh@[P?HETYb@KRMNQb@AZIVMFKL@@EFEDIb@QPQZINKLCRONCLMZKVOHINCLKNAf@ODEFADQHIF?F@HAn@Yj@_@RCNOL?ZSREt@_@BEPGBILGFKJ?RIBBD?j@OxBmALCHG`AUj@YXWPIHGJCPMDKHAVOJKTGFIb@KJGLAFOJET@LKf@Sf@[REPKREZUDMDEN@ZUVFHCLOh@SPMD?j@RPBHALDPARUP}@LSRU^Kp@a@\\]f@MJGBIDAVJHFFJF?PILWBk@NGT?TOTEDEPGFDDAAEH@XC\\LRD@ATJVSNALHD?AF@TPHH?PJb@ALDb@Df@@j@LBGL?FKDANFJ@l@ED@T?`@H\\G|@CDBDCDCBK?QGy@B_@CQ?QD_@GuA?]LeBDMRS"
-  },
-  {
-    "name": "thursday night bridges",
-    "distance": 11791.4,
-    "moving_time": 4372,
-    "start_date_local": "2026-07-23T19:07:24Z",
-    "type": "Run",
-    "polyline": "clkwFrcqbMGG]VSCe@RkAn@g@LYX]@e@Zo@DEGOLGRDh@KhBLh@Ex@GDwAGw@QMFi@CWUw@Ge@Ss@FkAh@o@@{@f@]x@WL]??PKLQ?SQg@AiB`AUXsCbAO@_@Z}@`@w@r@_Bd@a@h@o@Vi@f@SBYR_@DELSBq@f@]?eAp@o@HuBbBe@Di@^S@ILSIe@VO?a@TO?uBxA}@Ls@f@oElBe@\\m@LGJk@LUWOPgAVST}@XQHGPkAh@i@t@]ReA`@AHQL?PURM?WQQDSKCLIJc@JIVOLsBbAw@l@k@|@[ZYHi@r@ICGNRn@p@j@`Af@f@Dr@h@b@LJTRHHCRg@Ae@UcBCiA?gAOeBF_@`@]bA_@?}AOaBB]C_AUwB?iAO{BAyCUoEBu@[sCDa@K}AQe@Ae@JqAK]Bk@YiGB]MsBs@a@w@k@e@KQF[bA}@zEi@|BGRKDiC{@CSQLoA]y@s@WCCMf@oAh@sCv@kDTa@Ja@B[Vm@Ai@DYd@yAJaAj@aCrAcHb@iCh@yBPOb@aCRsA\\eAZqALiA\\kA?[Lk@JOPoA@m@Za@L_AHI`@uCh@_BFi@LYHy@f@kBX{AL_A\\sA`@gB?e@Lk@@_ANIL_@A]J_@Tc@\\eBR[Bc@d@kBZg@bDkP`@oAFk@Mk@@QQDoA{Ap@rAGp@BTs@\\Q\\OlBWh@E^OVBl@i@rBS~AI\\OHDPKTAZ]x@Gp@a@fAd@PTVd@Cr@LnDnApBHr@h@|@[j@ZxAI`@Op@N^OZa@ZA~Ah@NWzAMBVXJDLP?nAeAp@MnA]l@]n@Gz@i@v@M|Ae@j@[bA{ATGn@m@HYz@oANEZq@RKp@}@`A{AXQn@y@\\q@JGB]JAf@g@n@iAbAeAZy@b@i@bAa@hAKZIr@RXGpBn@hALn@ZFvAvAfL[jAC`@Ah@LF@n@Kb@CpFE|AMrADH@`@At@OrE@nDSrAH^KzFDn@K~BDTCxBGl@Bh@Q`ABdCMtF@n@GtBOjABhCOfAAzATn@r@CtAJ|@Kx@R^MPQh@@ZQzAPxAq@VLj@?ZQr@FxAs@Hi@ZMp@o@j@]RJKQLX?TE^CnCE\\FzAK`@AxE"
   }
 ]
