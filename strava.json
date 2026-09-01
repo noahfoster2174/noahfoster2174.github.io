@@ -1,5 +1,13 @@
 [
   {
+    "name": "tempo tuesday",
+    "distance": 14330.9,
+    "moving_time": 4645,
+    "start_date_local": "2026-09-01T10:09:49Z",
+    "type": "Run",
+    "polyline": "{wjwFzwpbMz@e@r@aAx@g@v@Q~A}@z@MnBs@\\OPUf@AdA[BXTIz@y@F_@AaAV_AZQn@Cn@b@HA\\O\\c@`Cq@j@_Af@YxDiB^e@rAu@f@s@x@Yt@_Ah@WLa@~@s@ZM^FdA{@~@g@CBNA`FcDJ_@JGf@EbBgA@mAz@FPYh@LZ]dMeI?Kx@_@Hy@|@HlBcBd@SXc@\\Ez@e@LU|Aq@rB{BRFJUf@QN^XPbAEdA_@Ne@NM|B]t@@vA_@jACnAd@r@jANd@RLBNZ\\`CpA`ChCvAv@bEl@jFa@bABpAXl@h@hBxBj@b@bClAnBdBf@p@R`@~@vAzAtEdBdDzArAh@Rx@DlAW^Uf@q@f@oBXkCj@oBjBmCl@qAb@yAj@s@pA}@lA[jDLfDGfB_AXe@vA{ArAq@pBKdCj@lBOj@Kr@a@V[p@qBD{@KgAU{AeAwBqA}Ao@uAYw@y@cD]qD[_CYyAeAuCeB_CgCmB}As@y@OaBI}@HsDtACPKFoAb@gABo@U[B}BnAs@TsAbAs@PeAj@aALwChA_@r@YlASEBfATvAHzARpAOlBBlAdAlDl@~@zBr@pBL|@d@ZXr@|Af@n@zAnA~@ZR\\f@X^d@n@pBXnAjF^tA@pBg@|@w@fByBr@g@z@QjAEdB^rAHpBWx@m@d@q@Xs@Hq@AaBs@}CaBcC{@yAYm@?Sa@w@m@kCk@_GQiA_@_AOy@oAoCoBkBm@WqCyAeCUyBPoAf@wBlAoAJeAQe@JuBpA_A\\iAv@gBf@q@LsEhBg@J_D@yGhCmCvAc@ZgAbBc@^m@x@a@bAa@zAy@`Ag@\\{@L{AEeBr@_ALkAWSB_BmAsAWCNcAX_Ar@YfAa@h@uAb@eFP]Nq@Bu@g@gBHe@^Kn@a@DUf@UUWDEd@Qf@aAt@UBkApA{@Z{@l@g@f@iBbAu@@YZCLmBhAgC~BaDdB_@b@U@KR}@d@i@CGMk@KUbACf@S^oAr@o@RMR{@^SX_A`@uBvAqApAs@VcAl@mBnAiAd@oA|@}@z@sB`A[h@aA~@WHcAjAgAz@M?i@^QRETeAp@mBfAWEc@LKb@aC`AaDn@_@h@aAb@?VKP_@Ju@h@u@Ne@Go@\\u@D"
+  },
+  {
     "name": "mlrm",
     "distance": 16457.2,
     "moving_time": 5874,
@@ -30,13 +38,5 @@
     "start_date_local": "2026-08-26T08:05:53Z",
     "type": "Run",
     "polyline": "q|jwFxppbMm@WCGI?LEKQAMB{@BE?y@D}DH_BCUGAYH_@d@CHQFW^MJW^GLO@GJm@Xy@HaAToALaAKo@MkARiAL}@CWI}AHgA?}AX_@UYAUDUVM@SA_Ac@mADMFw@Uy@E]^YNW`@k@f@c@j@]P[Dk@Cc@IeBBIZBFEd@C|@M`MEp@BRAdBIf@@RMn@Hx@KTAPA`BN`@C\\?d@G^BRGTAn@Gd@KHQDg@X[b@KTD|AEJGfAJh@Qb@?xADBAHBL?^C^ERMNIl@GvCHLE`DCt@GRBb@PB?`@J\\z@nAZPFLR?`@XBPJ^?r@@LPP@HIxBT^`@HNJVHp@An@ZnATj@RfAn@XXx@Xx@j@r@BXIZL`@ZH\\Ab@Id@UjA[bACTOXM~@U`AOd@EVz@TdAn@T@Py@Vi@V}@LyAPs@n@kARC|BbABDAR]lB[hAIh@M^S~@i@tAxCzAFGPu@lBaIAKNg@XSZKh@J\\\\ZPd@p@r@`@L@NRRf@hBl@hAj@CPuClLCPBDrC|AN?CDXiACGR}@BHNc@t@yC?STw@DCJJNBv@BtAj@@DGh@w@hCGf@Qd@Gj@Yz@ALW|@DFTFlAp@h@LFa@v@}C\\iB`@uARk@TDR?VMPoARiADE?Q]GGDAPKLa@hAGXYf@e@Ae@_@y@OU]QK{B}@q@MOSC[Qi@SQSCkB{@}@Uq@_@Su@y@[w@k@c@m@o@a@[o@QIS?YMa@Y{@WSGg@Ds@O_@[Mm@QUQIS?s@ZUAs@QUUOa@]a@OEi@VW?kBkA{@Iq@Qe@]i@UOSOIU?s@a@e@IyAm@IMK_@?OJaAAOUe@@g@c@o@CMcA}@]w@Y[WgADg@EWBO?kBBc@AuALeAGe@BSAEHmABKAy@J{BCaBHeABwADULOxA]HMBUEq@PS?g@BKCu@Be@KwCFyH?OFK@y@Fc@?a@DKDw@?mBDcACk@Ds@As@HgBDK|@@f@T\\APKTAPMFIp@YRWtA}@l@g@hCJHDhAELHtAFn@APGPFbADPE`@QpALhADdAExASJMH?FKHAnALx@?dCQLUXGJRN?^M\\YV]N_@v@}@RM^KL\\@VEC?DVxBCx@D~AER@pDANIJ"
-  },
-  {
-    "name": "mile repeats",
-    "distance": 14901.6,
-    "moving_time": 4951,
-    "start_date_local": "2026-08-25T08:08:51Z",
-    "type": "Run",
-    "polyline": "}wjwF|zpbMNAEBDOvADVw@@[XSb@CD[`@w@x@w@bG}BNs@tA_@h@{@^L^KFk@JW^CLM~@NnA_Ax@u@~@ZPMEQFY?a@bLqHAYRE`@o@xAq@JQb@GVm@fDyAnAeABWlAo@`@@d@QCCIcAFYhEi@dBiAFOBFbBiALSL?HSh@Q`HqEh@g@VGNSLm@x@D|@aAfAk@Rc@h@SnA}@nAm@fAc@h@e@hAsAF\\dA\\dB_@Z[F]LIfB[d@LlDu@f@Df@PT\\XJt@bBrDhC`CjClAl@|Dp@vFa@hABhAVhDtDxBbA|ClCvBdDzArEfBfDhAbA`Bb@nAIt@i@v@_Bh@mEh@aBxBqDdAuC~@eAnB{@rEHvB?j@OrA_At@iArBmAbAe@|AJpCf@hAGhAw@nBoC?yAs@wDiCqDyAqDWaA]aCEyA[aCq@uCoAeCyAeBiAaA}BiAyA[mAE{Bb@aDrA?Ro@P{@@y@Q]BmHfDi@`@}@LiBhA}@XiA~Ac@dBn@~D@tAG~Cz@lDh@x@lAx@vDd@r@^h@l@h@|Aj@r@p@j@jCpAf@n@l@pAXrANRv@T|DRdAArBe@v@k@dBsB?M`By@fAKdEn@zAKhAc@|@gARe@PkBE{@McAu@oBsBmCcAsBAa@WSg@oCe@qF_@oB?m@Og@{@eBqBcC{AgAaCgAwB]qCZsE~Bw@FkA[g@FaBt@mDlBs@f@oB\\}D~Aq@h@aBMeANeCnAuADqBdARe@R?j@c@dAc@tC_AZUY`@_@PkBz@{A`@iErBoAvAk@hBaA|As@`BiAv@kCLWH_Ax@uAP_A[}BsAqBM{@p@e@|@UdA@vAKFu@s@_@G_CXaBAoBXs@i@aBD[R]~@u@Hc@RS~@u@t@o@`@SV]N]b@qB|@c@n@{@T{@h@OTq@@IV_@^UDcBxA{@|@_@?oA~@yA`AQBy@v@_DnBcBr@yAnAuA~@u@PkCvB{Ar@a@b@m@CYr@WX_Bl@M\\c@\\{@Xy@h@Up@]f@a@d@iCdBgATIPaAr@MX_@f@DPa@xAi@@kBc@s@h@Mb@e@RiBPU`@u@b@J?IRgALaDpAIPk@b@gANq@@]KgAx@q@N"
   }
 ]
