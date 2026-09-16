@@ -45,7 +45,7 @@ jobs:
               except Exception as e:
                   failures.append(f'{page}: unreachable ({e})')
 
-          for name in ['strava.json', 'strava-history.json', 'github.json']:
+          for name in ['strava.json', 'strava-history.json', 'letterboxd.json', 'github.json']:
               try:
                   json.load(fetch(f'{SITE}/{name}'))
               except Exception as e:

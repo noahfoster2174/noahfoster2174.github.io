@@ -7,17 +7,19 @@ Portfolio website. Static site hosted on GitHub Pages.
 - GitHub Pages (noahfoster2174.github.io)
 - GitHub Actions data pipelines (all commit only-if-changed, staggered crons, pull --rebase before push):
   - strava.yml (:00 every 6h) → strava.json (last 5 runs) + strava-history.json (full run history via scripts/strava_sync.py)
+  - letterboxd.yml (:30 every 6h) → letterboxd.json (parses public Letterboxd RSS, user noahfoster, no secrets)
   - github.yml (:45 every 6h) → github.json (recent Noah-authored commits per repo via scripts/build_github_json.py; bot commits excluded)
 - GitHub Actions health check: health.yml (Mon+Thu) fails loudly → GitHub emails Noah when pages aren't 200, JSON is invalid, or strava.json commit age > 7 days. Forced-failure test: dispatch with max_age_days=0.
 
 ## External Integrations
 - Strava API (athlete 129221305)
+- Letterboxd RSS (user: noahfoster) — Noah started logging 2026-09; feed section hides itself while the log is empty
 
 ## Pages
 - index.html    — title card only: name + links, no copy at all (Noah's explicit call 2026-07-13; do not add self-description, stats, or features here)
 - about.html    — stat blocks (day job / based / live weekly miles / now ticker), experience timeline, skills — no bio paragraphs, Noah's call 2026-07-13
 - projects.html — project cards
-- feed.html    — Strava training graph + Currently Building (safe DOM rendering, no innerHTML)
+- feed.html    — Strava training graph + Currently Building + Letterboxd films (safe DOM rendering, no innerHTML)
 - strava.json   — cached Strava data (auto-updated by GitHub Actions)
 
 ## Design System
@@ -50,4 +52,4 @@ Design history and planning iterations live in Noze: projects/personal-site/docs
 ## GitHub
 Repo: github.com/noahfoster2174/noahfoster2174.github.io (public)
 
-Films section removed 2026-09-16 (Letterboxd never adopted; letterboxd.yml + letterboxd.json deleted). Fantasy Football Assistant added to projects + Currently Building (repo private — no GitHub link by design).
+Films section removed 2026-09-16, then restored the same day when Noah decided to start logging on Letterboxd. Fantasy Football Assistant added to projects + Currently Building (repo private — no GitHub link by design).

@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Feed — Noah Foster</title>
-  <meta name="description" content="What Noah Foster is training for and building." />
+  <meta name="description" content="What Noah Foster is training for, building, and watching." />
   <meta property="og:title" content="Feed — Noah Foster" />
-  <meta property="og:description" content="What Noah Foster is training for and building." />
+  <meta property="og:description" content="What Noah Foster is training for, building, and watching." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://noahfoster2174.github.io/feed.html" />
   <meta property="og:image" content="https://noahfoster2174.github.io/assets/og.png" />
@@ -71,6 +71,15 @@
     .building-desc { font-size: 0.9rem; color: var(--muted); }
     .building-sep { color: var(--border); flex-shrink: 0; }
     .building-signal { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; color: var(--light-text); margin-top: 0.2rem; }
+
+    /* ── Recently Watched ── */
+    .film-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+    @media (max-width: 600px) { .film-grid { grid-template-columns: repeat(2, 1fr); } }
+    .film-card { display: flex; flex-direction: column; gap: 0.5rem; }
+    .film-poster { width: 100%; aspect-ratio: 2/3; object-fit: cover; border: 1px solid var(--border); background: var(--surface); display: block; }
+    .film-poster-placeholder { width: 100%; aspect-ratio: 2/3; background: var(--surface); border: 1px solid var(--border); }
+    .film-title { font-weight: 600; font-size: 0.85rem; line-height: 1.3; }
+    .film-rating { font-size: 0.85rem; color: var(--accent); }
 
     /* ── Empty / loading states ── */
     .feed-state { font-size: 0.9rem; color: var(--muted); font-style: italic; padding: 1rem 0; }
@@ -163,6 +172,19 @@
             <span class="building-desc">Designed and built with Claude Code as a portfolio and experiment.</span>
           </li>
         </ul>
+      </div>
+    </section>
+
+    <!-- ── Recently Watched (hidden while letterboxd.json is empty) ── -->
+    <section class="feed-block fade-in" id="films-block">
+      <div class="container">
+        <div class="feed-block-header">
+          <h2 class="section-label">Recently Watched</h2>
+          <a href="https://letterboxd.com/noahfoster/" target="_blank" rel="noopener noreferrer" class="feed-link">Letterboxd &nearr;</a>
+        </div>
+        <div class="film-grid" id="film-grid">
+          <p class="feed-state">Loading films...</p>
+        </div>
       </div>
     </section>
 
@@ -365,8 +387,54 @@
       } catch {}
     }
 
+    // ── Letterboxd poster grid ──
+    // Reads letterboxd.json, cached by .github/workflows/letterboxd.yml
+    // (same pattern as strava.json). Section hides entirely when empty.
+    async function loadLetterboxd() {
+      const section = document.getElementById('films-block');
+      const container = document.getElementById('film-grid');
+      try {
+        const res = await fetch('letterboxd.json');
+        if (!res.ok) throw new Error('fetch failed');
+        const films = await res.json();
+        if (!Array.isArray(films) || !films.length) throw new Error('no films');
+
+        container.replaceChildren();
+        films.slice(0, 8).forEach(film => {
+          const card = makeEl('div', 'film-card');
+
+          if (film.poster) {
+            const img = makeEl('img', 'film-poster');
+            img.src = film.poster;
+            img.alt = film.title;
+            img.loading = 'lazy';
+            card.appendChild(img);
+          } else {
+            card.appendChild(makeEl('div', 'film-poster-placeholder'));
+          }
+
+          const titleEl = makeEl('div', 'film-title');
+          setText(titleEl, film.title);
+          card.appendChild(titleEl);
+
+          if (film.rating) {
+            const val = parseFloat(film.rating);
+            const stars = '\u2605'.repeat(Math.floor(val)) + (val % 1 >= 0.5 ? '\u00bd' : '');
+            const ratingEl = makeEl('div', 'film-rating');
+            setText(ratingEl, stars);
+            card.appendChild(ratingEl);
+          }
+
+          container.appendChild(card);
+        });
+      } catch {
+        section.style.display = 'none';
+      }
+    }
+
     loadTrainingStats();
     loadBuilding();
+    loadLetterboxd();
 
     // ── Page transition curtain ──
     const curtain = document.getElementById('curtain');
