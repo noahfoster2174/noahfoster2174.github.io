@@ -1,17 +1,24 @@
 [
   {
+    "repo": "noahfoster2174.github.io",
+    "url": "https://github.com/noahfoster2174/noahfoster2174.github.io",
+    "last_commit": "2026-09-16T16:33:21Z",
+    "commits_30d": 3,
+    "latest": "restore: films section and letterboxd pipeline - Noah's logging now"
+  },
+  {
+    "repo": "gmail-inbox-automation",
+    "url": "https://github.com/noahfoster2174/gmail-inbox-automation",
+    "last_commit": "2026-09-16T16:11:05Z",
+    "commits_30d": 2,
+    "latest": "CI: install the llm extra so the classifier tests run instead of skipping"
+  },
+  {
     "repo": "media-stack",
     "url": "https://github.com/noahfoster2174/media-stack",
     "last_commit": "2026-07-15T05:37:31Z",
     "commits_30d": 4,
     "latest": "Remove TMDB trending from chat context"
-  },
-  {
-    "repo": "noahfoster2174.github.io",
-    "url": "https://github.com/noahfoster2174/noahfoster2174.github.io",
-    "last_commit": "2026-07-13T14:22:10Z",
-    "commits_30d": 15,
-    "latest": "fix: wrap inner-page nav on narrow viewports"
   },
   {
     "repo": "noahfoster2174",
@@ -26,12 +33,5 @@
     "last_commit": "2026-03-10T01:32:11Z",
     "commits_30d": 1,
     "latest": "Initial commit: meal planner web app"
-  },
-  {
-    "repo": "gmail_cleanup",
-    "url": "https://github.com/noahfoster2174/gmail_cleanup",
-    "last_commit": "2026-02-20T21:37:13Z",
-    "commits_30d": 13,
-    "latest": "docs: add README with setup, usage, architecture, and security notes"
   }
 ]
