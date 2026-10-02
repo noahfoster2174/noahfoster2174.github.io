@@ -1,17 +1,17 @@
 [
   {
+    "repo": "gmail-inbox-automation",
+    "url": "https://github.com/noahfoster2174/gmail-inbox-automation",
+    "last_commit": "2026-10-02T12:55:47Z",
+    "commits_30d": 1,
+    "latest": "Gmail inbox automation v1.0"
+  },
+  {
     "repo": "noahfoster2174.github.io",
     "url": "https://github.com/noahfoster2174/noahfoster2174.github.io",
     "last_commit": "2026-09-16T16:33:21Z",
     "commits_30d": 3,
     "latest": "restore: films section and letterboxd pipeline - Noah's logging now"
-  },
-  {
-    "repo": "gmail-inbox-automation",
-    "url": "https://github.com/noahfoster2174/gmail-inbox-automation",
-    "last_commit": "2026-09-16T16:11:05Z",
-    "commits_30d": 2,
-    "latest": "CI: install the llm extra so the classifier tests run instead of skipping"
   },
   {
     "repo": "media-stack",
